@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class Mapper {
+public class MapperService {
 
     @Autowired
     private ApiProvider apiProvider;

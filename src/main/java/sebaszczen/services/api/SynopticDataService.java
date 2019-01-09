@@ -3,7 +3,7 @@ package sebaszczen.services.api;
 import sebaszczen.domain.Weather;
 
 public interface SynopticDataService {
-    void saveWeatherMeasurements();
+    void saveSynopticData();
 
     void saveAirConditions();
 }
