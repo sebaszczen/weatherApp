@@ -9,6 +9,7 @@ import java.util.Calendar;
 public class Weather {
     @Id
     @GeneratedValue
+    private Long id;
     private Long id_stacji;
     private String stacja;
     private Calendar data_pomiaru;
@@ -20,53 +21,84 @@ public class Weather {
     private float suma_opadu;
     private float cisnienie;
 
-    public void setId_stacji(Long id_stacji) {
-        this.id_stacji = id_stacji;
+    public Weather(WeatherBuilder weatherBuilder) {
+        this.id_stacji=weatherBuilder.id_stacji;
+        this.stacja = weatherBuilder.stacja;
+        this.data_pomiaru = weatherBuilder.data_pomiaru;
+        this.hour = weatherBuilder.hour;
+        this.temperatura = weatherBuilder.temperatura;
+        this.predkosc_wiatru = weatherBuilder.predkosc_wiatru;
+        this.kierunek_wiatru = weatherBuilder.kierunek_wiatru;
+        this.wilgotnosc_wzgledna = weatherBuilder.wilgotnosc_wzgledna;
+        this.suma_opadu = weatherBuilder.suma_opadu;
+        this.cisnienie = weatherBuilder.cisnienie;
     }
 
-    public void setStacja(String stacja) {
-        this.stacja = stacja;
-    }
+    public static class WeatherBuilder {
+        private Long id_stacji;
+        private String stacja;
+        private Calendar data_pomiaru;
+        private String hour;
+        private float temperatura;
+        private float predkosc_wiatru;
+        private int kierunek_wiatru;
+        private float WeatherBuilder;
+        private float wilgotnosc_wzgledna;
+        private float suma_opadu;
+        private float cisnienie;
 
-    public void setData_pomiaru(Calendar data_pomiaru) {
-        this.data_pomiaru = data_pomiaru;
-    }
+        public WeatherBuilder setId_stacji(Long id_stacji) {
+            this.id_stacji = id_stacji;
+            return this;
+        }
 
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
+        public WeatherBuilder setStacja(String stacja) {
+            this.stacja = stacja;
+            return this;
+        }
 
-    public void setTemperatura(float temperatura) {
-        this.temperatura = temperatura;
-    }
+        public WeatherBuilder setData_pomiaru(Calendar data_pomiaru) {
+            this.data_pomiaru = data_pomiaru;
+            return this;
+        }
 
-    public void setPredkosc_wiatru(float predkosc_wiatru) {
-        this.predkosc_wiatru = predkosc_wiatru;
-    }
+        public WeatherBuilder setHour(String hour) {
+            this.hour = hour;
+            return this;
+        }
 
-    public void setKierunek_wiatru(int kierunek_wiatru) {
-        this.kierunek_wiatru = kierunek_wiatru;
-    }
+        public WeatherBuilder setTemperatura(float temperatura) {
+            this.temperatura = temperatura;
+            return this;
+        }
 
-    public void setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
-        this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
-    }
+        public WeatherBuilder setPredkosc_wiatru(float predkosc_wiatru) {
+            this.predkosc_wiatru = predkosc_wiatru;
+            return this;
+        }
 
-    public void setSuma_opadu(float suma_opadu) {
-        this.suma_opadu = suma_opadu;
-    }
+        public WeatherBuilder setKierunek_wiatru(int kierunek_wiatru) {
+            this.kierunek_wiatru = kierunek_wiatru;
+            return this;
+        }
 
-    public void setCisnienie(float cisnienie) {
-        this.cisnienie = cisnienie;
-    }
+        public WeatherBuilder setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
+            this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
+            return this;
+        }
 
-    public Weather() {
-    }
+        public WeatherBuilder setSuma_opadu(float suma_opadu) {
+            this.suma_opadu = suma_opadu;
+            return this;
+        }
 
-    public Weather(Long id_stacji, float temperatura, float predkosc_wiatru, Calendar data_pomiaru) {
-        this.id_stacji = id_stacji;
-        this.temperatura = temperatura;
-        this.predkosc_wiatru = predkosc_wiatru;
-        this.data_pomiaru = data_pomiaru;
+        public WeatherBuilder setCisnienie(float cisnienie) {
+            this.cisnienie = cisnienie;
+            return this;
+        }
+
+        public Weather build() {
+            return new Weather(this);
+        }
     }
 }

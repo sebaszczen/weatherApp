@@ -1,19 +1,22 @@
 package sebaszczen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import sebaszczen.services.api.ApiSupplier;
-import sebaszczen.services.api.ApiSupplierImpl;
+import org.springframework.web.bind.annotation.RestController;
+import sebaszczen.services.api.SynopticDataServiceImpl;
 
-@Controller
+@RestController
 public class WeatherController {
 
     @Autowired
-    private ApiSupplierImpl apiSupplier;
+    private SynopticDataServiceImpl apiSupplier;
 
-    @GetMapping("/save")
-    public void saveMeasurements() {
-        apiSupplier.saveWeatherMeasurements();
-    }
+//    @PostMapping("/save")
+//    public void saveSynopticData() {
+//        apiSupplier.saveWeatherMeasurements();
+//    }
+//
+//    @PostMapping("/save")
+//    public void saveAirConditionData() {
+//        apiSupplier.saveAirConditions();
+//    }
 }
