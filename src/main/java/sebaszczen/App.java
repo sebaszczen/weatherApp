@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import sebaszczen.apiSupplier.ApiProvider;
+import sebaszczen.apiProvider.ApiProvider;
 
 /**
  * Hello world!
@@ -12,18 +12,12 @@ import sebaszczen.apiSupplier.ApiProvider;
  */
 
 @SpringBootApplication
-public class App implements CommandLineRunner
+public class App
 {
-    @Autowired
-    private ApiProvider apiProvider;
 
     public static void main( String[] args )
     {
         SpringApplication.run(App.class);
     }
 
-    @Override
-    public void run(String... strings) throws Exception {
-        System.out.println(apiProvider.getAllSynopticData());
-    }
 }

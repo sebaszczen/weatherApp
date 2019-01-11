@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import sebaszczen.domain.dto.gios.AirConditionDataDto;
 
 @Repository
-public interface AirRepository {
+public interface AirConditionsRepository {
 }

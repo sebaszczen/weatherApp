@@ -2,12 +2,11 @@ package sebaszczen.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Calendar;
 
 @Entity
-public class Weather {
+public class SynopticStation {
     @Id
     @GeneratedValue
     private Long id;
@@ -22,7 +21,7 @@ public class Weather {
     private float suma_opadu;
     private float cisnienie;
 
-    public Weather(WeatherBuilder weatherBuilder) {
+    public SynopticStation(WeatherBuilder weatherBuilder) {
         this.id_stacji=weatherBuilder.id_stacji;
         this.stacja = weatherBuilder.stacja;
         this.data_pomiaru = weatherBuilder.data_pomiaru;
@@ -98,8 +97,8 @@ public class Weather {
             return this;
         }
 
-        public Weather build() {
-            return new Weather(this);
+        public SynopticStation build() {
+            return new SynopticStation(this);
         }
     }
 }

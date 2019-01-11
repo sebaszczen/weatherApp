@@ -21,7 +21,7 @@ public class IntegrationTests {
 
     @Test
     public void saveSynopticData() {
-        ResponseEntity<Void> responseEntity = testRestTemplate.exchange("/save", HttpMethod.POST, new HttpEntity<>(void.class), void.class);
+        ResponseEntity<Void> responseEntity = testRestTemplate.exchange("/api?provider=imgw", HttpMethod.POST, new HttpEntity<>(void.class), void.class);
 //        String actual = responseEntity.getHeaders().get(HttpHeaders.LOCATION).get(0);
 //        Assertions.assertThat(actual.contains(""))
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);

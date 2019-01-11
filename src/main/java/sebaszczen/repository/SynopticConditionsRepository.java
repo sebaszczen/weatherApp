@@ -2,9 +2,9 @@ package sebaszczen.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sebaszczen.domain.Weather;
+import sebaszczen.domain.SynopticStation;
 
 @Repository
-public interface WeatherRepository extends JpaRepository<Weather,Long> {
+public interface SynopticConditionsRepository extends JpaRepository<SynopticStation,Long> {
 
 }
