@@ -7,6 +7,7 @@ import sebaszczen.domain.SynopticStation;
 import sebaszczen.repository.ImgwApiRepository;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Service

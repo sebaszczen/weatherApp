@@ -5,22 +5,11 @@
     <bookmark url="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d242d9ae-9e17-44cd-939c-162bfb1c4c17" name="Default" comment="po naprawach">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/configurations/LocalDateTimeAttributeConverter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java" />
+    <list default="true" id="d242d9ae-9e17-44cd-939c-162bfb1c4c17" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/SynopticConditionsRepository.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/IntegrationTests.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/unitTests/ApiControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/unitTests/ApiServiceTest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/sebaszczen/IntegrationTests.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/weatherApp.iml" afterPath="$PROJECT_DIR$/weatherApp.iml" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ImgwApiRepositoryTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java">
+      <file leaf-file-name="ApiServiceTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="41" column="64" lean-forward="false" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
+            <state relative-caret-position="374">
+              <caret line="35" column="78" lean-forward="false" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -62,6 +51,7 @@
       <find>gettime</find>
       <find>apiServiceImpl</find>
       <find>getSynopticStationBuilderList</find>
+      <find>mockbean</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,15 +92,16 @@
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/unitTests/ImgwApiRepository.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/unitTests/ImgwApiRepositoryTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/unitTests/ApiServiceTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/integrationTests/IntegrationTests.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/configurations/LocalDateTimeAttributeConverter.java" />
-        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java" />
-        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
       </list>
     </option>
   </component>
@@ -120,6 +111,17 @@
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="weatherApp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
@@ -356,7 +358,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ImgwApiRepositoryTest.saveImgwData">
+  <component name="RunManager" selected="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -378,7 +380,7 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration name="ApiControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApiControllerTest.saveCurrentDataOnDemand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="sebaszczen.tests.unitTests.*" />
@@ -388,10 +390,10 @@
       <module name="weatherApp" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="sebaszczen.unitTests" />
+      <option name="PACKAGE_NAME" value="sebaszczen.tests.unitTests" />
       <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.unitTests.ApiControllerTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="saveCurrentDataOnDemand" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -417,6 +419,31 @@
       <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.unitTests.ApiServiceTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="sebaszczen.tests.unitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="weatherApp" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="sebaszczen.tests.unitTests" />
+      <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.unitTests.ApiServiceTest" />
+      <option name="METHOD_NAME" value="saveImgwData_provideSynopticStationList" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -467,31 +494,6 @@
       <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.integrationTests.IntegrationTests" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="IntegrationTests.saveSynopticData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="sebaszczen.tests.integrationTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="weatherApp" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="sebaszczen.integrationTests" />
-      <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.integrationTests.IntegrationTests" />
-      <option name="METHOD_NAME" value="saveSynopticData" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -564,19 +566,19 @@
       <listeners />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ApiControllerTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ApiServiceTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ImgwApiRepositoryTest.saveImgwData" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ApiServiceTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ImgwApiRepositoryTest.saveImgwData" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ImgwApiRepositoryTest.saveImgwData" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ApiServiceTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ApiControllerTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ImgwApiRepositoryTest.saveImgwData" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ApiServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -622,39 +624,46 @@
       <option name="project" value="LOCAL" />
       <updated>1547223614857</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="testy poprawione i działają">
+      <created>1547463199490</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1547463199490</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApiControllerTest - 2019.01.14 at 11h 29m 08s.xml">
-      <configuration name="ApiControllerTest" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 18m 27s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApiServiceTest - 2019.01.14 at 11h 26m 19s.xml">
-      <configuration name="ApiServiceTest" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 32m 36s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApiServiceTest - 2019.01.14 at 11h 29m 13s.xml">
-      <configuration name="ApiServiceTest" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 49m 39s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 33m 39s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 51m 47s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 34m 18s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 53m 17s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 38m 22s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 14h 14m 41s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 39m 06s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 14h 15m 29s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 41m 10s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 14h 19m 26s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ImgwApiRepositoryTest_saveImgwData - 2019.01.14 at 11h 47m 36s.xml">
-      <configuration name="ImgwApiRepositoryTest.saveImgwData" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 14h 20m 39s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="IntegrationTests - 2019.01.14 at 11h 28m 46s.xml">
-      <configuration name="IntegrationTests" configurationId="JUnit" />
+    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 14h 20m 59s.xml">
+      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -672,27 +681,27 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45749614" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49149922" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4714065" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7156105" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2565688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5285935" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32457495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20196672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SimpleHttpClient" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -734,7 +743,8 @@
     <MESSAGE value="sdf" />
     <MESSAGE value="update" />
     <MESSAGE value="po naprawach" />
-    <option name="LAST_COMMIT_MESSAGE" value="po naprawach" />
+    <MESSAGE value="testy poprawione i działają" />
+    <option name="LAST_COMMIT_MESSAGE" value="testy poprawione i działają" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -752,12 +762,6 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java</url>
           <line>37</line>
           <properties />
@@ -771,22 +775,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>26</line>
+          <line>27</line>
           <properties />
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java</url>
+          <line>36</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="24" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://A:/jdk1.8.0_151/src.zip!/java/util/function/Function.java" />
-    <entry file="jar://A:/jdk1.8.0_151/src.zip!/java/util/Arrays.java" />
-    <entry file="jar://A:/jdk1.8.0_151/src.zip!/java/util/stream/Stream.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiSupplier.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/City.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/Commune.java" />
@@ -952,14 +965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar!/org/mockito/BDDMockito.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
@@ -988,14 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="26" column="18" lean-forward="true" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1061,33 +1058,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.3.12.RELEASE/spring-test-4.3.12.RELEASE.jar!/org/springframework/test/context/junit4/SpringRunner.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" column="151" lean-forward="true" selection-start-line="23" selection-start-column="151" selection-end-line="23" selection-end-column="151" />
+        <state relative-caret-position="102">
+          <caret line="9" column="57" lean-forward="false" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.3.12.RELEASE/spring-test-4.3.12.RELEASE.jar!/org/springframework/test/context/junit4/SpringJUnit4ClassRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-test/1.5.8.RELEASE/spring-boot-test-1.5.8.RELEASE.jar!/org/springframework/boot/test/context/SpringBootTest.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state relative-caret-position="162">
+          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="41" column="64" lean-forward="false" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+        <state relative-caret-position="147">
+          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
+        <state relative-caret-position="113">
           <caret line="30" column="56" lean-forward="false" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
           <folding />
         </state>
@@ -1095,32 +1144,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="182">
+          <caret line="23" column="69" lean-forward="false" selection-start-line="23" selection-start-column="69" selection-end-line="23" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+        <state relative-caret-position="232">
+          <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="41" column="64" lean-forward="false" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
+        <state relative-caret-position="374">
+          <caret line="35" column="78" lean-forward="false" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
           <folding />
         </state>
       </provider>

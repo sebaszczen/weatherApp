@@ -24,18 +24,17 @@ public class ApiServiceTest {
     @Mock
     private ApiProvider apiProvider;
 
-    @Mock
+    @InjectMocks
     private ApiServiceImpl apiService;
     private MockSynopticStationBuilder mockSynopticStationBuilder=new MockSynopticStationBuilder();
 
 
     @Test
-    public void saveImgwData_provideSynopticStationList() {
+    public void saveImgwData_JpaSaveMethodCalledTwoTimes() {
         List<SynopticStation.SynopticStationBuilder> synopticStationBuilderList = mockSynopticStationBuilder.getSynopticStationBuilderList();
-
-//        doNothing().when(imgwApiRepository).save(any());
+        when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(new SynopticStation(synopticStationBuilderList.get(0)));
         given(apiProvider.getAllSynopticData()).willReturn(synopticStationBuilderList);
         apiService.saveImgwData();
-        verify(apiService,times(1)).saveImgwData();
+        verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
     }
 }
