@@ -1,4 +1,4 @@
-package sebaszczen.unitTests;
+package sebaszczen.tests.unitTests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import sebaszczen.services.api.ApiService;
 
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 
 @WebMvcTest

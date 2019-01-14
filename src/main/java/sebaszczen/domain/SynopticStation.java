@@ -3,6 +3,9 @@ package sebaszczen.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 @Entity
@@ -12,8 +15,7 @@ public class SynopticStation {
     private Long id;
     private Long id_stacji;
     private String stacja;
-    private Calendar data_pomiaru;
-    private String hour;
+    private LocalDateTime localDateTime;
     private float temperatura;
     private float predkosc_wiatru;
     private int kierunek_wiatru;
@@ -21,78 +23,76 @@ public class SynopticStation {
     private float suma_opadu;
     private float cisnienie;
 
-    public SynopticStation(WeatherBuilder weatherBuilder) {
-        this.id_stacji=weatherBuilder.id_stacji;
-        this.stacja = weatherBuilder.stacja;
-        this.data_pomiaru = weatherBuilder.data_pomiaru;
-        this.hour = weatherBuilder.hour;
-        this.temperatura = weatherBuilder.temperatura;
-        this.predkosc_wiatru = weatherBuilder.predkosc_wiatru;
-        this.kierunek_wiatru = weatherBuilder.kierunek_wiatru;
-        this.wilgotnosc_wzgledna = weatherBuilder.wilgotnosc_wzgledna;
-        this.suma_opadu = weatherBuilder.suma_opadu;
-        this.cisnienie = weatherBuilder.cisnienie;
+    public SynopticStation(SynopticStationBuilder synopticStationBuilder) {
+        this.id_stacji= synopticStationBuilder.id_stacji;
+        this.stacja = synopticStationBuilder.stacja;
+        this.localDateTime= LocalDateTime.of(synopticStationBuilder.data_pomiaru, synopticStationBuilder.godzina_pomiaru);
+        this.temperatura = synopticStationBuilder.temperatura;
+        this.predkosc_wiatru = synopticStationBuilder.predkosc_wiatru;
+        this.kierunek_wiatru = synopticStationBuilder.kierunek_wiatru;
+        this.wilgotnosc_wzgledna = synopticStationBuilder.wilgotnosc_wzgledna;
+        this.suma_opadu = synopticStationBuilder.suma_opadu;
+        this.cisnienie = synopticStationBuilder.cisnienie;
     }
 
-    public static class WeatherBuilder {
+    public static class SynopticStationBuilder {
         private Long id_stacji;
         private String stacja;
-        private Calendar data_pomiaru;
-        private String hour;
+        private LocalDate data_pomiaru;
+        private LocalTime godzina_pomiaru;
         private float temperatura;
         private float predkosc_wiatru;
         private int kierunek_wiatru;
-        private float WeatherBuilder;
         private float wilgotnosc_wzgledna;
         private float suma_opadu;
         private float cisnienie;
 
-        public WeatherBuilder setId_stacji(Long id_stacji) {
+        public SynopticStationBuilder setId_stacji(Long id_stacji) {
             this.id_stacji = id_stacji;
             return this;
         }
 
-        public WeatherBuilder setStacja(String stacja) {
+        public SynopticStationBuilder setStacja(String stacja) {
             this.stacja = stacja;
             return this;
         }
 
-        public WeatherBuilder setData_pomiaru(Calendar data_pomiaru) {
+        public SynopticStationBuilder setData_pomiaru(LocalDate data_pomiaru) {
             this.data_pomiaru = data_pomiaru;
             return this;
         }
 
-        public WeatherBuilder setHour(String hour) {
-            this.hour = hour;
+        public SynopticStationBuilder setGodzina_pomiaru(int godzina_pomiaru) {
+            this.godzina_pomiaru = LocalTime.of(godzina_pomiaru,0,0,0);
             return this;
         }
 
-        public WeatherBuilder setTemperatura(float temperatura) {
+        public SynopticStationBuilder setTemperatura(float temperatura) {
             this.temperatura = temperatura;
             return this;
         }
 
-        public WeatherBuilder setPredkosc_wiatru(float predkosc_wiatru) {
+        public SynopticStationBuilder setPredkosc_wiatru(float predkosc_wiatru) {
             this.predkosc_wiatru = predkosc_wiatru;
             return this;
         }
 
-        public WeatherBuilder setKierunek_wiatru(int kierunek_wiatru) {
+        public SynopticStationBuilder setKierunek_wiatru(int kierunek_wiatru) {
             this.kierunek_wiatru = kierunek_wiatru;
             return this;
         }
 
-        public WeatherBuilder setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
+        public SynopticStationBuilder setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
             this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
             return this;
         }
 
-        public WeatherBuilder setSuma_opadu(float suma_opadu) {
+        public SynopticStationBuilder setSuma_opadu(float suma_opadu) {
             this.suma_opadu = suma_opadu;
             return this;
         }
 
-        public WeatherBuilder setCisnienie(float cisnienie) {
+        public SynopticStationBuilder setCisnienie(float cisnienie) {
             this.cisnienie = cisnienie;
             return this;
         }

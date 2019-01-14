@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.domain.SynopticStation;
-import sebaszczen.repository.SynopticConditionsRepository;
+import sebaszczen.repository.ImgwApiRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ApiServiceImpl implements ApiService {
 
     @Autowired
-    private SynopticConditionsRepository synopticConditionsRepository;
+    private ImgwApiRepository imgwApiRepository;
 
     @Autowired
     private ApiProvider apiProvider;
@@ -23,6 +23,6 @@ public class ApiServiceImpl implements ApiService {
         List<SynopticStation> synopticStationList = apiProvider.getAllSynopticData()
                 .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
 
-        synopticStationList.forEach(synopticConditionsRepository::save);
+        synopticStationList.forEach(imgwApiRepository::save);
     }
 }

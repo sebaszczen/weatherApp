@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import sebaszczen.domain.SynopticStation;
 
 @Repository
-public interface SynopticConditionsRepository extends JpaRepository<SynopticStation,Long> {
+public interface ImgwApiRepository extends JpaRepository<SynopticStation,Long> {
 
 }

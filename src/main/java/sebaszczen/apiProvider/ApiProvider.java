@@ -28,8 +28,8 @@ public class ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("/" + city).build().encode().toUri();
     }
 
-    public List<SynopticStation.WeatherBuilder> getAllSynopticData() {
-        SynopticStation.WeatherBuilder[] forObject = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.WeatherBuilder[].class);
+    public List<SynopticStation.SynopticStationBuilder> getAllSynopticData() {
+        SynopticStation.SynopticStationBuilder[] forObject = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationBuilder[].class);
         return Arrays.stream(forObject).collect(Collectors.toList());
     }
 
