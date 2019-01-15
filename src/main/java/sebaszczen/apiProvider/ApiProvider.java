@@ -46,7 +46,7 @@ public class ApiProvider {
 
         return getStationLocalizationsFromGiosApi().parallelStream()
                 .map(station -> restTemplate
-                        .getForObject(MEASURING_STATION_API_URL_BY_ID + station.getId(), AirConditionDataDto.class))
+                        .getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
                 .collect(Collectors.toList());
     }
 }

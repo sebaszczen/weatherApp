@@ -1,15 +1,19 @@
 package sebaszczen.domain.dto.gios;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class StationLocalizationDto {
-    private float id;
+    @JsonProperty("id")
+    private int stationId;
     private String stationName;
     private String gegrLat;
     private String gegrLon;
+    @JsonProperty("city")
     private CityDto cityDto;
     private String addressStreet;
 
-    public float getId() {
-        return id;
+    public float getStationId() {
+        return stationId;
     }
 
     public String getStationName() {
@@ -32,8 +36,8 @@ public class StationLocalizationDto {
         return addressStreet;
     }
 
-    public void setId(float id) {
-        this.id = id;
+    public void setStationId(int stationId) {
+        this.stationId = stationId;
     }
 
     public void setStationName(String stationName) {

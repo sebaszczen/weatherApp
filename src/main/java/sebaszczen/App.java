@@ -1,5 +1,6 @@
 package sebaszczen;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,12 +13,20 @@ import sebaszczen.apiProvider.ApiProvider;
  */
 
 @SpringBootApplication
-public class App
+public class App implements CommandLineRunner
 {
+
+    @Autowired
+    private ApiProvider apiProvider;
 
     public static void main( String[] args )
     {
         SpringApplication.run(App.class);
     }
 
+    @Override
+    public void run(String... strings) throws Exception {
+        apiProvider.getStationLocalizationsFromGiosApi();
+//        apiProvider.getAirConditionData();
+    }
 }

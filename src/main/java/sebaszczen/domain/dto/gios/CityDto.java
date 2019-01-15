@@ -1,12 +1,16 @@
 package sebaszczen.domain.dto.gios;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CityDto {
-    private float id;
+    @JsonProperty("id")
+    private float cityId;
     private String name;
+    @JsonProperty("commune")
     private CommuneDto communeDto;
 
-    public void setId(float id) {
-        this.id = id;
+    public void setCityId(float cityId) {
+        this.cityId = cityId;
     }
 
     public void setName(String name) {
