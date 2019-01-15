@@ -12,7 +12,7 @@ public class StationLocalizationDto {
     private CityDto cityDto;
     private String addressStreet;
 
-    public float getStationId() {
+    public int getStationId() {
         return stationId;
     }
 

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CityDto {
     @JsonProperty("id")
-    private float cityId;
+    private int cityId;
     private String name;
     @JsonProperty("commune")
     private CommuneDto communeDto;
 
-    public void setCityId(float cityId) {
+    public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 
