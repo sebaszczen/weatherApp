@@ -11,15 +11,22 @@ public class Level {
     @Id
     @GeneratedValue
     private Long id;
+    private int airConditionLevel;
     private String airConditionInWord;
-    @OneToOne
-    private AirConditionData airConditionData;
 
-    public Level(String airConditionInWord) {
+    public Level() {
+    }
+
+    public Level(String airConditionInWord, int airLevelByNumber) {
         this.airConditionInWord = airConditionInWord;
+        this.airConditionLevel = airLevelByNumber;
     }
 
     public void setAirConditionInWord(String airConditionInWord) {
         this.airConditionInWord = airConditionInWord;
+    }
+
+    public void setAirConditionLevel(int airConditionLevel) {
+        this.airConditionLevel = airConditionLevel;
     }
 }

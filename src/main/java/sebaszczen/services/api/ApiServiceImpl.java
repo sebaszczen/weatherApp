@@ -34,20 +34,21 @@ public class ApiServiceImpl implements ApiService {
     public void saveImgwData() {
         List<SynopticStation> synopticStationList = apiProvider.getAllSynopticData()
                 .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
-
         synopticStationList.forEach(imgwApiRepository::save);
     }
 
     @Override
     public void saveData() {
-//        List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalizationsFromGiosApi()
-//                .parallelStream().map(StationLocalization::new).collect(Collectors.toList());
-//        stationLocalizationList.forEach(stationLocalizationRepository::save);
+        List<SynopticStation> synopticStationList = apiProvider.getAllSynopticData()
+                .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
+        synopticStationList.forEach(imgwApiRepository::save);
 
+        List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalizationsFromGiosApi()
+                .parallelStream().map(StationLocalization::new).collect(Collectors.toList());
+        stationLocalizationList.forEach(stationLocalizationRepository::save);
 
         List<AirConditionData> airConditionDataList = apiProvider.getAirConditionData().parallelStream()
                 .map(AirConditionData::new).collect(Collectors.toList());
-
         airConditionDataList.forEach(airConditionDataRepository::save);
     }
 

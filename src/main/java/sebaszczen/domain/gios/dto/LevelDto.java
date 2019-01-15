@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LevelDto {
     @JsonProperty("id")
-    private Long airLevelByNumber;
+    private int airLevelByNumber;
     @JsonProperty("indexLevelName")
     private String airConditionInWord;
 
-    public void setAirLevelByNumber(Long airLevelByNumber) {
+    public void setAirLevelByNumber(int airLevelByNumber) {
         this.airLevelByNumber = airLevelByNumber;
     }
 
@@ -16,7 +16,7 @@ public class LevelDto {
         this.airConditionInWord = airConditionInWord;
     }
 
-    public Long getAirLevelByNumber() {
+    public int getAirLevelByNumber() {
         return airLevelByNumber;
     }
 
