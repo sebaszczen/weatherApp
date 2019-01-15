@@ -1,7 +1,10 @@
 package sebaszczen.domain.dto.gios;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AirConditionDataDto {
-    private Long id;
+    @JsonProperty("id")
+    private int stationId;
     private String stCalcDate;
     private LevelDto stIndexLevel; //powietrze ogólnie
     private LevelDto so2IndexLevel; //dwutlenek siarki
@@ -14,8 +17,8 @@ public class AirConditionDataDto {
     private LevelDto o3IndexLevel;
     private LevelDto c6h6IndexLevel;
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStationId(int stationId) {
+        this.stationId = stationId;
     }
 
     public void setStCalcDate(String stCalcDate) {
