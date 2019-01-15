@@ -64,4 +64,52 @@ public class AirConditionDataDto {
     public void setC6h6IndexLevel(LevelDto c6h6IndexLevel) {
         this.c6h6IndexLevel = c6h6IndexLevel;
     }
+
+    public int getStationId() {
+        return stationId;
+    }
+
+    public String getStCalcDate() {
+        return stCalcDate;
+    }
+
+    public LevelDto getStIndexLevel() {
+        return stIndexLevel;
+    }
+
+    public LevelDto getSo2IndexLevel() {
+        return so2IndexLevel;
+    }
+
+    public String getSo2SourceDataDate() {
+        return so2SourceDataDate;
+    }
+
+    public LevelDto getNo2IndexLevel() {
+        return no2IndexLevel;
+    }
+
+    public LevelDto getCoIndexLevel() {
+        return coIndexLevel;
+    }
+
+    public String getCoSourceDataDate() {
+        return coSourceDataDate;
+    }
+
+    public LevelDto getPm10IndexLevel() {
+        return pm10IndexLevel;
+    }
+
+    public LevelDto getPm25IndexLevel() {
+        return pm25IndexLevel;
+    }
+
+    public LevelDto getO3IndexLevel() {
+        return o3IndexLevel;
+    }
+
+    public LevelDto getC6h6IndexLevel() {
+        return c6h6IndexLevel;
+    }
 }

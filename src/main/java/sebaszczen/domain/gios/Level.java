@@ -1,13 +1,22 @@
 package sebaszczen.domain.gios;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Level {
-    private Long airLevelByNumber;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String airConditionInWord;
+    @OneToOne
+    private AirConditionData airConditionData;
 
-    public void setAirLevelByNumber(Long airLevelByNumber) {
-        this.airLevelByNumber = airLevelByNumber;
+    public Level(String airConditionInWord) {
+        this.airConditionInWord = airConditionInWord;
     }
 
     public void setAirConditionInWord(String airConditionInWord) {

@@ -3,8 +3,9 @@ package sebaszczen.domain.gios.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LevelDto {
-    @JsonProperty("airLevelByNumber")
+    @JsonProperty("id")
     private Long airLevelByNumber;
+    @JsonProperty("indexLevelName")
     private String airConditionInWord;
 
     public void setAirLevelByNumber(Long airLevelByNumber) {
@@ -13,5 +14,13 @@ public class LevelDto {
 
     public void setAirConditionInWord(String airConditionInWord) {
         this.airConditionInWord = airConditionInWord;
+    }
+
+    public Long getAirLevelByNumber() {
+        return airLevelByNumber;
+    }
+
+    public String getAirConditionInWord() {
+        return airConditionInWord;
     }
 }
