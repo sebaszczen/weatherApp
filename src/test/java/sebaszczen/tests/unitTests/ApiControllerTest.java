@@ -29,4 +29,5 @@ public class ApiControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api?provider=imgw"))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
+
 }

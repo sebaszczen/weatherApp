@@ -37,4 +37,8 @@ public class ApiServiceTest {
         apiService.saveImgwData();
         verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
     }
+
+    @Test
+    public void saveData_getDataSaved() {
+    }
 }

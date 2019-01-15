@@ -6,15 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d242d9ae-9e17-44cd-939c-162bfb1c4c17" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/SaveApiDataIntegrationTest.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/Level.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/Level.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/LevelDto.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/LevelDto.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" afterPath="$PROJECT_DIR$/target/classes/application.properties" />
-      <change beforePath="$PROJECT_DIR$/weatherApp.iml" afterPath="$PROJECT_DIR$/weatherApp.iml" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,41 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AirConditionData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevelDto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/LevelDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-              <folding>
-                <element signature="e#308#309#0" expanded="true" />
-                <element signature="e#364#365#0" expanded="true" />
-                <element signature="e#492#493#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
-                <element signature="e#571#572#0" expanded="true" />
-                <element signature="e#616#617#0" expanded="true" />
-                <element signature="e#657#658#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StationLocalization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/StationLocalization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="289">
+              <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,32 +37,68 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://A:/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
+      <file leaf-file-name="City.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/City.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="1379" column="0" lean-forward="false" selection-start-line="1379" selection-start-column="0" selection-end-line="1379" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApiServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ApiServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="317">
+              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SaveApiDataIntegrationTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/SaveApiDataIntegrationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#605#606#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiControllerTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiServiceTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntegrationTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,43 +125,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AirConditionDataDto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/AirConditionDataDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="88" column="24" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
-              <folding>
-                <element signature="e#1920#1921#0" expanded="true" />
-                <element signature="e#1972#1973#0" expanded="true" />
-                <element signature="e#2005#2006#0" expanded="true" />
-                <element signature="e#2037#2038#0" expanded="true" />
-                <element signature="e#2074#2075#0" expanded="true" />
-                <element signature="e#2107#2108#0" expanded="true" />
-                <element signature="e#2148#2149#0" expanded="true" />
-                <element signature="e#2183#2184#0" expanded="true" />
-                <element signature="e#2225#2226#0" expanded="true" />
-                <element signature="e#2261#2262#0" expanded="true" />
-                <element signature="e#2305#2306#0" expanded="true" />
-                <element signature="e#2345#2346#0" expanded="true" />
-                <element signature="e#2387#2388#0" expanded="true" />
-                <element signature="e#2423#2424#0" expanded="true" />
-                <element signature="e#2464#2465#0" expanded="true" />
-                <element signature="e#2499#2500#0" expanded="true" />
-                <element signature="e#2542#2543#0" expanded="true" />
-                <element signature="e#2581#2582#0" expanded="true" />
-                <element signature="e#2624#2625#0" expanded="true" />
-                <element signature="e#2661#2662#0" expanded="true" />
-                <element signature="e#2704#2705#0" expanded="true" />
-                <element signature="e#2741#2742#0" expanded="true" />
-                <element signature="e#2782#2783#0" expanded="true" />
-                <element signature="e#2817#2818#0" expanded="true" />
-                <element signature="e#2860#2861#0" expanded="true" />
-                <element signature="e#2897#2898#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/Level.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -182,8 +146,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -214,8 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/apiSupplier/Nauka.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/configurations/Configuration.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/configurations/SwaggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/apiSupplier/ApiProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/SynopticDataService.java" />
@@ -238,7 +200,6 @@
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java" />
         <option value="$PROJECT_DIR$/src/test/java/sebaszczen/respository/MockSynopticStationBuilder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/dto/gios/CityDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/dto/gios/StationLocalizationDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/dto/gios/AirConditionDataDto.java" />
@@ -256,8 +217,6 @@
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/Commune.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/StationLocalization.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/City.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/repository/AirConditionDataRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/AirConditionDataDto.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
@@ -265,6 +224,11 @@
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/Level.java" />
         <option value="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/City.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/StationLocalization.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/SaveApiDataIntegrationTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
       </list>
     </option>
   </component>
@@ -405,17 +369,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sebaszczen" type="462c0819:PsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
-              <item name="gios" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="weatherApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="weatherApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sebaszczen" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -532,7 +485,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="JUnit.SaveApiDataIntegrationTest.saveData_getDataSaved">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -623,31 +576,6 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="IntegrationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="sebaszczen.tests.integrationTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="weatherApp" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="sebaszczen.integrationTests" />
-      <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.integrationTests.IntegrationTests" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration name="IntegrationTests.saveSynopticData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -661,6 +589,31 @@
       <option name="PACKAGE_NAME" value="sebaszczen.tests.integrationTests" />
       <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.integrationTests.IntegrationTests" />
       <option name="METHOD_NAME" value="saveSynopticData" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="SaveApiDataIntegrationTest.saveData_getDataSaved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="sebaszczen.tests.integrationTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="weatherApp" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="sebaszczen.tests.integrationTests" />
+      <option name="MAIN_CLASS_NAME" value="sebaszczen.tests.integrationTests.SaveApiDataIntegrationTest" />
+      <option name="METHOD_NAME" value="saveData_getDataSaved" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -734,19 +687,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
-      <item index="4" class="java.lang.String" itemvalue="Application.App" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
+      <item index="3" class="java.lang.String" itemvalue="Application.App" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SaveApiDataIntegrationTest.saveData_getDataSaved" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.App" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.IntegrationTests" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.SaveApiDataIntegrationTest.saveData_getDataSaved" />
+        <item index="1" class="java.lang.String" itemvalue="Application.App" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.IntegrationTests.saveSynopticData" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ApiServiceTest.saveImgwData_provideSynopticStationList" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ApiControllerTest.saveCurrentDataOnDemand" />
       </list>
     </recent_temporary>
   </component>
@@ -827,19 +780,17 @@
       <option name="project" value="LOCAL" />
       <updated>1547562419011</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="zapisywanie danych z api poprawnie działa">
+      <created>1547588929702</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1547588929702</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 32m 36s.xml">
-      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 49m 39s.xml">
-      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 51m 47s.xml">
-      <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ApiServiceTest_saveImgwData_provideSynopticStationList - 2019.01.14 at 13h 53m 17s.xml">
       <configuration name="ApiServiceTest.saveImgwData_provideSynopticStationList" configurationId="JUnit" />
     </history-entry>
@@ -860,6 +811,15 @@
     </history-entry>
     <history-entry file="IntegrationTests_saveSynopticData - 2019.01.15 at 14h 11m 32s.xml">
       <configuration name="IntegrationTests.saveSynopticData" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SaveApiDataIntegrationTest_saveData_getDataSaved - 2019.01.15 at 23h 52m 41s.xml">
+      <configuration name="SaveApiDataIntegrationTest.saveData_getDataSaved" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SaveApiDataIntegrationTest_saveData_getDataSaved - 2019.01.15 at 23h 55m 39s.xml">
+      <configuration name="SaveApiDataIntegrationTest.saveData_getDataSaved" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SaveApiDataIntegrationTest_saveData_getDataSaved - 2019.01.15 at 23h 58m 50s.xml">
+      <configuration name="SaveApiDataIntegrationTest.saveData_getDataSaved" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -882,7 +842,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45749614" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52859133" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44351465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7140865" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32457495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -943,7 +903,8 @@
     <MESSAGE value="stationLocalizationDto improved" />
     <MESSAGE value="aircondition improved" />
     <MESSAGE value="zapisywanie adresu stacji" />
-    <option name="LAST_COMMIT_MESSAGE" value="zapisywanie adresu stacji" />
+    <MESSAGE value="zapisywanie danych z api poprawnie działa" />
+    <option name="LAST_COMMIT_MESSAGE" value="zapisywanie danych z api poprawnie działa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1011,13 +972,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.6.0/assertj-core-2.6.0.jar!/org/assertj/core/api/Assertions.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="431" column="44" lean-forward="true" selection-start-line="431" selection-start-column="44" selection-end-line="431" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/sebaszczen/controller/WeatherController.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/configurations/SwaggerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1089,7 +1043,7 @@
         <state relative-caret-position="51">
           <caret line="8" column="66" lean-forward="false" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1123,16 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ImgwApiRepositoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -1157,24 +1101,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/repository/StationRepository.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="35" column="78" lean-forward="false" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1247,7 +1173,7 @@
         <state relative-caret-position="119">
           <caret line="7" column="87" lean-forward="false" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1264,14 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/City.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1308,32 +1226,32 @@
         <state relative-caret-position="128">
           <caret line="88" column="24" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
           <folding>
-            <element signature="e#1920#1921#0" expanded="true" />
-            <element signature="e#1972#1973#0" expanded="true" />
-            <element signature="e#2005#2006#0" expanded="true" />
-            <element signature="e#2037#2038#0" expanded="true" />
-            <element signature="e#2074#2075#0" expanded="true" />
-            <element signature="e#2107#2108#0" expanded="true" />
-            <element signature="e#2148#2149#0" expanded="true" />
-            <element signature="e#2183#2184#0" expanded="true" />
-            <element signature="e#2225#2226#0" expanded="true" />
-            <element signature="e#2261#2262#0" expanded="true" />
-            <element signature="e#2305#2306#0" expanded="true" />
-            <element signature="e#2345#2346#0" expanded="true" />
-            <element signature="e#2387#2388#0" expanded="true" />
-            <element signature="e#2423#2424#0" expanded="true" />
-            <element signature="e#2464#2465#0" expanded="true" />
-            <element signature="e#2499#2500#0" expanded="true" />
-            <element signature="e#2542#2543#0" expanded="true" />
-            <element signature="e#2581#2582#0" expanded="true" />
-            <element signature="e#2624#2625#0" expanded="true" />
-            <element signature="e#2661#2662#0" expanded="true" />
-            <element signature="e#2704#2705#0" expanded="true" />
-            <element signature="e#2741#2742#0" expanded="true" />
-            <element signature="e#2782#2783#0" expanded="true" />
-            <element signature="e#2817#2818#0" expanded="true" />
-            <element signature="e#2860#2861#0" expanded="true" />
-            <element signature="e#2897#2898#0" expanded="true" />
+            <element signature="e#1920#1921#0" expanded="false" />
+            <element signature="e#1972#1973#0" expanded="false" />
+            <element signature="e#2005#2006#0" expanded="false" />
+            <element signature="e#2037#2038#0" expanded="false" />
+            <element signature="e#2074#2075#0" expanded="false" />
+            <element signature="e#2107#2108#0" expanded="false" />
+            <element signature="e#2148#2149#0" expanded="false" />
+            <element signature="e#2183#2184#0" expanded="false" />
+            <element signature="e#2225#2226#0" expanded="false" />
+            <element signature="e#2261#2262#0" expanded="false" />
+            <element signature="e#2305#2306#0" expanded="false" />
+            <element signature="e#2345#2346#0" expanded="false" />
+            <element signature="e#2387#2388#0" expanded="false" />
+            <element signature="e#2423#2424#0" expanded="false" />
+            <element signature="e#2464#2465#0" expanded="false" />
+            <element signature="e#2499#2500#0" expanded="false" />
+            <element signature="e#2542#2543#0" expanded="false" />
+            <element signature="e#2581#2582#0" expanded="false" />
+            <element signature="e#2624#2625#0" expanded="false" />
+            <element signature="e#2661#2662#0" expanded="false" />
+            <element signature="e#2704#2705#0" expanded="false" />
+            <element signature="e#2741#2742#0" expanded="false" />
+            <element signature="e#2782#2783#0" expanded="false" />
+            <element signature="e#2817#2818#0" expanded="false" />
+            <element signature="e#2860#2861#0" expanded="false" />
+            <element signature="e#2897#2898#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1386,16 +1304,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/StationLocalization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1414,10 +1322,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/City.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/StationLocalization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/IntegrationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/integrationTests/SaveApiDataIntegrationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="317">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
           <folding />
         </state>
       </provider>
