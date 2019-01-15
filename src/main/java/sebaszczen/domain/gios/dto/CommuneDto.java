@@ -1,4 +1,4 @@
-package sebaszczen.domain.dto.gios;
+package sebaszczen.domain.gios.dto;
 
 public class CommuneDto {
     private String communeName;
@@ -15,5 +15,17 @@ public class CommuneDto {
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
+    }
+
+    public String getCommuneName() {
+        return communeName;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
     }
 }

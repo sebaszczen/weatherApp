@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import sebaszczen.domain.SynopticStation;
-import sebaszczen.domain.dto.gios.AirConditionDataDto;
-import sebaszczen.domain.dto.gios.StationLocalizationDto;
+import sebaszczen.domain.gios.dto.AirConditionDataDto;
+import sebaszczen.domain.gios.dto.StationLocalizationDto;
 
 import java.net.URI;
 import java.util.Arrays;
