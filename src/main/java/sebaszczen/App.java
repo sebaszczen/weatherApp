@@ -17,8 +17,8 @@ import sebaszczen.services.api.ApiService;
 public class App implements CommandLineRunner
 {
 
-    @Autowired
-    private ApiProvider apiProvider;
+//    @Autowired
+//    private ApiProvider apiProvider;
 
     @Autowired
     private ApiService apiService;

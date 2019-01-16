@@ -28,8 +28,8 @@ public class ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("/" + city).build().encode().toUri();
     }
 
-    public List<SynopticStation.SynopticStationBuilder> getAllSynopticData() {
-        SynopticStation.SynopticStationBuilder[] forObject = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationBuilder[].class);
+    public List<SynopticStation.SynopticStationDto> getAllSynopticStationDto() {
+        SynopticStation.SynopticStationDto[] forObject = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
         return Arrays.stream(forObject).collect(Collectors.toList());
     }
 
@@ -37,14 +37,14 @@ public class ApiProvider {
         return restTemplate.getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()), SynopticStation.class);
     }
 
-    public List<StationLocalizationDto> getStationLocalizationsFromGiosApi() {
+    public List<StationLocalizationDto> getStationLocalizationDto() {
         StationLocalizationDto[] stationLocalizationDto = restTemplate.getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         return Arrays.stream(stationLocalizationDto).parallel().collect(Collectors.toList());
     }
 
     public List<AirConditionDataDto> getAirConditionData(){
 
-        return getStationLocalizationsFromGiosApi().parallelStream()
+        return getStationLocalizationDto().parallelStream()
                 .map(station -> restTemplate
                         .getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
                 .collect(Collectors.toList());

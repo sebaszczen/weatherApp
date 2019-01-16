@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Calendar;
 
 @Entity
 public class SynopticStation {
@@ -23,19 +22,19 @@ public class SynopticStation {
     private float suma_opadu;
     private float cisnienie;
 
-    public SynopticStation(SynopticStationBuilder synopticStationBuilder) {
-        this.id_stacji= synopticStationBuilder.id_stacji;
-        this.stacja = synopticStationBuilder.stacja;
-        this.localDateTime= LocalDateTime.of(synopticStationBuilder.data_pomiaru, synopticStationBuilder.godzina_pomiaru);
-        this.temperatura = synopticStationBuilder.temperatura;
-        this.predkosc_wiatru = synopticStationBuilder.predkosc_wiatru;
-        this.kierunek_wiatru = synopticStationBuilder.kierunek_wiatru;
-        this.wilgotnosc_wzgledna = synopticStationBuilder.wilgotnosc_wzgledna;
-        this.suma_opadu = synopticStationBuilder.suma_opadu;
-        this.cisnienie = synopticStationBuilder.cisnienie;
+    public SynopticStation(SynopticStationDto synopticStationDto) {
+        this.id_stacji= synopticStationDto.id_stacji;
+        this.stacja = synopticStationDto.stacja;
+        this.localDateTime= LocalDateTime.of(synopticStationDto.data_pomiaru, synopticStationDto.godzina_pomiaru);
+        this.temperatura = synopticStationDto.temperatura;
+        this.predkosc_wiatru = synopticStationDto.predkosc_wiatru;
+        this.kierunek_wiatru = synopticStationDto.kierunek_wiatru;
+        this.wilgotnosc_wzgledna = synopticStationDto.wilgotnosc_wzgledna;
+        this.suma_opadu = synopticStationDto.suma_opadu;
+        this.cisnienie = synopticStationDto.cisnienie;
     }
 
-    public static class SynopticStationBuilder {
+    public static class SynopticStationDto {
         private Long id_stacji;
         private String stacja;
         private LocalDate data_pomiaru;
@@ -47,52 +46,52 @@ public class SynopticStation {
         private float suma_opadu;
         private float cisnienie;
 
-        public SynopticStationBuilder setId_stacji(Long id_stacji) {
+        public SynopticStationDto setId_stacji(Long id_stacji) {
             this.id_stacji = id_stacji;
             return this;
         }
 
-        public SynopticStationBuilder setStacja(String stacja) {
+        public SynopticStationDto setStacja(String stacja) {
             this.stacja = stacja;
             return this;
         }
 
-        public SynopticStationBuilder setData_pomiaru(LocalDate data_pomiaru) {
+        public SynopticStationDto setData_pomiaru(LocalDate data_pomiaru) {
             this.data_pomiaru = data_pomiaru;
             return this;
         }
 
-        public SynopticStationBuilder setGodzina_pomiaru(int godzina_pomiaru) {
+        public SynopticStationDto setGodzina_pomiaru(int godzina_pomiaru) {
             this.godzina_pomiaru = LocalTime.of(godzina_pomiaru,0,0,0);
             return this;
         }
 
-        public SynopticStationBuilder setTemperatura(float temperatura) {
+        public SynopticStationDto setTemperatura(float temperatura) {
             this.temperatura = temperatura;
             return this;
         }
 
-        public SynopticStationBuilder setPredkosc_wiatru(float predkosc_wiatru) {
+        public SynopticStationDto setPredkosc_wiatru(float predkosc_wiatru) {
             this.predkosc_wiatru = predkosc_wiatru;
             return this;
         }
 
-        public SynopticStationBuilder setKierunek_wiatru(int kierunek_wiatru) {
+        public SynopticStationDto setKierunek_wiatru(int kierunek_wiatru) {
             this.kierunek_wiatru = kierunek_wiatru;
             return this;
         }
 
-        public SynopticStationBuilder setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
+        public SynopticStationDto setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
             this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
             return this;
         }
 
-        public SynopticStationBuilder setSuma_opadu(float suma_opadu) {
+        public SynopticStationDto setSuma_opadu(float suma_opadu) {
             this.suma_opadu = suma_opadu;
             return this;
         }
 
-        public SynopticStationBuilder setCisnienie(float cisnienie) {
+        public SynopticStationDto setCisnienie(float cisnienie) {
             this.cisnienie = cisnienie;
             return this;
         }
