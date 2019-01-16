@@ -1,7 +1,10 @@
 package sebaszczen.services.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.domain.SynopticStation;
 import sebaszczen.domain.gios.AirConditionData;
@@ -11,10 +14,13 @@ import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class ApiServiceImpl implements ApiService {
+
+    private Logger logger = Logger.getLogger(String.valueOf(ApiServiceImpl.class));
 
     @Autowired
     private ImgwApiRepository imgwApiRepository;
@@ -29,6 +35,7 @@ public class ApiServiceImpl implements ApiService {
     private AirConditionDataRepository airConditionDataRepository;
 
     @Override
+    @Transactional
     public void saveImgwData() {
         List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStationDto()
                 .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
@@ -36,7 +43,13 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
+    @Transactional
+    @Async
+    @Scheduled(fixedRate =60000)
     public void saveData() {
+        String name = Thread.currentThread().getName();
+        logger.info("watek:  "+ name);
+
         List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStationDto()
                 .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
         synopticStationList.forEach(imgwApiRepository::save);
