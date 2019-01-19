@@ -4,7 +4,6 @@ import sebaszczen.domain.gios.dto.AirConditionDataDto;
 import sebaszczen.domain.gios.dto.LevelDto;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 public class AirConditionData {

@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.domain.SynopticStation;
 import sebaszczen.domain.gios.AirConditionData;
