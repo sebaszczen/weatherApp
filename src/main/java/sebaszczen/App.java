@@ -1,13 +1,11 @@
 package sebaszczen;
 
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.services.api.ApiService;
 
 import java.util.logging.Logger;
@@ -24,7 +22,7 @@ public class App implements CommandLineRunner
 {
     private static Logger logger = Logger.getLogger(App.class.getName());
 //    @Autowired
-//    private ApiProvider apiProvider;
+//    private ApiProviderImpl apiProvider;
 
     @Autowired
     private ApiService apiService;
@@ -37,8 +35,8 @@ public class App implements CommandLineRunner
 
     @Override
     public void run(String... strings) throws Exception {
-//        apiProvider.getAirConditionData();
-//        apiProvider.getAirConditionData();
+//        apiProvider.getAllAirConditionDataDto();
+//        apiProvider.getAllAirConditionDataDto();
 //        apiService.saveData();
     }
 }

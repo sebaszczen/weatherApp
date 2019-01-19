@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.domain.SynopticStation;
 import sebaszczen.domain.gios.AirConditionData;
@@ -23,7 +21,6 @@ import sebaszczen.services.api.ApiServiceImpl;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -64,7 +61,7 @@ public class ApiServiceTest {
         List<StationLocalizationDto> mockStationLocalizationDtoList = mockStationLocalizationDto.getMockStationLocalizationDtoList();
 
         given(apiProvider.getAllSynopticStationDto()).willReturn(synopticStationDtoList);
-        given(apiProvider.getAirConditionData()).willReturn(mockAirConditionDataDtoList);
+        given(apiProvider.getAllAirConditionDataDto()).willReturn(mockAirConditionDataDtoList);
         given(apiProvider.getStationLocalizationDto()).willReturn(mockStationLocalizationDtoList);
 
         when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(new SynopticStation(synopticStationDtoList.get(0)));

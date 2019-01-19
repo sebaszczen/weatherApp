@@ -9,6 +9,7 @@ import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.domain.SynopticStation;
 import sebaszczen.domain.gios.AirConditionData;
 import sebaszczen.domain.gios.StationLocalization;
+import sebaszczen.domain.gios.dto.AirConditionDataDto;
 import sebaszczen.repository.AirConditionDataRepository;
 import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.repository.StationLocalizationRepository;
@@ -20,19 +21,23 @@ import java.util.stream.Collectors;
 @Service
 public class ApiServiceImpl implements ApiService {
 
-    private Logger logger = Logger.getLogger(String.valueOf(ApiServiceImpl.class));
+    private final Logger logger = Logger.getLogger(String.valueOf(ApiServiceImpl.class));
+
+    private final ImgwApiRepository imgwApiRepository;
+
+    private final ApiProvider apiProvider;
+
+    private final StationLocalizationRepository stationLocalizationRepository;
+
+    private final AirConditionDataRepository airConditionDataRepository;
 
     @Autowired
-    private ImgwApiRepository imgwApiRepository;
-
-    @Autowired
-    private ApiProvider apiProvider;
-
-    @Autowired
-    private StationLocalizationRepository stationLocalizationRepository;
-
-    @Autowired
-    private AirConditionDataRepository airConditionDataRepository;
+    public ApiServiceImpl(ImgwApiRepository imgwApiRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository airConditionDataRepository) {
+        this.imgwApiRepository = imgwApiRepository;
+        this.apiProvider = apiProvider;
+        this.stationLocalizationRepository = stationLocalizationRepository;
+        this.airConditionDataRepository = airConditionDataRepository;
+    }
 
     @Override
     @Transactional
@@ -45,23 +50,28 @@ public class ApiServiceImpl implements ApiService {
     @Override
     @Transactional
     @Async
-    @Scheduled(fixedRate =60000)
+    @Scheduled(fixedRate = 600000)
     public void saveData() {
-        String name = Thread.currentThread().getName();
-        logger.info("watek:  "+ name);
+        SynopticStation.SynopticStationDto warszawa = apiProvider.getSynopticDataByStationName("warszawa");
+        if (imgwApiRepository.checkIfContain
+                (warszawa.getGodzina_pomiaru().getHour(), warszawa.getData_pomiaru().getDayOfMonth()) == 0) {
+            List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStationDto()
+                    .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
+            synopticStationList.forEach(imgwApiRepository::save);
+        }
 
-        List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStationDto()
-                .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
-        synopticStationList.forEach(imgwApiRepository::save);
-
-        List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalizationDto()
-                .parallelStream().map(StationLocalization::new).collect(Collectors.toList());
+        AirConditionDataDto airConditionDataDto = apiProvider.getAirConditionDataByIndex(114);
+        if (airConditionDataRepository.checkIfContain(airConditionDataDto.getStCalcDate().getHour(),
+                airConditionDataDto.getStCalcDate().getDayOfMonth())==0){
+            List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalizationDto()
+                    .parallelStream().map(StationLocalization::new).collect(Collectors.toList());
         stationLocalizationList.forEach(stationLocalizationRepository::save);
 
-        List<AirConditionData> airConditionDataList = apiProvider.getAirConditionData().parallelStream()
+        List<AirConditionData> airConditionDataList = apiProvider.getAllAirConditionDataDto().parallelStream()
                 .map(AirConditionData::new).collect(Collectors.toList());
         airConditionDataList.forEach(airConditionDataRepository::save);
     }
+}
 
 
 }

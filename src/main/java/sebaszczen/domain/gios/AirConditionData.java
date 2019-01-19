@@ -4,6 +4,7 @@ import sebaszczen.domain.gios.dto.AirConditionDataDto;
 import sebaszczen.domain.gios.dto.LevelDto;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class AirConditionData {
@@ -11,7 +12,7 @@ public class AirConditionData {
     @GeneratedValue
     private Long id;
     private int stationId;
-    private String stCalcDate;
+    private LocalDateTime stCalcDate;
     @OneToOne(cascade = CascadeType.ALL)
     private Level stIndexLevel; //powietrze ogólnie
     @OneToOne(cascade = CascadeType.ALL)

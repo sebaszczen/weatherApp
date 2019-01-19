@@ -99,5 +99,45 @@ public class SynopticStation {
         public SynopticStation build() {
             return new SynopticStation(this);
         }
+
+        public Long getId_stacji() {
+            return id_stacji;
+        }
+
+        public String getStacja() {
+            return stacja;
+        }
+
+        public LocalDate getData_pomiaru() {
+            return data_pomiaru;
+        }
+
+        public LocalTime getGodzina_pomiaru() {
+            return godzina_pomiaru;
+        }
+
+        public float getTemperatura() {
+            return temperatura;
+        }
+
+        public float getPredkosc_wiatru() {
+            return predkosc_wiatru;
+        }
+
+        public int getKierunek_wiatru() {
+            return kierunek_wiatru;
+        }
+
+        public float getWilgotnosc_wzgledna() {
+            return wilgotnosc_wzgledna;
+        }
+
+        public float getSuma_opadu() {
+            return suma_opadu;
+        }
+
+        public float getCisnienie() {
+            return cisnienie;
+        }
     }
 }

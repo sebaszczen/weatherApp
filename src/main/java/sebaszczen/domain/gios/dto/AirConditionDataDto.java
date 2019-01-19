@@ -2,10 +2,14 @@ package sebaszczen.domain.gios.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class AirConditionDataDto {
     @JsonProperty("id")
     private int stationId;
-    private String stCalcDate;
+    private LocalDateTime stCalcDate;
     private LevelDto stIndexLevel; //powietrze ogólnie
     private LevelDto so2IndexLevel; //dwutlenek siarki
     private String so2SourceDataDate;
@@ -22,7 +26,8 @@ public class AirConditionDataDto {
     }
 
     public void setStCalcDate(String stCalcDate) {
-        this.stCalcDate = stCalcDate;
+        String[] split = stCalcDate.split(" ");
+        this.stCalcDate = LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
     }
 
     public void setStIndexLevel(LevelDto stIndexLevel) {
@@ -69,7 +74,7 @@ public class AirConditionDataDto {
         return stationId;
     }
 
-    public String getStCalcDate() {
+    public LocalDateTime getStCalcDate() {
         return stCalcDate;
     }
 

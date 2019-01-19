@@ -11,11 +11,14 @@ import java.net.URI;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-//@RequestMapping("/data")
 public class ApiController {
 
+    private final ApiService synopticDataService;
+
     @Autowired
-    private ApiService synopticDataService;
+    public ApiController(ApiService synopticDataService) {
+        this.synopticDataService = synopticDataService;
+    }
 
     @RequestMapping(value = "/api",method = POST)
     public ResponseEntity saveCurrentDataOnDemand
