@@ -50,7 +50,7 @@ public class ApiServiceImpl implements ApiService {
     @Override
     @Transactional
     @Async
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 3600000)
     public void saveData() {
         SynopticStation.SynopticStationDto warszawa = apiProvider.getSynopticDataByStationName("warszawa");
         if (imgwApiRepository.checkIfContain
