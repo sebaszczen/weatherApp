@@ -15,5 +15,5 @@ public interface ApiProvider {
 
     List<AirConditionDataDto> getAllAirConditionDataDto();
 
-    AirConditionDataDto getAirConditionDataByIndex(int index);
+    AirConditionDataDto getAirConditionDataByStationIndex(int index);
 }

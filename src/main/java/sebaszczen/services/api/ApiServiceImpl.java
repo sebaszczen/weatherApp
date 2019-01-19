@@ -29,14 +29,14 @@ public class ApiServiceImpl implements ApiService {
 
     private final StationLocalizationRepository stationLocalizationRepository;
 
-    private final AirConditionDataRepository airConditionDataRepository;
+    private final AirConditionDataRepository giosApiRepository;
 
     @Autowired
-    public ApiServiceImpl(ImgwApiRepository imgwApiRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository airConditionDataRepository) {
+    public ApiServiceImpl(ImgwApiRepository imgwApiRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository giosApiRepository) {
         this.imgwApiRepository = imgwApiRepository;
         this.apiProvider = apiProvider;
         this.stationLocalizationRepository = stationLocalizationRepository;
-        this.airConditionDataRepository = airConditionDataRepository;
+        this.giosApiRepository = giosApiRepository;
     }
 
     @Override
@@ -52,26 +52,38 @@ public class ApiServiceImpl implements ApiService {
     @Async
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
-        SynopticStation.SynopticStationDto warszawa = apiProvider.getSynopticDataByStationName("warszawa");
-        if (imgwApiRepository.checkIfContain
-                (warszawa.getGodzina_pomiaru().getHour(), warszawa.getData_pomiaru().getDayOfMonth()) == 0) {
+
+        if (imgwApiIsUpToDate()) {
             List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStationDto()
                     .parallelStream().map(SynopticStation::new).collect(Collectors.toList());
             synopticStationList.forEach(imgwApiRepository::save);
         }
 
-        AirConditionDataDto airConditionDataDto = apiProvider.getAirConditionDataByIndex(114);
-        if (airConditionDataRepository.checkIfContain(airConditionDataDto.getStCalcDate().getHour(),
-                airConditionDataDto.getStCalcDate().getDayOfMonth())==0){
+        if (giosApiIsUpToDate()){
             List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalizationDto()
                     .parallelStream().map(StationLocalization::new).collect(Collectors.toList());
         stationLocalizationList.forEach(stationLocalizationRepository::save);
 
         List<AirConditionData> airConditionDataList = apiProvider.getAllAirConditionDataDto().parallelStream()
                 .map(AirConditionData::new).collect(Collectors.toList());
-        airConditionDataList.forEach(airConditionDataRepository::save);
+        airConditionDataList.forEach(giosApiRepository::save);
     }
 }
+
+    private boolean imgwApiIsUpToDate() {
+        SynopticStation.SynopticStationDto warszawa = apiProvider.getSynopticDataByStationName("warszawa");
+        int hour = warszawa.getGodzina_pomiaru().getHour();
+        int dayOfMonth = warszawa.getData_pomiaru().getDayOfMonth();
+        return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
+    }
+
+    private boolean giosApiIsUpToDate() {
+        AirConditionDataDto airConditionDataDto = apiProvider.getAirConditionDataByStationIndex(114);
+        int hour1 = airConditionDataDto.getStCalcDate().getHour();
+        int dayOfMonth1 = airConditionDataDto.getStCalcDate().getDayOfMonth();
+        return giosApiRepository.checkIfContain(hour1,
+                dayOfMonth1)==0;
+    }
 
 
 }

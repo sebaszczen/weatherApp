@@ -54,7 +54,7 @@ public class ApiProviderImpl implements ApiProvider {
                 .collect(Collectors.toList());
     }
 
-    public AirConditionDataDto getAirConditionDataByIndex(int index){
+    public AirConditionDataDto getAirConditionDataByStationIndex(int index){
         return  restTemplate.getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
     }
 }

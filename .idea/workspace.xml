@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="615965a2-d316-42f4-9438-26678295c4ab" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProviderImpl.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/App.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/App.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProvider.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/controller/ApiController.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/controller/ApiController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/SynopticStation.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/AirConditionData.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/AirConditionDataDto.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/domain/gios/dto/AirConditionDataDto.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/AirConditionDataRepository.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/AirConditionDataRepository.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/ImgwApiRepository.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/StationLocalizationRepository.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/repository/StationLocalizationRepository.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProviderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProviderImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/sebaszczen/tests/unitTests/ApiServiceTest.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sebaszczen/App.class" afterPath="$PROJECT_DIR$/target/classes/sebaszczen/App.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +20,8 @@
       <file leaf-file-name="ApiServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+            <state relative-caret-position="116">
+              <caret line="55" column="30" lean-forward="false" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -282,6 +272,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -518,7 +509,21 @@
       <option name="project" value="LOCAL" />
       <updated>1547896324884</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="scheduler finished">
+      <created>1547917512259</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1547917512259</updated>
+    </task>
+    <task id="LOCAL-00003" summary="scheduler dime improved">
+      <created>1547917607243</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1547917607243</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -561,10 +566,10 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6707882" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6692427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45440495" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25113463" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SimpleHttpClient" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -581,44 +586,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="scheduler finished" />
+    <MESSAGE value="scheduler dime improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="scheduler dime improved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>63</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>55</line>
-          <properties />
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>56</line>
-          <properties />
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>64</line>
+          <line>61</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>57</line>
+          <line>56</line>
           <properties />
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java</url>
-          <line>65</line>
+          <line>62</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
@@ -804,14 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProviderImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/repository/AirConditionDataRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -820,10 +801,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/apiProvider/ApiProviderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sebaszczen/services/api/ApiServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        <state relative-caret-position="116">
+          <caret line="55" column="30" lean-forward="false" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
           <folding />
         </state>
       </provider>
