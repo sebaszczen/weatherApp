@@ -39,4 +39,5 @@ public class ImgwApiRepositoryTest {
         List<SynopticStation> all = imgwApiRepository.findAll();
         Assertions.assertThat(all).isEqualTo(synopticStationList);
     }
+
 }

@@ -24,8 +24,8 @@ public class App implements CommandLineRunner
 //    @Autowired
 //    private ApiProviderImpl apiProvider;
 
-    @Autowired
-    private ApiService apiService;
+//    @Autowired
+//    private ApiService apiService;
 
     public static void main( String[] args )
     {

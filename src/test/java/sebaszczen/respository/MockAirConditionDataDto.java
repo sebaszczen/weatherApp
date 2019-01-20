@@ -14,19 +14,20 @@ public class MockAirConditionDataDto {
         LevelDto levelDto1 = new LevelDto();
         levelDto1.setAirConditionInWord("super");
         levelDto1.setAirLevelByNumber(1);
+
         AirConditionDataDto airConditionDataDto1 = new AirConditionDataDto();
         airConditionDataDto1.setC6h6IndexLevel(levelDto1);
         airConditionDataDto1.setCoIndexLevel(levelDto1);
         airConditionDataDto1.setNo2IndexLevel(levelDto1);
+        airConditionDataDto1.setStCalcDate("2019-01-12 12:20");
 
 
-        LevelDto levelDto2 = new LevelDto();
-        levelDto1.setAirConditionInWord("super");
-        levelDto1.setAirLevelByNumber(1);
         AirConditionDataDto airConditionDataDto2 = new AirConditionDataDto();
-        airConditionDataDto1.setC6h6IndexLevel(levelDto2);
-        airConditionDataDto1.setCoIndexLevel(levelDto2);
-        airConditionDataDto1.setNo2IndexLevel(levelDto2);
+        airConditionDataDto2.setC6h6IndexLevel(levelDto1);
+        airConditionDataDto2.setCoIndexLevel(levelDto1);
+        airConditionDataDto2.setNo2IndexLevel(levelDto1);
+        airConditionDataDto2.setStCalcDate("2019-01-12 12:20");
+
 
         list.add(airConditionDataDto1);
         list.add(airConditionDataDto2);

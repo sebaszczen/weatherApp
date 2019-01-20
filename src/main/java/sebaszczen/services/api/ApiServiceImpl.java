@@ -74,6 +74,7 @@ public class ApiServiceImpl implements ApiService {
         SynopticStation.SynopticStationDto warszawa = apiProvider.getSynopticDataByStationName("warszawa");
         int hour = warszawa.getGodzina_pomiaru().getHour();
         int dayOfMonth = warszawa.getData_pomiaru().getDayOfMonth();
+        imgwApiRepository.findAll();
         return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
     }
 
@@ -81,8 +82,7 @@ public class ApiServiceImpl implements ApiService {
         AirConditionDataDto airConditionDataDto = apiProvider.getAirConditionDataByStationIndex(114);
         int hour1 = airConditionDataDto.getStCalcDate().getHour();
         int dayOfMonth1 = airConditionDataDto.getStCalcDate().getDayOfMonth();
-        return giosApiRepository.checkIfContain(hour1,
-                dayOfMonth1)==0;
+        return giosApiRepository.checkIfContain(hour1, dayOfMonth1)==0;
     }
 
 
