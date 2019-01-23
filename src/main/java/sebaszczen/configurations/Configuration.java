@@ -1,5 +1,6 @@
 package sebaszczen.configurations;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -19,5 +20,9 @@ public class Configuration {
         return executor;
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }

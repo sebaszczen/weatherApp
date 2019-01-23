@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import sebaszczen.services.api.ApiService;
+import sebaszczen.services.api.IApiService;
 
 import java.net.URI;
 
@@ -13,10 +13,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 public class ApiController {
 
-    private final ApiService synopticDataService;
+    private final IApiService synopticDataService;
 
     @Autowired
-    public ApiController(ApiService synopticDataService) {
+    public ApiController(IApiService synopticDataService) {
         this.synopticDataService = synopticDataService;
     }
 
@@ -30,9 +30,4 @@ public class ApiController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).build();
     }
-//
-//    @PostMapping("/save")
-//    public void saveAirConditionData() {
-//        apiProvider.saveAirConditions();
-//    }
 }

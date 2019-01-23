@@ -1,10 +1,11 @@
-package sebaszczen.domain.gios;
+package sebaszczen.model;
 
-import sebaszczen.domain.gios.dto.AirConditionDataDto;
-import sebaszczen.domain.gios.dto.LevelDto;
+import sebaszczen.dto.AirConditionDataDto;
+import sebaszczen.dto.LevelDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class AirConditionData {
@@ -63,4 +64,79 @@ public class AirConditionData {
         LevelDto c6h6IndexLevel = airConditionDataDto.getC6h6IndexLevel();
         this.c6h6IndexLevel = c6h6IndexLevel == null ? new Level() : new Level(c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
     }
+
+    public LocalDateTime getStCalcDate() {
+        return stCalcDate;
+    }
+
+    public int getStationId() {
+        return stationId;
+    }
+
+    public Level getStIndexLevel() {
+        return stIndexLevel;
+    }
+
+    public Level getSo2IndexLevel() {
+        return so2IndexLevel;
+    }
+
+    public String getSo2SourceDataDate() {
+        return so2SourceDataDate;
+    }
+
+    public Level getNo2IndexLevel() {
+        return no2IndexLevel;
+    }
+
+    public Level getCoIndexLevel() {
+        return coIndexLevel;
+    }
+
+    public String getCoSourceDataDate() {
+        return coSourceDataDate;
+    }
+
+    public Level getPm10IndexLevel() {
+        return pm10IndexLevel;
+    }
+
+    public Level getPm25IndexLevel() {
+        return pm25IndexLevel;
+    }
+
+    public Level getO3IndexLevel() {
+        return o3IndexLevel;
+    }
+
+    public Level getC6h6IndexLevel() {
+        return c6h6IndexLevel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AirConditionData that = (AirConditionData) o;
+        return stationId == that.stationId &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(stCalcDate, that.stCalcDate) &&
+                Objects.equals(stIndexLevel, that.stIndexLevel) &&
+                Objects.equals(so2IndexLevel, that.so2IndexLevel) &&
+                Objects.equals(so2SourceDataDate, that.so2SourceDataDate) &&
+                Objects.equals(no2IndexLevel, that.no2IndexLevel) &&
+                Objects.equals(coIndexLevel, that.coIndexLevel) &&
+                Objects.equals(coSourceDataDate, that.coSourceDataDate) &&
+                Objects.equals(pm10IndexLevel, that.pm10IndexLevel) &&
+                Objects.equals(pm25IndexLevel, that.pm25IndexLevel) &&
+                Objects.equals(o3IndexLevel, that.o3IndexLevel) &&
+                Objects.equals(c6h6IndexLevel, that.c6h6IndexLevel);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, stationId, stCalcDate, stIndexLevel, so2IndexLevel, so2SourceDataDate, no2IndexLevel, coIndexLevel, coSourceDataDate, pm10IndexLevel, pm25IndexLevel, o3IndexLevel, c6h6IndexLevel);
+    }
 }
+

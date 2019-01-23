@@ -1,4 +1,4 @@
-package sebaszczen.domain;
+package sebaszczen.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Entity
 public class SynopticStation {
@@ -21,6 +22,10 @@ public class SynopticStation {
     private float wilgotnosc_wzgledna;
     private float suma_opadu;
     private float cisnienie;
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
 
     public SynopticStation(SynopticStationDto synopticStationDto) {
         this.id_stacji= synopticStationDto.id_stacji;
@@ -96,7 +101,7 @@ public class SynopticStation {
             return this;
         }
 
-        public SynopticStation build() {
+        public SynopticStation convertToEntity() {
             return new SynopticStation(this);
         }
 
@@ -139,5 +144,29 @@ public class SynopticStation {
         public float getCisnienie() {
             return cisnienie;
         }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SynopticStation that = (SynopticStation) o;
+        return Float.compare(that.temperatura, temperatura) == 0 &&
+                Float.compare(that.predkosc_wiatru, predkosc_wiatru) == 0 &&
+                kierunek_wiatru == that.kierunek_wiatru &&
+                Float.compare(that.wilgotnosc_wzgledna, wilgotnosc_wzgledna) == 0 &&
+                Float.compare(that.suma_opadu, suma_opadu) == 0 &&
+                Float.compare(that.cisnienie, cisnienie) == 0 &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(id_stacji, that.id_stacji) &&
+                Objects.equals(stacja, that.stacja) &&
+                Objects.equals(localDateTime, that.localDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, id_stacji, stacja, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
     }
 }

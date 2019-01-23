@@ -1,4 +1,4 @@
-package sebaszczen.domain.gios.dto;
+package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

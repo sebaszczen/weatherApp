@@ -1,19 +1,19 @@
 package sebaszczen.apiProvider;
 
-import sebaszczen.domain.SynopticStation;
-import sebaszczen.domain.gios.dto.AirConditionDataDto;
-import sebaszczen.domain.gios.dto.StationLocalizationDto;
+import sebaszczen.model.AirConditionData;
+import sebaszczen.model.StationLocalization;
+import sebaszczen.model.SynopticStation;
 
 import java.util.List;
 
 public interface ApiProvider {
-    List<SynopticStation.SynopticStationDto> getAllSynopticStationDto();
+    List<SynopticStation> getAllSynopticStation();
 
-    SynopticStation.SynopticStationDto getSynopticDataByStationName(String cityName);
+    SynopticStation getSynopticDataByStationName(String cityName);
 
-    List<StationLocalizationDto> getStationLocalizationDto();
+    List<StationLocalization> getStationLocalization();
 
-    List<AirConditionDataDto> getAllAirConditionDataDto();
+    List<AirConditionData> getAllAirConditionData();
 
-    AirConditionDataDto getAirConditionDataByStationIndex(int index);
+    AirConditionData getAirConditionDataByStationIndex(int index);
 }

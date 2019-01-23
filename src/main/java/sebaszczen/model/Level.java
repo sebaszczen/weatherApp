@@ -1,10 +1,10 @@
-package sebaszczen.domain.gios;
+package sebaszczen.model;
 
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import java.util.Objects;
 
 @Entity
 public class Level {
@@ -28,5 +28,28 @@ public class Level {
 
     public void setAirConditionLevel(int airConditionLevel) {
         this.airConditionLevel = airConditionLevel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Level)) return false;
+        Level level = (Level) o;
+        return airConditionLevel == level.airConditionLevel &&
+                Objects.equals(airConditionInWord, level.airConditionInWord);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(airConditionLevel, airConditionInWord);
+    }
+
+    public int getAirConditionLevel() {
+        return airConditionLevel;
+    }
+
+    public String getAirConditionInWord() {
+        return airConditionInWord;
     }
 }

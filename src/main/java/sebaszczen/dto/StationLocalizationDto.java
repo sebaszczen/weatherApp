@@ -1,6 +1,7 @@
-package sebaszczen.domain.gios.dto;
+package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import sebaszczen.model.StationLocalization;
 
 public class StationLocalizationDto {
     @JsonProperty("id")
@@ -58,5 +59,9 @@ public class StationLocalizationDto {
 
     public void setAddressStreet(String addressStreet) {
         this.addressStreet = addressStreet;
+    }
+
+    public StationLocalization convertToEntity() {
+        return new StationLocalization(this);
     }
 }

@@ -1,10 +1,12 @@
 package sebaszczen.respository;
 
-import sebaszczen.domain.gios.dto.AirConditionDataDto;
-import sebaszczen.domain.gios.dto.LevelDto;
+import sebaszczen.dto.AirConditionDataDto;
+import sebaszczen.dto.LevelDto;
+import sebaszczen.model.AirConditionData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockAirConditionDataDto {
 
@@ -33,5 +35,9 @@ public class MockAirConditionDataDto {
         list.add(airConditionDataDto2);
 
         return list;
+    }
+
+    public List<AirConditionData> getAirConditionDataList() {
+        return getMockAirConditionDataDtoList().parallelStream().map(AirConditionData::new).collect(Collectors.toList());
     }
 }

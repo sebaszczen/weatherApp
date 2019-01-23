@@ -1,6 +1,7 @@
-package sebaszczen.domain.gios.dto;
+package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import sebaszczen.model.AirConditionData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +29,10 @@ public class AirConditionDataDto {
     public void setStCalcDate(String stCalcDate) {
         String[] split = stCalcDate.split(" ");
         this.stCalcDate = LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
+    }
+
+    public AirConditionData convertToEntity() {
+        return new AirConditionData(this);
     }
 
     public void setStIndexLevel(LevelDto stIndexLevel) {
@@ -117,4 +122,5 @@ public class AirConditionDataDto {
     public LevelDto getC6h6IndexLevel() {
         return c6h6IndexLevel;
     }
+
 }

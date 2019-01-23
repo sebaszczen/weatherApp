@@ -8,7 +8,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-import sebaszczen.domain.SynopticStation;
+import sebaszczen.model.SynopticStation;
 import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.respository.MockSynopticStationDto;
 

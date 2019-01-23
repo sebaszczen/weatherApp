@@ -1,10 +1,11 @@
 package sebaszczen.respository;
 
-import sebaszczen.domain.SynopticStation;
+import sebaszczen.model.SynopticStation;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockSynopticStationDto {
 
@@ -24,5 +25,10 @@ public class MockSynopticStationDto {
         list.add(synopticStationDto);
         list.add(synopticStationDto2);
         return list;
+    }
+
+    public List<SynopticStation> getSynopticStationList() {
+        List<SynopticStation.SynopticStationDto> synopticStationDtoList = getSynopticStationDtoList();
+        return synopticStationDtoList.parallelStream().map(SynopticStation::new).collect(Collectors.toList());
     }
 }

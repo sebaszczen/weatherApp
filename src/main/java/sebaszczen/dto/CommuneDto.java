@@ -1,4 +1,4 @@
-package sebaszczen.domain.gios.dto;
+package sebaszczen.dto;
 
 public class CommuneDto {
     private String communeName;

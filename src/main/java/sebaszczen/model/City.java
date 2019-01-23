@@ -1,8 +1,9 @@
-package sebaszczen.domain.gios;
+package sebaszczen.model;
 
-import sebaszczen.domain.gios.dto.CommuneDto;
+import sebaszczen.dto.CommuneDto;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Embeddable
 public class City {
@@ -30,5 +31,21 @@ public class City {
 
     public void setCommune(Commune commune) {
         this.commune = commune;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city1 = (City) o;
+        return cityId == city1.cityId &&
+                Objects.equals(city, city1.city) &&
+                Objects.equals(commune, city1.commune);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(cityId, city, commune);
     }
 }

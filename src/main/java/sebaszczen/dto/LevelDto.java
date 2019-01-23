@@ -1,6 +1,8 @@
-package sebaszczen.domain.gios.dto;
+package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Objects;
 
 public class LevelDto {
     @JsonProperty("id")
@@ -22,5 +24,20 @@ public class LevelDto {
 
     public String getAirConditionInWord() {
         return airConditionInWord;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LevelDto)) return false;
+        LevelDto levelDto = (LevelDto) o;
+        return airLevelByNumber == levelDto.airLevelByNumber &&
+                Objects.equals(airConditionInWord, levelDto.airConditionInWord);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(airLevelByNumber, airConditionInWord);
     }
 }

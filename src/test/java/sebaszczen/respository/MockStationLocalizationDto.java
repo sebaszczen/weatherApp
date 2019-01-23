@@ -1,11 +1,13 @@
 package sebaszczen.respository;
 
-import sebaszczen.domain.gios.dto.CityDto;
-import sebaszczen.domain.gios.dto.CommuneDto;
-import sebaszczen.domain.gios.dto.StationLocalizationDto;
+import sebaszczen.dto.CityDto;
+import sebaszczen.dto.CommuneDto;
+import sebaszczen.dto.StationLocalizationDto;
+import sebaszczen.model.StationLocalization;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockStationLocalizationDto {
 
@@ -64,5 +66,9 @@ public class MockStationLocalizationDto {
         list.add(stationLocalizationDto3);
 
         return list;
+    }
+
+    public List<StationLocalization> getStationLocalizationList() {
+        return getMockStationLocalizationDtoList().parallelStream().map(StationLocalization::new).collect(Collectors.toList());
     }
 }
