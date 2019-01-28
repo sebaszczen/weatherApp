@@ -1,5 +1,6 @@
 package sebaszczen.model;
 
+import sebaszczen.dto.CityDto;
 import sebaszczen.dto.CommuneDto;
 
 import javax.persistence.*;
@@ -12,9 +13,10 @@ public class City {
     @Embedded
     private Commune commune;
 
-    public City(int cityId, String city, CommuneDto communeDto) {
-        this.cityId = cityId;
-        this.city = city;
+    public City(CityDto cityDto) {
+        this.cityId = cityDto.getCityId();
+        this.city = cityDto.getCityName();
+        CommuneDto communeDto = cityDto.getCommuneDto();
         this.commune = new Commune(communeDto.getCommuneName(),communeDto.getDistrictName(),communeDto.getProvinceName());
     }
 

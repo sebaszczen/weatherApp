@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class SynopticStation {
@@ -28,9 +29,10 @@ public class SynopticStation {
     }
 
     public SynopticStation(SynopticStationDto synopticStationDto) {
-        this.id_stacji= synopticStationDto.id_stacji;
+        this.id_stacji = synopticStationDto.id_stacji;
         this.stacja = synopticStationDto.stacja;
-        this.localDateTime= LocalDateTime.of(synopticStationDto.data_pomiaru, synopticStationDto.godzina_pomiaru);
+//        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synopticStationDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synopticStationDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
+        this.localDateTime = LocalDateTime.of(synopticStationDto.getData_pomiaru(), synopticStationDto.getGodzina_pomiaru());
         this.temperatura = synopticStationDto.temperatura;
         this.predkosc_wiatru = synopticStationDto.predkosc_wiatru;
         this.kierunek_wiatru = synopticStationDto.kierunek_wiatru;
@@ -67,7 +69,7 @@ public class SynopticStation {
         }
 
         public SynopticStationDto setGodzina_pomiaru(int godzina_pomiaru) {
-            this.godzina_pomiaru = LocalTime.of(godzina_pomiaru,0,0,0);
+            this.godzina_pomiaru = LocalTime.of(godzina_pomiaru, 0, 0, 0);
             return this;
         }
 

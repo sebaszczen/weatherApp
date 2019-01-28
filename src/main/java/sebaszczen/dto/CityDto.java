@@ -5,16 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CityDto {
     @JsonProperty("id")
     private int cityId;
-    private String name;
+    private String cityName;
     @JsonProperty("commune")
     private CommuneDto communeDto;
+
+    public CityDto(int cityId, String cityName, CommuneDto communeDto) {
+        this.cityId = cityId;
+        this.cityName = cityName;
+        this.communeDto = communeDto;
+    }
+
+    public CityDto() {
+    }
 
     public int getCityId() {
         return cityId;
     }
 
-    public String getName() {
-        return name;
+    public String getCityName() {
+        return cityName;
     }
 
     public CommuneDto getCommuneDto() {
@@ -25,8 +34,8 @@ public class CityDto {
         this.cityId = cityId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public void setCommuneDto(CommuneDto communeDto) {

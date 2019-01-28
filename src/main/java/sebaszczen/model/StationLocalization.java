@@ -1,10 +1,13 @@
 package sebaszczen.model;
 
 import sebaszczen.dto.CityDto;
+import sebaszczen.dto.CommuneDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import javax.persistence.*;
+import javax.swing.text.html.Option;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class StationLocalization {
@@ -24,8 +27,10 @@ public class StationLocalization {
         this.stationName = stationLocalizationDto.getStationName();
         this.gegrLat = stationLocalizationDto.getGegrLat();
         this.gegrLon = stationLocalizationDto.getGegrLon();
+//        CityDto cityDto = Optional.ofNullable(stationLocalizationDto.getCityDto()).orElse(new CityDto(0,"no data",new CommuneDto()));
+//        this.city = new City(cityDto.getCityId(),cityDto.getCityName(),cityDto.getCommuneDto()) ;
         CityDto cityDto = stationLocalizationDto.getCityDto();
-        this.city = new City(cityDto.getCityId(),cityDto.getName(),cityDto.getCommuneDto()) ;
+        this.city=Optional.ofNullable(cityDto).isPresent()?new City(cityDto):new City();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
     }
 

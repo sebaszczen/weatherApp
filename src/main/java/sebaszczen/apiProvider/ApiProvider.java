@@ -5,11 +5,12 @@ import sebaszczen.model.StationLocalization;
 import sebaszczen.model.SynopticStation;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ApiProvider {
     List<SynopticStation> getAllSynopticStation();
 
-    SynopticStation getSynopticDataByStationName(String cityName);
+    Optional<SynopticStation> getSynopticDataByStationName(String cityName);
 
     List<StationLocalization> getStationLocalization();
 

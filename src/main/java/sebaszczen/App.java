@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.apiProvider.ApiProviderImpl;
 import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.model.AirConditionData;
@@ -28,7 +29,7 @@ public class App implements CommandLineRunner
     private static Logger logger = Logger.getLogger(App.class.getName());
 
 //    @Autowired
-//    private ApiProviderImpl apiProvider;
+//    private ApiProvider apiProvider;
 //
 //    @Autowired
 //    private ModelMapper modelMapper;
@@ -39,7 +40,6 @@ public class App implements CommandLineRunner
     public static void main( String[] args )
     {
         SpringApplication.run(App.class);
-        logger.info("watek:  "+ Thread.currentThread().getName());
     }
 
     @Override
@@ -47,5 +47,6 @@ public class App implements CommandLineRunner
 //        AirConditionData airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
 //        AirConditionData map = modelMapper.map(airConditionDataByStationIndex, AirConditionData.class);
 
+//        apiProvider.getSynopticDataByStationName("warszawa");
     }
 }

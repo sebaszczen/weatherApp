@@ -14,6 +14,7 @@ import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -65,11 +66,18 @@ public class ApiService implements IApiService {
 }
 
     private boolean imgwApiIsUpToDate() {
-        SynopticStation warszawa = apiProvider.getSynopticDataByStationName("warszawa");
-        int hour = warszawa.getLocalDateTime().getHour();
-        int dayOfMonth = warszawa.getLocalDateTime().getDayOfMonth();
-        imgwApiRepository.findAll();
-        return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
+        String stationNames[]={"warszawa","chojnice","hel","katowice","kielce"};
+        for (String stationName : stationNames) {
+            Optional<SynopticStation> station = apiProvider.getSynopticDataByStationName(stationName);
+            if (station.isPresent()) {
+                SynopticStation synopticStation = station.get();
+                int hour = synopticStation.getLocalDateTime().getHour();
+                int dayOfMonth = synopticStation.getLocalDateTime().getDayOfMonth();
+                imgwApiRepository.findAll();
+                return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
+            }
+        }
+        return false;
     }
 
     private boolean giosApiIsUpToDate() {

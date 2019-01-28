@@ -13,17 +13,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.SynopticStation;
 import sebaszczen.model.AirConditionData;
-import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.repository.AirConditionDataRepository;
 import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.repository.StationLocalizationRepository;
-import sebaszczen.respository.MockAirConditionDataDto;
-import sebaszczen.respository.MockSynopticStationDto;
+import sebaszczen.respository.MockAirConditionData;
+import sebaszczen.respository.MockSynopticStation;
 import sebaszczen.services.api.IApiService;
 import sebaszczen.services.api.ApiService;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -43,8 +42,8 @@ public class TestDatabaseWithMockedRepo {
     @Autowired
     private TestEntityManager testEntityManager;
 
-    private MockSynopticStationDto mockSynopticStationDto=new MockSynopticStationDto();
-    private MockAirConditionDataDto mockAirConditionDataDto = new MockAirConditionDataDto();
+    private MockSynopticStation mockSynopticStation =new MockSynopticStation();
+    private MockAirConditionData mockAirConditionData = new MockAirConditionData();
 
     @Mock
     private ApiProvider apiProvider;
@@ -62,12 +61,12 @@ public class TestDatabaseWithMockedRepo {
 
     @Test
     public void saveData_AlreadyContainsData() {
-        List<SynopticStation> synopticStationList = mockSynopticStationDto.getSynopticStationList();
+        List<SynopticStation> synopticStationList = mockSynopticStation.getSynopticStationList();
         testEntityManager.persist(synopticStationList.get(0));
 
-        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(synopticStationList.get(0));
+        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticStationList.get(0)));
 
-        List<AirConditionData> mockAirConditionDataList = mockAirConditionDataDto.getAirConditionDataList();
+        List<AirConditionData> mockAirConditionDataList = mockAirConditionData.getAirConditionDataList();
         testEntityManager.persist(mockAirConditionDataList.get(0));
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(mockAirConditionDataList.get(0));

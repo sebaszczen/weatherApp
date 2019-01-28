@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockSynopticStationDto {
+public class MockSynopticStation {
 
     public List<SynopticStation.SynopticStationDto> getSynopticStationDtoList() {
         List <SynopticStation.SynopticStationDto>  list = new ArrayList();

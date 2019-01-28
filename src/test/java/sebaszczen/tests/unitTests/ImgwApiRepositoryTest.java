@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.model.SynopticStation;
 import sebaszczen.repository.ImgwApiRepository;
-import sebaszczen.respository.MockSynopticStationDto;
+import sebaszczen.respository.MockSynopticStation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,11 +29,11 @@ public class ImgwApiRepositoryTest {
     @Autowired
     private ImgwApiRepository imgwApiRepository;
 
-    private MockSynopticStationDto mockSynopticStationDto =new MockSynopticStationDto();
+    private MockSynopticStation mockSynopticStation =new MockSynopticStation();
 
     @Test
     public void saveImgwData() {
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = mockSynopticStationDto.getSynopticStationDtoList();
+        List<SynopticStation.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
         List<SynopticStation> synopticStationList = synopticStationDtoList.parallelStream().map(SynopticStation::new).collect(Collectors.toList());
         synopticStationList.forEach(testEntityManager::persist);
         List<SynopticStation> all = imgwApiRepository.findAll();

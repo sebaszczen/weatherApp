@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockAirConditionDataDto {
+public class MockAirConditionData {
 
     public List<AirConditionDataDto> getMockAirConditionDataDtoList() {
         List <AirConditionDataDto> list = new ArrayList();

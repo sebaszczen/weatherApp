@@ -3,6 +3,7 @@ package sebaszczen.configurations;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Executor;
 
@@ -25,4 +26,8 @@ public class Configuration {
         return new ModelMapper();
     }
 
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

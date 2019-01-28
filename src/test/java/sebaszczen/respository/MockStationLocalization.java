@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockStationLocalizationDto {
+public class MockStationLocalization {
 
     public List<StationLocalizationDto> getMockStationLocalizationDtoList() {
         List <StationLocalizationDto> list = new ArrayList();
@@ -17,10 +17,7 @@ public class MockStationLocalizationDto {
         communeDto.setCommuneName("mazowsze");
         communeDto.setDistrictName("podlasie");
         communeDto.setProvinceName("province");
-        CityDto cityDto = new CityDto();
-        cityDto.setCityId(1);
-        cityDto.setCommuneDto(communeDto);
-        cityDto.setName("name");
+        CityDto cityDto = new CityDto(1,"name",communeDto);
         StationLocalizationDto stationLocalizationDto = new StationLocalizationDto();
         stationLocalizationDto.setAddressStreet("Warszawa");
         stationLocalizationDto.setCityDto(cityDto);
@@ -33,10 +30,7 @@ public class MockStationLocalizationDto {
         communeDto2.setCommuneName("mazowsze");
         communeDto2.setDistrictName("podlasie");
         communeDto2.setProvinceName("province");
-        CityDto cityDto2 = new CityDto();
-        cityDto2.setCityId(1);
-        cityDto2.setCommuneDto(communeDto);
-        cityDto2.setName("name");
+        CityDto cityDto2 = new CityDto(2,"name",communeDto2);
         StationLocalizationDto stationLocalizationDto2 = new StationLocalizationDto();
         stationLocalizationDto2.setAddressStreet("Warszawa");
         stationLocalizationDto2.setCityDto(cityDto);
@@ -49,10 +43,7 @@ public class MockStationLocalizationDto {
         communeDto3.setCommuneName("mazowsze");
         communeDto3.setDistrictName("podlasie");
         communeDto3.setProvinceName("province");
-        CityDto cityDto3 = new CityDto();
-        cityDto3.setCityId(1);
-        cityDto3.setCommuneDto(communeDto);
-        cityDto3.setName("name");
+        CityDto cityDto3 = new CityDto(3,"name",communeDto3);
         StationLocalizationDto stationLocalizationDto3 = new StationLocalizationDto();
         stationLocalizationDto3.setAddressStreet("Warszawa");
         stationLocalizationDto3.setCityDto(cityDto);

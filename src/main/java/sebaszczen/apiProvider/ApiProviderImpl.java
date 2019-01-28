@@ -1,5 +1,6 @@
 package sebaszczen.apiProvider;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -10,8 +11,11 @@ import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,7 +24,12 @@ public class ApiProviderImpl implements ApiProvider {
     private final static String MEASURING_STATION_API_URL_BY_ID = "http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/";
     private final static String ALL_SYNOPTIC_STATIONS_API_URL = "https://danepubliczne.imgw.pl/api/data/synop";
     private final static String SYNOPTIC_STATION_BY_CITY = "https://danepubliczne.imgw.pl/api/data/synop/station/";
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
+
+    @Autowired
+    public ApiProviderImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private URI getAllSynopticDataUri() {
         return UriComponentsBuilder.fromHttpUrl(ALL_SYNOPTIC_STATIONS_API_URL).build().encode().toUri();
@@ -33,14 +42,20 @@ public class ApiProviderImpl implements ApiProvider {
     @Override
     public List<SynopticStation> getAllSynopticStation() {
         SynopticStation.SynopticStationDto[] synopticStationDtos = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos).collect(Collectors.toList());
+        List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos).filter(synopticStationDto -> synopticStationDto.getData_pomiaru() != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
         return synopticStationDtoList.parallelStream().map(SynopticStation.SynopticStationDto::convertToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public SynopticStation getSynopticDataByStationName(String cityName) {
+    public Optional<SynopticStation> getSynopticDataByStationName(String cityName) {
         SynopticStation.SynopticStationDto stationDto = restTemplate.getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()), SynopticStation.SynopticStationDto.class);
-        return stationDto.convertToEntity();
+        Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
+        Optional<LocalTime> godzina_pomiaru = Optional.ofNullable(stationDto.getGodzina_pomiaru());
+        if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){
+            return Optional.of(stationDto.convertToEntity());
+        }
+//        return stationDto.convertToEntity();
+        return Optional.empty();
     }
 
     @Override
