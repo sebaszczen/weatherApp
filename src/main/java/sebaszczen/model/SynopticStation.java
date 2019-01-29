@@ -28,6 +28,9 @@ public class SynopticStation {
         return localDateTime;
     }
 
+    public SynopticStation() {
+    }
+
     public SynopticStation(SynopticStationDto synopticStationDto) {
         this.id_stacji = synopticStationDto.id_stacji;
         this.stacja = synopticStationDto.stacja;

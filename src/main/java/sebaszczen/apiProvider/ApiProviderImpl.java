@@ -1,7 +1,12 @@
 package sebaszczen.apiProvider;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import sebaszczen.model.AirConditionData;
@@ -26,6 +31,8 @@ public class ApiProviderImpl implements ApiProvider {
     private final static String ALL_SYNOPTIC_STATIONS_API_URL = "https://danepubliczne.imgw.pl/api/data/synop";
     private final static String SYNOPTIC_STATION_BY_CITY = "https://danepubliczne.imgw.pl/api/data/synop/station/";
     private RestTemplate restTemplate;
+    Logger logger= LogManager.getLogger(ApiProviderImpl.class);
+
 
     @Autowired
     public ApiProviderImpl(RestTemplate restTemplate) {
@@ -42,11 +49,19 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<SynopticStation> getAllSynopticStation() {
-        SynopticStation.SynopticStationDto[] synopticStationDtos = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
+        getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
+//        SynopticStation.SynopticStationDto[] synopticStationDtos = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
+        SynopticStation.SynopticStationDto[] synopticStationDtos = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
+//            HttpStatus statusCode = responseEntity.getStatusCode();
+//        SynopticStation.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
         List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
         return synopticStationDtoList.parallelStream().map(SynopticStation.SynopticStationDto::convertToEntity).collect(Collectors.toList());
+    }
+
+    private <T> T getForObject(String uri, Class<T> result) throws RestClientException {
+        return restTemplate.getForObject(uri, result);
     }
 
     @Override
@@ -77,7 +92,13 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     public Optional<AirConditionData> getAirConditionDataByStationIndex(int index){
-        AirConditionDataDto airConditionDataDto = restTemplate.getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
+        AirConditionDataDto airConditionDataDto = null;
+        try {
+            airConditionDataDto = restTemplate.getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
+        } catch (HttpClientErrorException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
         Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());
         if (stCalcDate.isPresent()){
         return Optional.of(airConditionDataDto.convertToEntity());
