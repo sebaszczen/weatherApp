@@ -18,11 +18,4 @@ public class SynopticStationTest {
         assertEquals(synopticStation,synopticStationDto.convertToEntity());
     }
 
-    @Test
-    public void synopticStation_convertToEntityNull() {
-        SynopticStation.SynopticStationDto synopticStationDto = new SynopticStation.SynopticStationDto();
-        SynopticStation convertToEntity = synopticStationDto.convertToEntity();
-        SynopticStation synopticStation = new SynopticStation(synopticStationDto);
-        assertEquals(synopticStation,convertToEntity);
-    }
 }

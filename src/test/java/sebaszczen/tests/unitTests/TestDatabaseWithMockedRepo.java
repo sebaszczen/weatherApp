@@ -69,7 +69,7 @@ public class TestDatabaseWithMockedRepo {
         List<AirConditionData> mockAirConditionDataList = mockAirConditionData.getAirConditionDataList();
         testEntityManager.persist(mockAirConditionDataList.get(0));
 
-        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(mockAirConditionDataList.get(0));
+        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirConditionDataList.get(0)));
 
         IApiService = new ApiService(imgwApiRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository);
         IApiService.saveData();

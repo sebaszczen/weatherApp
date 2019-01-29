@@ -12,6 +12,7 @@ import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,9 @@ public class ApiProviderImpl implements ApiProvider {
     @Override
     public List<SynopticStation> getAllSynopticStation() {
         SynopticStation.SynopticStationDto[] synopticStationDtos = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos).filter(synopticStationDto -> synopticStationDto.getData_pomiaru() != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
+        List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
+                .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
+                        != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
         return synopticStationDtoList.parallelStream().map(SynopticStation.SynopticStationDto::convertToEntity).collect(Collectors.toList());
     }
 
@@ -54,7 +57,6 @@ public class ApiProviderImpl implements ApiProvider {
         if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){
             return Optional.of(stationDto.convertToEntity());
         }
-//        return stationDto.convertToEntity();
         return Optional.empty();
     }
 
@@ -70,13 +72,21 @@ public class ApiProviderImpl implements ApiProvider {
         List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().parallelStream()
                 .map(station -> restTemplate
                         .getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
-                .collect(Collectors.toList());
+                .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());
         return airConditionDataDtoList.parallelStream().map(AirConditionDataDto::convertToEntity).collect(Collectors.toList());
     }
 
-    public AirConditionData getAirConditionDataByStationIndex(int index){
+    public Optional<AirConditionData> getAirConditionDataByStationIndex(int index){
         AirConditionDataDto airConditionDataDto = restTemplate.getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
-        return airConditionDataDto.convertToEntity();
+        Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());
+        if (stCalcDate.isPresent()){
+        return Optional.of(airConditionDataDto.convertToEntity());
+        }
+        else {
+            return Optional.empty();
+
+        }
+//        return airConditionDataDto.convertToEntity();
     }
 }
 

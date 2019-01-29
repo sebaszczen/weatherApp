@@ -81,11 +81,16 @@ public class ApiService implements IApiService {
     }
 
     private boolean giosApiIsUpToDate() {
-        AirConditionData airConditionData = apiProvider.getAirConditionDataByStationIndex(114);
-        int hour1 = airConditionData.getStCalcDate().getHour();
-        int dayOfMonth1 = airConditionData.getStCalcDate().getDayOfMonth();
-        return giosApiRepository.checkIfContain(hour1, dayOfMonth1)==0;
+        int[] stationIndex = {114, 115, 116, 117};
+        for (int index : stationIndex) {
+            Optional<AirConditionData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
+            if (airConditionDataByStationIndex.isPresent()) {
+                AirConditionData airConditionData = airConditionDataByStationIndex.get();
+                int hour1 = airConditionData.getStCalcDate().getHour();
+                int dayOfMonth1 = airConditionData.getStCalcDate().getDayOfMonth();
+                return giosApiRepository.checkIfContain(hour1, dayOfMonth1) == 0;
+            }
+        }
+        return false;
     }
-
-
 }

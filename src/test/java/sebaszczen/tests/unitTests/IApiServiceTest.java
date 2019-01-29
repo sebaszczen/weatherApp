@@ -63,7 +63,7 @@ public class IApiServiceTest {
         given(apiProvider.getAllAirConditionData()).willReturn(mockAirConditionDataDtoList);
         given(apiProvider.getStationLocalization()).willReturn(mockStationLocalizationDtoList);
         when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticStationList.get(0)));
-        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(mockAirConditionDataDtoList.get(0));
+        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirConditionDataDtoList.get(0)));
 
         when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(synopticStationList.get(0));
         when(stationLocalizationRepository.save(any(StationLocalization.class))).thenReturn(mockStationLocalizationDtoList.get(0));
