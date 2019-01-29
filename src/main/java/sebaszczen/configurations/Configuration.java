@@ -1,6 +1,7 @@
 package sebaszczen.configurations;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
@@ -29,5 +30,10 @@ public class Configuration {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public RestTemplateBuilder restTemplateBuilder() {
+        return new RestTemplateBuilder();
     }
 }

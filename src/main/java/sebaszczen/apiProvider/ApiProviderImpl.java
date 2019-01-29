@@ -3,9 +3,11 @@ package sebaszczen.apiProvider;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,6 +18,7 @@ import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -31,12 +34,11 @@ public class ApiProviderImpl implements ApiProvider {
     private final static String ALL_SYNOPTIC_STATIONS_API_URL = "https://danepubliczne.imgw.pl/api/data/synop";
     private final static String SYNOPTIC_STATION_BY_CITY = "https://danepubliczne.imgw.pl/api/data/synop/station/";
     private RestTemplate restTemplate;
-    Logger logger= LogManager.getLogger(ApiProviderImpl.class);
-
+    private Logger logger = LogManager.getLogger(ApiProviderImpl.class);
 
     @Autowired
-    public ApiProviderImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public ApiProviderImpl(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.errorHandler(new RestTemplateResponseErrorHandler()).build();
     }
 
     private URI getAllSynopticDataUri() {
@@ -47,26 +49,22 @@ public class ApiProviderImpl implements ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("" + city).build().encode().toUri();
     }
 
+    private <T> T getForObject(String uri, Class<T> result) {
+            return restTemplate.getForObject(uri, result);
+    }
+
     @Override
     public List<SynopticStation> getAllSynopticStation() {
-        getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
-//        SynopticStation.SynopticStationDto[] synopticStationDtos = restTemplate.getForObject(getAllSynopticDataUri(), SynopticStation.SynopticStationDto[].class);
         SynopticStation.SynopticStationDto[] synopticStationDtos = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
-//            HttpStatus statusCode = responseEntity.getStatusCode();
-//        SynopticStation.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
         List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
         return synopticStationDtoList.parallelStream().map(SynopticStation.SynopticStationDto::convertToEntity).collect(Collectors.toList());
     }
 
-    private <T> T getForObject(String uri, Class<T> result) throws RestClientException {
-        return restTemplate.getForObject(uri, result);
-    }
-
     @Override
     public Optional<SynopticStation> getSynopticDataByStationName(String cityName) {
-        SynopticStation.SynopticStationDto stationDto = restTemplate.getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()), SynopticStation.SynopticStationDto.class);
+        SynopticStation.SynopticStationDto stationDto = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticStation.SynopticStationDto.class);
         Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
         Optional<LocalTime> godzina_pomiaru = Optional.ofNullable(stationDto.getGodzina_pomiaru());
         if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){
@@ -77,7 +75,7 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<StationLocalization> getStationLocalization() {
-        StationLocalizationDto[] stationLocalizationDto = restTemplate.getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
+        StationLocalizationDto[] stationLocalizationDto = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDto).parallel().collect(Collectors.toList());
         return stationLocalizationDtoList.parallelStream().map(StationLocalizationDto::convertToEntity).collect(Collectors.toList());
     }
@@ -85,20 +83,14 @@ public class ApiProviderImpl implements ApiProvider {
     @Override
     public List<AirConditionData> getAllAirConditionData(){
         List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().parallelStream()
-                .map(station -> restTemplate
-                        .getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
+                .map(station ->
+                        getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
                 .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());
         return airConditionDataDtoList.parallelStream().map(AirConditionDataDto::convertToEntity).collect(Collectors.toList());
     }
 
     public Optional<AirConditionData> getAirConditionDataByStationIndex(int index){
-        AirConditionDataDto airConditionDataDto = null;
-        try {
-            airConditionDataDto = restTemplate.getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
-        } catch (HttpClientErrorException e) {
-            e.printStackTrace();
-            return Optional.empty();
-        }
+            AirConditionDataDto airConditionDataDto = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
         Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());
         if (stCalcDate.isPresent()){
         return Optional.of(airConditionDataDto.convertToEntity());

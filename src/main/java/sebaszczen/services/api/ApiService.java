@@ -81,7 +81,7 @@ public class ApiService implements IApiService {
     }
 
     private boolean giosApiIsUpToDate() {
-        int[] stationIndex = {114, 115, 116, 117};
+        int[] stationIndex = {11114, 115, 116, 117};
         for (int index : stationIndex) {
             Optional<AirConditionData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
             if (airConditionDataByStationIndex.isPresent()) {
