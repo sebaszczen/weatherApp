@@ -1,9 +1,12 @@
 package sebaszczen.services.api;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.SynopticStation;
 import sebaszczen.model.AirConditionData;
@@ -21,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class ApiService implements IApiService {
 
-    private final Logger logger = Logger.getLogger(String.valueOf(ApiService.class));
+    org.apache.logging.log4j.Logger logger = LogManager.getLogger(ApiService.class);
 
     private final ImgwApiRepository imgwApiRepository;
 
@@ -51,31 +54,39 @@ public class ApiService implements IApiService {
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
 
-        if (imgwApiIsUpToDate()) {
-            List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStation();
-            synopticStationList.forEach(imgwApiRepository::save);
+        try {
+            if (imgwApiIsUpToDate()) {
+                List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStation();
+                synopticStationList.forEach(imgwApiRepository::save);
+            }
+
+            if (giosApiIsUpToDate()) {
+                List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalization();
+                stationLocalizationList.forEach(stationLocalizationRepository::save);
+
+                List<AirConditionData> airConditionDataList = apiProvider.getAllAirConditionData();
+                airConditionDataList.forEach(giosApiRepository::save);
+            }
+        }
+        catch (ResourceAccessException e)
+        {
+            logger.error("couldnt connect with external api "+e);
         }
 
-        if (giosApiIsUpToDate()){
-            List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalization();
-        stationLocalizationList.forEach(stationLocalizationRepository::save);
-
-        List<AirConditionData> airConditionDataList = apiProvider.getAllAirConditionData();
-        airConditionDataList.forEach(giosApiRepository::save);
-    }
 }
 
-    private boolean imgwApiIsUpToDate() {
+    private boolean imgwApiIsUpToDate()throws ResourceAccessException {
         String stationNames[]={"warszawa","chojnice","hel","katowice","kielce"};
         for (String stationName : stationNames) {
-            Optional<SynopticStation> station = apiProvider.getSynopticDataByStationName(stationName);
-            if (station.isPresent()) {
-                SynopticStation synopticStation = station.get();
-                int hour = synopticStation.getLocalDateTime().getHour();
-                int dayOfMonth = synopticStation.getLocalDateTime().getDayOfMonth();
-                imgwApiRepository.findAll();
-                return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
-            }
+            Optional<SynopticStation> station = null;
+                station = apiProvider.getSynopticDataByStationName(stationName);
+                if (station.isPresent()) {
+                    SynopticStation synopticStation = station.get();
+                    int hour = synopticStation.getLocalDateTime().getHour();
+                    int dayOfMonth = synopticStation.getLocalDateTime().getDayOfMonth();
+                    imgwApiRepository.findAll();
+                    return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
+                }
         }
         return false;
     }

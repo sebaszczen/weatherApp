@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -47,16 +48,12 @@ public class ApiProviderImpl implements ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("" + city).build().encode().toUri();
     }
 
-    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result) {
-        try {
+    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result) throws ResourceAccessException {
             return restTemplate.getForEntity(uri, result);
-        } catch (RestClientException x) {
-            throw new RuntimeException("sdf");
-        }
     }
 
     @Override
-    public List<SynopticStation> getAllSynopticStation() {
+    public List<SynopticStation> getAllSynopticStation() throws RestClientException {
         ResponseEntity<SynopticStation.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
         SynopticStation.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
         List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
@@ -66,7 +63,7 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public Optional<SynopticStation> getSynopticDataByStationName(String cityName) {
+    public Optional<SynopticStation> getSynopticDataByStationName(String cityName) throws ResourceAccessException {
         ResponseEntity<SynopticStation.SynopticStationDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticStation.SynopticStationDto.class);
         SynopticStation.SynopticStationDto stationDto = responseEntity.getBody();
         Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
