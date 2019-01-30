@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,7 +16,6 @@ import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
-import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,8 +34,9 @@ public class ApiProviderImpl implements ApiProvider {
     private Logger logger = LogManager.getLogger(ApiProviderImpl.class);
 
     @Autowired
-    public ApiProviderImpl(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.errorHandler(new RestTemplateResponseErrorHandler()).build();
+    public ApiProviderImpl(RestTemplate restTemplate) {
+//        this.restTemplate = restTemplateBuilder.errorHandler(new RestTemplateResponseErrorHandler()).build();
+        this.restTemplate = restTemplate;
     }
 
     private URI getAllSynopticDataUri() {
@@ -49,13 +47,18 @@ public class ApiProviderImpl implements ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("" + city).build().encode().toUri();
     }
 
-    private <T> T getForObject(String uri, Class<T> result) {
-            return restTemplate.getForObject(uri, result);
+    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result) {
+        try {
+            return restTemplate.getForEntity(uri, result);
+        } catch (RestClientException x) {
+            throw new RuntimeException("sdf");
+        }
     }
 
     @Override
     public List<SynopticStation> getAllSynopticStation() {
-        SynopticStation.SynopticStationDto[] synopticStationDtos = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
+        ResponseEntity<SynopticStation.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
+        SynopticStation.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
         List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
@@ -64,7 +67,8 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public Optional<SynopticStation> getSynopticDataByStationName(String cityName) {
-        SynopticStation.SynopticStationDto stationDto = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticStation.SynopticStationDto.class);
+        ResponseEntity<SynopticStation.SynopticStationDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticStation.SynopticStationDto.class);
+        SynopticStation.SynopticStationDto stationDto = responseEntity.getBody();
         Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
         Optional<LocalTime> godzina_pomiaru = Optional.ofNullable(stationDto.getGodzina_pomiaru());
         if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){
@@ -75,8 +79,9 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<StationLocalization> getStationLocalization() {
-        StationLocalizationDto[] stationLocalizationDto = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
-        List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDto).parallel().collect(Collectors.toList());
+        ResponseEntity<StationLocalizationDto[]> responseEntity = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
+        StationLocalizationDto[] stationLocalizationDtos = responseEntity.getBody();
+        List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDtos).parallel().collect(Collectors.toList());
         return stationLocalizationDtoList.parallelStream().map(StationLocalizationDto::convertToEntity).collect(Collectors.toList());
     }
 
@@ -84,13 +89,14 @@ public class ApiProviderImpl implements ApiProvider {
     public List<AirConditionData> getAllAirConditionData(){
         List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().parallelStream()
                 .map(station ->
-                        getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class))
+                        getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class).getBody())
                 .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());
         return airConditionDataDtoList.parallelStream().map(AirConditionDataDto::convertToEntity).collect(Collectors.toList());
     }
 
     public Optional<AirConditionData> getAirConditionDataByStationIndex(int index){
-            AirConditionDataDto airConditionDataDto = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
+        ResponseEntity<AirConditionDataDto> responseEntity = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
+        AirConditionDataDto airConditionDataDto = responseEntity.getBody();
         Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());
         if (stCalcDate.isPresent()){
         return Optional.of(airConditionDataDto.convertToEntity());

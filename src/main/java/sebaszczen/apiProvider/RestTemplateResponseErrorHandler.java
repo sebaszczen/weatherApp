@@ -1,12 +1,12 @@
 package sebaszczen.apiProvider;
 
-import javassist.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
+import sebaszczen.exception.NotFoundException;
 
 import java.io.IOException;
 
@@ -41,7 +41,8 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
             // handle CLIENT_ERROR
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
-                logger.error("Api connection error: ",httpResponse.getStatusCode(),httpResponse.getStatusText());
+                logger.error("Api connection error: "+httpResponse.getStatusCode().toString()+" "+ httpResponse.getStatusText().toString());
+                throw new NotFoundException();
             }
         }
     }
