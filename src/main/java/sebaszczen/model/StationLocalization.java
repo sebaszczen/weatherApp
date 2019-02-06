@@ -15,7 +15,6 @@ public class StationLocalization {
     @GeneratedValue
     private Long id;
     private int stationId;
-    private String stationName;
     private String gegrLat;
     private String gegrLon;
     @Embedded
@@ -24,7 +23,6 @@ public class StationLocalization {
 
     public StationLocalization(StationLocalizationDto stationLocalizationDto) {
         this.stationId = stationLocalizationDto.getStationId();
-        this.stationName = stationLocalizationDto.getStationName();
         this.gegrLat = stationLocalizationDto.getGegrLat();
         this.gegrLon = stationLocalizationDto.getGegrLon();
 //        CityDto cityDto = Optional.ofNullable(stationLocalizationDto.getCityDto()).orElse(new CityDto(0,"no data",new CommuneDto()));
@@ -32,6 +30,7 @@ public class StationLocalization {
         CityDto cityDto = stationLocalizationDto.getCityDto();
         this.city=Optional.ofNullable(cityDto).isPresent()?new City(cityDto):new City();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
+
     }
 
     public int getStationId() {
@@ -45,16 +44,15 @@ public class StationLocalization {
         StationLocalization that = (StationLocalization) o;
         return stationId == that.stationId &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(stationName, that.stationName) &&
                 Objects.equals(gegrLat, that.gegrLat) &&
                 Objects.equals(gegrLon, that.gegrLon) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(addressStreet, that.addressStreet);
+        Objects.equals(addressStreet, that.addressStreet);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, stationId, stationName, gegrLat, gegrLon, city, addressStreet);
+        return Objects.hash(id, stationId, gegrLat, gegrLon, city, addressStreet);
     }
 }

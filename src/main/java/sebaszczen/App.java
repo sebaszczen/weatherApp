@@ -35,7 +35,7 @@ public class App implements CommandLineRunner
 //    private ModelMapper modelMapper;
 
 //    @Autowired
-//    private IApiService apiService;
+//    private ApiService apiService;
 
     public static void main( String[] args )
     {

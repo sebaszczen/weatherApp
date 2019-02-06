@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import sebaszczen.services.api.IApiService;
+import sebaszczen.services.api.ApiService;
 
 import java.net.URI;
 
@@ -13,10 +13,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 public class ApiController {
 
-    private final IApiService synopticDataService;
+    private final ApiService synopticDataService;
 
     @Autowired
-    public ApiController(IApiService synopticDataService) {
+    public ApiController(ApiService synopticDataService) {
         this.synopticDataService = synopticDataService;
     }
 

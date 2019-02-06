@@ -7,15 +7,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 public class SynopticStation {
     @Id
     @GeneratedValue
     private Long id;
-    private Long id_stacji;
-    private String stacja;
+    private String city;
     private LocalDateTime localDateTime;
     private float temperatura;
     private float predkosc_wiatru;
@@ -32,8 +30,7 @@ public class SynopticStation {
     }
 
     public SynopticStation(SynopticStationDto synopticStationDto) {
-        this.id_stacji = synopticStationDto.id_stacji;
-        this.stacja = synopticStationDto.stacja;
+        this.city = synopticStationDto.stacja;
 //        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synopticStationDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synopticStationDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
         this.localDateTime = LocalDateTime.of(synopticStationDto.getData_pomiaru(), synopticStationDto.getGodzina_pomiaru());
         this.temperatura = synopticStationDto.temperatura;
@@ -164,14 +161,13 @@ public class SynopticStation {
                 Float.compare(that.suma_opadu, suma_opadu) == 0 &&
                 Float.compare(that.cisnienie, cisnienie) == 0 &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(id_stacji, that.id_stacji) &&
-                Objects.equals(stacja, that.stacja) &&
+                Objects.equals(city, that.city) &&
                 Objects.equals(localDateTime, that.localDateTime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, id_stacji, stacja, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
+        return Objects.hash(id, city, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
     }
 }

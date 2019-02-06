@@ -18,8 +18,8 @@ import sebaszczen.repository.ImgwApiRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockSynopticStation;
-import sebaszczen.services.api.IApiService;
 import sebaszczen.services.api.ApiService;
+import sebaszczen.services.api.ApiServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +48,7 @@ public class TestDatabaseWithMockedRepo {
     @Mock
     private ApiProvider apiProvider;
 
-    private IApiService IApiService;
+    private ApiService ApiService;
 
     @Autowired
     private ImgwApiRepository imgwApiRepository;
@@ -71,8 +71,8 @@ public class TestDatabaseWithMockedRepo {
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirConditionDataList.get(0)));
 
-        IApiService = new ApiService(imgwApiRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository);
-        IApiService.saveData();
+        ApiService = new ApiServiceImpl(imgwApiRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository);
+        ApiService.saveData();
 
         verify(apiProvider,times(0)).getAllSynopticStation();
         verify(apiProvider,times(0)).getStationLocalization();

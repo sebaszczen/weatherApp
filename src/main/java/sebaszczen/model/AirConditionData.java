@@ -14,28 +14,42 @@ public class AirConditionData {
     private Long id;
     private int stationId;
     private LocalDateTime stCalcDate;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level stIndexLevel; //powietrze ogólnie
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level so2IndexLevel; //dwutlenek siarki
-    private String so2SourceDataDate;
-    @OneToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level no2IndexLevel; //dwutlenek azotu
-    @OneToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level coIndexLevel;//tlenek wegla
-    private String coSourceDataDate;
-    @OneToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level pm10IndexLevel; //pył zawieszony PM10
-    @OneToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level pm25IndexLevel;
-    @OneToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="air_level",
+            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level o3IndexLevel;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
 
     private Level c6h6IndexLevel;
 
@@ -49,12 +63,10 @@ public class AirConditionData {
         this.stIndexLevel = stIndexLevel == null ? new Level() : new Level(stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
         LevelDto so2IndexLevel = airConditionDataDto.getSo2IndexLevel();
         this.so2IndexLevel = so2IndexLevel == null ? new Level() : new Level(so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
-        this.so2SourceDataDate = airConditionDataDto.getSo2SourceDataDate();
         LevelDto no2IndexLevel = airConditionDataDto.getNo2IndexLevel();
         this.no2IndexLevel = no2IndexLevel == null ? new Level() : new Level(no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
         LevelDto coIndexLevel = airConditionDataDto.getCoIndexLevel();
         this.coIndexLevel = coIndexLevel == null ? new Level() : new Level(coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
-        this.coSourceDataDate = airConditionDataDto.getCoSourceDataDate();
         LevelDto pm10IndexLevel = airConditionDataDto.getPm10IndexLevel();
         this.pm10IndexLevel = pm10IndexLevel == null ? new Level() : new Level(pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
         LevelDto pm25IndexLevel = airConditionDataDto.getPm25IndexLevel();
@@ -81,20 +93,12 @@ public class AirConditionData {
         return so2IndexLevel;
     }
 
-    public String getSo2SourceDataDate() {
-        return so2SourceDataDate;
-    }
-
     public Level getNo2IndexLevel() {
         return no2IndexLevel;
     }
 
     public Level getCoIndexLevel() {
         return coIndexLevel;
-    }
-
-    public String getCoSourceDataDate() {
-        return coSourceDataDate;
     }
 
     public Level getPm10IndexLevel() {
@@ -123,10 +127,8 @@ public class AirConditionData {
                 Objects.equals(stCalcDate, that.stCalcDate) &&
                 Objects.equals(stIndexLevel, that.stIndexLevel) &&
                 Objects.equals(so2IndexLevel, that.so2IndexLevel) &&
-                Objects.equals(so2SourceDataDate, that.so2SourceDataDate) &&
                 Objects.equals(no2IndexLevel, that.no2IndexLevel) &&
                 Objects.equals(coIndexLevel, that.coIndexLevel) &&
-                Objects.equals(coSourceDataDate, that.coSourceDataDate) &&
                 Objects.equals(pm10IndexLevel, that.pm10IndexLevel) &&
                 Objects.equals(pm25IndexLevel, that.pm25IndexLevel) &&
                 Objects.equals(o3IndexLevel, that.o3IndexLevel) &&
@@ -136,7 +138,7 @@ public class AirConditionData {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, stationId, stCalcDate, stIndexLevel, so2IndexLevel, so2SourceDataDate, no2IndexLevel, coIndexLevel, coSourceDataDate, pm10IndexLevel, pm25IndexLevel, o3IndexLevel, c6h6IndexLevel);
+        return Objects.hash(id, stationId, stCalcDate, stIndexLevel, so2IndexLevel, no2IndexLevel, coIndexLevel, pm10IndexLevel, pm25IndexLevel, o3IndexLevel, c6h6IndexLevel);
     }
 }
 

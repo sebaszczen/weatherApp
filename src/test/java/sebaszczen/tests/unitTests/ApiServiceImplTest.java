@@ -14,7 +14,7 @@ import sebaszczen.repository.StationLocalizationRepository;
 import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockStationLocalization;
 import sebaszczen.respository.MockSynopticStation;
-import sebaszczen.services.api.ApiService;
+import sebaszczen.services.api.ApiServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IApiServiceTest {
+public class ApiServiceImplTest {
 
     @Mock
     private ImgwApiRepository imgwApiRepository;
@@ -38,7 +38,7 @@ public class IApiServiceTest {
     private ApiProvider apiProvider;
 
     @InjectMocks
-    private ApiService apiService;
+    private ApiServiceImpl apiServiceImpl;
     private MockSynopticStation mockSynopticStation =new MockSynopticStation();
     private MockAirConditionData mockAirConditionData = new MockAirConditionData();
     private MockStationLocalization mockStationLocalization = new MockStationLocalization();
@@ -48,7 +48,7 @@ public class IApiServiceTest {
         List<SynopticStation> synopticStationList = mockSynopticStation.getSynopticStationList();
         given(apiProvider.getAllSynopticStation()).willReturn(synopticStationList);
         when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(synopticStationList.get(0));
-        apiService.saveImgwData();
+        apiServiceImpl.saveImgwData();
         verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
         verifyNoMoreInteractions(imgwApiRepository);
     }
@@ -69,7 +69,7 @@ public class IApiServiceTest {
         when(stationLocalizationRepository.save(any(StationLocalization.class))).thenReturn(mockStationLocalizationDtoList.get(0));
         when(airConditionDataRepository.save(any(AirConditionData.class))).thenReturn(mockAirConditionDataDtoList.get(0));
 
-        apiService.saveData();
+        apiServiceImpl.saveData();
 
         verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
         verify(stationLocalizationRepository,times(3)).save(any(StationLocalization.class));

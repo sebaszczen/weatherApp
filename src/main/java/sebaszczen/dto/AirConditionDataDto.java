@@ -6,6 +6,7 @@ import sebaszczen.model.AirConditionData;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 public class AirConditionDataDto {
     @JsonProperty("id")
@@ -27,7 +28,7 @@ public class AirConditionDataDto {
     }
 
     public void setStCalcDate(String stCalcDate) {
-        String[] split = stCalcDate.split(" ");
+        String[] split = Optional.ofNullable(stCalcDate).isPresent()?stCalcDate.split(" "):null;
         this.stCalcDate = LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
     }
 
