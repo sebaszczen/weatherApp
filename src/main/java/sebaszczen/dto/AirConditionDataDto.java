@@ -29,7 +29,7 @@ public class AirConditionDataDto {
 
     public void setStCalcDate(String stCalcDate) {
         String[] split = Optional.ofNullable(stCalcDate).isPresent()?stCalcDate.split(" "):null;
-        this.stCalcDate = LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
+        this.stCalcDate = split==null?null: LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
     }
 
     public AirConditionData convertToEntity() {

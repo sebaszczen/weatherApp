@@ -15,39 +15,18 @@ public class AirConditionData {
     private int stationId;
     private LocalDateTime stCalcDate;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level stIndexLevel; //powietrze ogólnie
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level so2IndexLevel; //dwutlenek siarki
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level no2IndexLevel; //dwutlenek azotu
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level coIndexLevel;//tlenek wegla
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level pm10IndexLevel; //pył zawieszony PM10
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level pm25IndexLevel;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="air_level",
-            joinColumns={@JoinColumn(name="air_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="level_id", referencedColumnName="id")})
     private Level o3IndexLevel;
     @ManyToOne(cascade = CascadeType.ALL)
 
