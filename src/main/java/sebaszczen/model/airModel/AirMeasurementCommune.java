@@ -1,17 +1,17 @@
-package sebaszczen.model;
+package sebaszczen.model.airModel;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-public class Commune {
+public class AirMeasurementCommune {
     private String provinceName;
 
-    public Commune(String communeName, String districtName, String provinceName) {
+    public AirMeasurementCommune(String provinceName) {
         this.provinceName = provinceName;
     }
 
-    public Commune() {
+    public AirMeasurementCommune() {
     }
 
     public void setProvinceName(String provinceName) {
@@ -22,8 +22,8 @@ public class Commune {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Commune commune = (Commune) o;
-        return Objects.equals(provinceName, commune.provinceName);
+        AirMeasurementCommune airMeasurementCommune = (AirMeasurementCommune) o;
+        return Objects.equals(provinceName, airMeasurementCommune.provinceName);
     }
 
     @Override

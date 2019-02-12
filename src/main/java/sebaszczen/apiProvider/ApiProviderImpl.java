@@ -3,16 +3,15 @@ package sebaszczen.apiProvider;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.StationLocalization;
-import sebaszczen.model.SynopticStation;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.airModel.AirMeasurementLocalization;
+import sebaszczen.model.SynopticData;
 import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 
@@ -53,19 +52,19 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public List<SynopticStation> getAllSynopticStation() throws RestClientException {
-        ResponseEntity<SynopticStation.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticStation.SynopticStationDto[].class);
-        SynopticStation.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
+    public List<SynopticData> getAllSynopticStation() throws RestClientException {
+        ResponseEntity<SynopticData.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticData.SynopticStationDto[].class);
+        SynopticData.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
-        return synopticStationDtoList.parallelStream().map(SynopticStation.SynopticStationDto::convertToEntity).collect(Collectors.toList());
+        return synopticStationDtoList.parallelStream().map(SynopticData.SynopticStationDto::convertToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<SynopticStation> getSynopticDataByStationName(String cityName) throws ResourceAccessException {
-        ResponseEntity<SynopticStation.SynopticStationDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticStation.SynopticStationDto.class);
-        SynopticStation.SynopticStationDto stationDto = responseEntity.getBody();
+    public Optional<SynopticData> getSynopticDataByStationName(String cityName) throws ResourceAccessException {
+        ResponseEntity<SynopticData.SynopticStationDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticData.SynopticStationDto.class);
+        SynopticData.SynopticStationDto stationDto = responseEntity.getBody();
         Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
         Optional<LocalTime> godzina_pomiaru = Optional.ofNullable(stationDto.getGodzina_pomiaru());
         if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){
@@ -75,7 +74,7 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public List<StationLocalization> getStationLocalization() {
+    public List<AirMeasurementLocalization> getStationLocalization() {
         ResponseEntity<StationLocalizationDto[]> responseEntity = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         StationLocalizationDto[] stationLocalizationDtos = responseEntity.getBody();
         List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDtos).parallel().collect(Collectors.toList());
@@ -83,7 +82,7 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public List<AirConditionData> getAllAirConditionData(){
+    public List<AirData> getAllAirConditionData(){
         List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().parallelStream()
                 .map(station ->
                         getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class).getBody())
@@ -91,7 +90,7 @@ public class ApiProviderImpl implements ApiProvider {
         return airConditionDataDtoList.parallelStream().map(AirConditionDataDto::convertToEntity).collect(Collectors.toList());
     }
 
-    public Optional<AirConditionData> getAirConditionDataByStationIndex(int index){
+    public Optional<AirData> getAirConditionDataByStationIndex(int index){
         ResponseEntity<AirConditionDataDto> responseEntity = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
         AirConditionDataDto airConditionDataDto = responseEntity.getBody();
         Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());

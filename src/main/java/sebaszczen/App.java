@@ -41,8 +41,8 @@ public class App implements CommandLineRunner
 
     @Override
     public void run(String... strings) throws Exception {
-//        AirConditionData airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
-//        AirConditionData map = modelMapper.map(airConditionDataByStationIndex, AirConditionData.class);
+//        AirData airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
+//        AirData map = modelMapper.map(airConditionDataByStationIndex, AirData.class);
 
 //        apiProvider.getSynopticDataByStationName("warszawa");
 //        Thread.sleep(40000);

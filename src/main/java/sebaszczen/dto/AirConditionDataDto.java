@@ -1,7 +1,7 @@
 package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import sebaszczen.model.AirConditionData;
+import sebaszczen.model.airModel.AirData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,8 +32,8 @@ public class AirConditionDataDto {
         this.stCalcDate = split==null?null: LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
     }
 
-    public AirConditionData convertToEntity() {
-        return new AirConditionData(this);
+    public AirData convertToEntity() {
+        return new AirData(this);
     }
 
     public void setStIndexLevel(LevelDto stIndexLevel) {

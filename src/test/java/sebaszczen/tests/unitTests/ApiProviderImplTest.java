@@ -12,17 +12,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.apiProvider.ApiProviderImpl;
-import sebaszczen.apiProvider.RestTemplateResponseErrorHandler;
 import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.StationLocalization;
-import sebaszczen.model.SynopticStation;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.SynopticData;
 import sebaszczen.respository.MockAirConditionData;
-import sebaszczen.respository.MockStationLocalization;
 import sebaszczen.respository.MockSynopticStation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,42 +41,42 @@ public class ApiProviderImplTest {
 
     @Test
     public void getAllSynopticStation_emptyDataAndTime() {
-        SynopticStation.SynopticStationDto synopticStationDto = new SynopticStation.SynopticStationDto();
-        SynopticStation.SynopticStationDto[] synopticStationDtos = {synopticStationDto};
+        SynopticData.SynopticStationDto synopticStationDto = new SynopticData.SynopticStationDto();
+        SynopticData.SynopticStationDto[] synopticStationDtos = {synopticStationDto};
         when(restTemplate.getForEntity( UriComponentsBuilder.fromHttpUrl("https://danepubliczne.imgw.pl/api/data/synop").build().encode().toUri().toString(),
-                SynopticStation.SynopticStationDto[].class)).thenReturn(new ResponseEntity<>(synopticStationDtos,HttpStatus.OK));
-        List<SynopticStation> allSynopticStation = apiProvider.getAllSynopticStation();
-        assertEquals(allSynopticStation.size(),0);
+                SynopticData.SynopticStationDto[].class)).thenReturn(new ResponseEntity<>(synopticStationDtos,HttpStatus.OK));
+        List<SynopticData> allSynopticData = apiProvider.getAllSynopticStation();
+        assertEquals(allSynopticData.size(),0);
     }
 
     @Test
     public void getAllSynopticStation() {
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
-        SynopticStation.SynopticStationDto[] synopticStationDtos1 = new SynopticStation.SynopticStationDto[synopticStationDtoList.size()];
-        SynopticStation.SynopticStationDto[] synopticStationDtos = synopticStationDtoList.toArray(synopticStationDtos1);
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
+        SynopticData.SynopticStationDto[] synopticStationDtos1 = new SynopticData.SynopticStationDto[synopticStationDtoList.size()];
+        SynopticData.SynopticStationDto[] synopticStationDtos = synopticStationDtoList.toArray(synopticStationDtos1);
         when(restTemplate.getForEntity( UriComponentsBuilder.fromHttpUrl("https://danepubliczne.imgw.pl/api/data/synop").build().encode().toUri().toString(),
-                SynopticStation.SynopticStationDto[].class)).thenReturn(new ResponseEntity<>(synopticStationDtos,HttpStatus.OK));
-        List<SynopticStation> allSynopticStation = apiProvider.getAllSynopticStation();
-        assertEquals(allSynopticStation.size(),synopticStationDtos.length);
+                SynopticData.SynopticStationDto[].class)).thenReturn(new ResponseEntity<>(synopticStationDtos,HttpStatus.OK));
+        List<SynopticData> allSynopticData = apiProvider.getAllSynopticStation();
+        assertEquals(allSynopticData.size(),synopticStationDtos.length);
     }
 
     @Test
     public void getSynopticDataByStationName() {
         String stattionName = "warszawa";
-        SynopticStation.SynopticStationDto synopticStationDto = mockSynopticStation.getSynopticStationDtoList().get(0);
+        SynopticData.SynopticStationDto synopticStationDto = mockSynopticStation.getSynopticStationDtoList().get(0);
         when(restTemplate.getForEntity( UriComponentsBuilder.fromHttpUrl("https://danepubliczne.imgw.pl/api/data/synop/station/").path("" + stattionName).build().encode().toUri().toString(),
-                SynopticStation.SynopticStationDto.class)).thenReturn(new ResponseEntity<>(synopticStationDto,HttpStatus.OK));
-        Optional<SynopticStation> synopticDataByStationName = apiProvider.getSynopticDataByStationName(stattionName);
+                SynopticData.SynopticStationDto.class)).thenReturn(new ResponseEntity<>(synopticStationDto,HttpStatus.OK));
+        Optional<SynopticData> synopticDataByStationName = apiProvider.getSynopticDataByStationName(stattionName);
         assertEquals(synopticDataByStationName.isPresent(),true);
     }
 
     @Test
     public void getSynopticDataByStationName_emptyData() {
         String stattionName = "warszawa";
-        SynopticStation.SynopticStationDto synopticStationDto=new SynopticStation.SynopticStationDto();
+        SynopticData.SynopticStationDto synopticStationDto=new SynopticData.SynopticStationDto();
         when(restTemplate.getForEntity( UriComponentsBuilder.fromHttpUrl("https://danepubliczne.imgw.pl/api/data/synop/station/").path("" + stattionName).build().encode().toUri().toString(),
-                SynopticStation.SynopticStationDto.class)).thenReturn(new ResponseEntity<>(synopticStationDto,HttpStatus.OK));
-        Optional<SynopticStation> synopticDataByStationName = apiProvider.getSynopticDataByStationName(stattionName);
+                SynopticData.SynopticStationDto.class)).thenReturn(new ResponseEntity<>(synopticStationDto,HttpStatus.OK));
+        Optional<SynopticData> synopticDataByStationName = apiProvider.getSynopticDataByStationName(stattionName);
         assertEquals(synopticDataByStationName.isPresent(),false);
     }
 
@@ -106,8 +102,8 @@ public class ApiProviderImplTest {
                 AirConditionDataDto.class)).thenReturn(new ResponseEntity<>(airConditionDataDto1,HttpStatus.OK));
         when(restTemplate.getForEntity("http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/113",
                 AirConditionDataDto.class)).thenReturn(new ResponseEntity<>(airConditionDataDto2,HttpStatus.OK));
-        List<AirConditionData> allAirConditionData = apiProvider.getAllAirConditionData();
-        assertEquals(allAirConditionData.size(),1);
+        List<AirData> allAirData = apiProvider.getAllAirConditionData();
+        assertEquals(allAirData.size(),1);
     }
 
     @Test
@@ -115,7 +111,7 @@ public class ApiProviderImplTest {
         AirConditionDataDto airConditionDataDto = mockAirConditionData.getMockAirConditionDataDtoList().get(0);
         when(restTemplate.getForEntity("http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/114", AirConditionDataDto.class))
         .thenReturn(new ResponseEntity<>(airConditionDataDto, HttpStatus.OK) );
-        Optional<AirConditionData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
+        Optional<AirData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
         assertEquals(airConditionDataByStationIndex.isPresent(),true);
     }
 
@@ -124,7 +120,7 @@ public class ApiProviderImplTest {
         AirConditionDataDto airConditionDataDto = new AirConditionDataDto();
         when(restTemplate.getForEntity("http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/114", AirConditionDataDto.class))
                 .thenReturn(new ResponseEntity<>(airConditionDataDto,HttpStatus.OK));
-        Optional<AirConditionData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
+        Optional<AirData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(114);
         assertEquals(airConditionDataByStationIndex.isPresent(),false);
     }
 }

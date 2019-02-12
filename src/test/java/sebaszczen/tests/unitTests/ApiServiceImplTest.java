@@ -5,11 +5,11 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.model.SynopticStation;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.StationLocalization;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.SynopticData;
+import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.repository.AirConditionDataRepository;
-import sebaszczen.repository.ImgwApiRepository;
+import sebaszczen.repository.SynopticDataRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockStationLocalization;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 public class ApiServiceImplTest {
 
     @Mock
-    private ImgwApiRepository imgwApiRepository;
+    private SynopticDataRepository synopticDataRepository;
 
     @Mock
     private AirConditionDataRepository airConditionDataRepository;
@@ -45,35 +45,35 @@ public class ApiServiceImplTest {
 
     @Test
     public void saveImgwData_JpaSaveMethodCalledTwoTimes() {
-        List<SynopticStation> synopticStationList = mockSynopticStation.getSynopticStationList();
-        given(apiProvider.getAllSynopticStation()).willReturn(synopticStationList);
-        when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(synopticStationList.get(0));
+        List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
+        given(apiProvider.getAllSynopticStation()).willReturn(synopticDataList);
+        when(synopticDataRepository.save(any(SynopticData.class))).thenReturn(synopticDataList.get(0));
         apiServiceImpl.saveImgwData();
-        verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
-        verifyNoMoreInteractions(imgwApiRepository);
+        verify(synopticDataRepository,times(2)).save(any(SynopticData.class));
+        verifyNoMoreInteractions(synopticDataRepository);
     }
 
     @Test
     public void saveData_getDataSaved() {
-        List<SynopticStation> synopticStationList = mockSynopticStation.getSynopticStationList();
-        List<AirConditionData> mockAirConditionDataDtoList = mockAirConditionData.getAirConditionDataList();
-        List<StationLocalization> mockStationLocalizationDtoList = mockStationLocalization.getStationLocalizationList();
+        List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
+        List<AirData> mockAirDataDtoList = mockAirConditionData.getAirConditionDataList();
+        List<AirMeasurementLocalization> mockAirMeasurementLocalizationDtoList = mockStationLocalization.getStationLocalizationList();
 
-        given(apiProvider.getAllSynopticStation()).willReturn(synopticStationList);
-        given(apiProvider.getAllAirConditionData()).willReturn(mockAirConditionDataDtoList);
-        given(apiProvider.getStationLocalization()).willReturn(mockStationLocalizationDtoList);
-        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticStationList.get(0)));
-        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirConditionDataDtoList.get(0)));
+        given(apiProvider.getAllSynopticStation()).willReturn(synopticDataList);
+        given(apiProvider.getAllAirConditionData()).willReturn(mockAirDataDtoList);
+        given(apiProvider.getStationLocalization()).willReturn(mockAirMeasurementLocalizationDtoList);
+        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
+        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataDtoList.get(0)));
 
-        when(imgwApiRepository.save(any(SynopticStation.class))).thenReturn(synopticStationList.get(0));
-        when(stationLocalizationRepository.save(any(StationLocalization.class))).thenReturn(mockStationLocalizationDtoList.get(0));
-        when(airConditionDataRepository.save(any(AirConditionData.class))).thenReturn(mockAirConditionDataDtoList.get(0));
+        when(synopticDataRepository.save(any(SynopticData.class))).thenReturn(synopticDataList.get(0));
+        when(stationLocalizationRepository.save(any(AirMeasurementLocalization.class))).thenReturn(mockAirMeasurementLocalizationDtoList.get(0));
+        when(airConditionDataRepository.save(any(AirData.class))).thenReturn(mockAirDataDtoList.get(0));
 
         apiServiceImpl.saveData();
 
-        verify(imgwApiRepository,times(2)).save(any(SynopticStation.class));
-        verify(stationLocalizationRepository,times(3)).save(any(StationLocalization.class));
-        verify(airConditionDataRepository,times(2)).save(any(AirConditionData.class));
+        verify(synopticDataRepository,times(2)).save(any(SynopticData.class));
+        verify(stationLocalizationRepository,times(3)).save(any(AirMeasurementLocalization.class));
+        verify(airConditionDataRepository,times(2)).save(any(AirData.class));
 
     }
 }

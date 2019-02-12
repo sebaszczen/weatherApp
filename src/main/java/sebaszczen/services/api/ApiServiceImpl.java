@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.ResourceAccessException;
 import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.model.Level;
-import sebaszczen.model.SynopticStation;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.StationLocalization;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.airModel.AirQuality;
+import sebaszczen.model.SynopticData;
+import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.repository.AirConditionDataRepository;
-import sebaszczen.repository.ImgwApiRepository;
+import sebaszczen.repository.SynopticDataRepository;
 import sebaszczen.repository.LevelRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 
@@ -25,7 +25,7 @@ public class ApiServiceImpl implements ApiService {
 
     org.apache.logging.log4j.Logger logger = LogManager.getLogger(ApiServiceImpl.class);
 
-    private final ImgwApiRepository imgwApiRepository;
+    private final SynopticDataRepository synopticDataRepository;
 
     private final ApiProvider apiProvider;
 
@@ -36,8 +36,8 @@ public class ApiServiceImpl implements ApiService {
     private final LevelRepository levelRepository;
 
     @Autowired
-    public ApiServiceImpl(ImgwApiRepository imgwApiRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository giosApiRepository, LevelRepository levelRepository) {
-        this.imgwApiRepository = imgwApiRepository;
+    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository giosApiRepository, LevelRepository levelRepository) {
+        this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
         this.stationLocalizationRepository = stationLocalizationRepository;
         this.giosApiRepository = giosApiRepository;
@@ -47,8 +47,8 @@ public class ApiServiceImpl implements ApiService {
     @Override
     @Transactional
     public void saveImgwData() {
-        List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStation();
-        synopticStationList.forEach(imgwApiRepository::save);
+        List<SynopticData> synopticDataList = apiProvider.getAllSynopticStation();
+        synopticDataList.forEach(synopticDataRepository::save);
     }
 
     @Override
@@ -58,28 +58,28 @@ public class ApiServiceImpl implements ApiService {
 
         try {
             if (imgwApiIsUpToDate()) {
-                List<SynopticStation> synopticStationList = apiProvider.getAllSynopticStation();
-                synopticStationList.forEach(imgwApiRepository::save);
+                List<SynopticData> synopticDataList = apiProvider.getAllSynopticStation();
+                synopticDataList.forEach(synopticDataRepository::save);
             }
 
             if (giosApiIsUpToDate()) {
-                List<StationLocalization> stationLocalizationList = apiProvider.getStationLocalization();
-                stationLocalizationList.forEach(stationLocalizationRepository::save);
+                List<AirMeasurementLocalization> airMeasurementLocalizationList = apiProvider.getStationLocalization();
+                airMeasurementLocalizationList.forEach(stationLocalizationRepository::save);
 
-                List<AirConditionData> airConditionDataList = apiProvider.getAllAirConditionData();
-                airConditionDataList.forEach(airConditionData -> {
-                    Level[] levels = {airConditionData.getC6h6IndexLevel(),airConditionData.getCoIndexLevel()
-                    ,airConditionData.getNo2IndexLevel(),airConditionData.getO3IndexLevel(),airConditionData.getPm10IndexLevel()
-                    ,airConditionData.getPm25IndexLevel(),airConditionData.getSo2IndexLevel(),airConditionData.getStIndexLevel()};
-                    Arrays.stream(levels).filter(level -> level!=null&&level.getId()!=null).forEach(levelRepository::save);
-//                    levelRepository.save(airConditionData.getC6h6IndexLevel());
-//                    levelRepository.save(airConditionData.getCoIndexLevel());
-//                    levelRepository.save(airConditionData.getNo2IndexLevel());
-//                    levelRepository.save(airConditionData.getO3IndexLevel());
-//                    levelRepository.save(airConditionData.getPm10IndexLevel());
-//                    levelRepository.save(airConditionData.getPm25IndexLevel());
-//                    levelRepository.save(airConditionData.getSo2IndexLevel());
-//                    levelRepository.save(airConditionData.getStIndexLevel());
+                List<AirData> airDataList = apiProvider.getAllAirConditionData();
+                airDataList.forEach(airConditionData -> {
+                    AirQuality[] airQualities = {airConditionData.getC6H6IndexAirQuality(),airConditionData.getCoIndexAirQuality()
+                    ,airConditionData.getNo2IndexAirQuality(),airConditionData.getO3IndexAirQuality(),airConditionData.getPm10IndexAirQuality()
+                    ,airConditionData.getPm25IndexAirQuality(),airConditionData.getSo2IndexAirQuality(),airConditionData.getStIndexAirQuality()};
+                    Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(levelRepository::save);
+//                    levelRepository.save(airConditionData.getC6H6IndexAirQuality());
+//                    levelRepository.save(airConditionData.getCoIndexAirQuality());
+//                    levelRepository.save(airConditionData.getNo2IndexAirQuality());
+//                    levelRepository.save(airConditionData.getO3IndexAirQuality());
+//                    levelRepository.save(airConditionData.getPm10IndexAirQuality());
+//                    levelRepository.save(airConditionData.getPm25IndexAirQuality());
+//                    levelRepository.save(airConditionData.getSo2IndexAirQuality());
+//                    levelRepository.save(airConditionData.getStIndexAirQuality());
 
                         giosApiRepository.save(airConditionData);
                 });
@@ -95,14 +95,14 @@ public class ApiServiceImpl implements ApiService {
     private boolean imgwApiIsUpToDate()throws ResourceAccessException {
         String stationNames[]={"warszawa","chojnice","hel","katowice","kielce"};
         for (String stationName : stationNames) {
-            Optional<SynopticStation> station;
+            Optional<SynopticData> station;
                 station = apiProvider.getSynopticDataByStationName(stationName);
                 if (station.isPresent()) {
-                    SynopticStation synopticStation = station.get();
-                    int hour = synopticStation.getLocalDateTime().getHour();
-                    int dayOfMonth = synopticStation.getLocalDateTime().getDayOfMonth();
-                    imgwApiRepository.findAll();
-                    return imgwApiRepository.checkIfContain(hour, dayOfMonth) == 0;
+                    SynopticData synopticData = station.get();
+                    int hour = synopticData.getLocalDateTime().getHour();
+                    int dayOfMonth = synopticData.getLocalDateTime().getDayOfMonth();
+                    synopticDataRepository.findAll();
+                    return synopticDataRepository.checkIfContain(hour, dayOfMonth) == 0;
                 }
         }
         return false;
@@ -111,11 +111,11 @@ public class ApiServiceImpl implements ApiService {
     private boolean giosApiIsUpToDate() {
         int[] stationIndex = {114, 115, 116, 117};
         for (int index : stationIndex) {
-            Optional<AirConditionData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
+            Optional<AirData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
             if (airConditionDataByStationIndex.isPresent()) {
-                AirConditionData airConditionData = airConditionDataByStationIndex.get();
-                int hour1 = airConditionData.getStCalcDate().getHour();
-                int dayOfMonth1 = airConditionData.getStCalcDate().getDayOfMonth();
+                AirData airData = airConditionDataByStationIndex.get();
+                int hour1 = airData.getStCalcDate().getHour();
+                int dayOfMonth1 = airData.getStCalcDate().getDayOfMonth();
                 return giosApiRepository.checkIfContain(hour1, dayOfMonth1) == 0;
             }
         }

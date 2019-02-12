@@ -11,10 +11,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.model.SynopticStation;
-import sebaszczen.model.AirConditionData;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.SynopticData;
 import sebaszczen.repository.AirConditionDataRepository;
-import sebaszczen.repository.ImgwApiRepository;
+import sebaszczen.repository.SynopticDataRepository;
 import sebaszczen.repository.LevelRepository;
 import sebaszczen.repository.StationLocalizationRepository;
 import sebaszczen.respository.MockAirConditionData;
@@ -52,7 +52,7 @@ public class TestDatabaseWithMockedRepo {
     private ApiService ApiService;
 
     @Autowired
-    private ImgwApiRepository imgwApiRepository;
+    private SynopticDataRepository synopticDataRepository;
 
     @Autowired
     private AirConditionDataRepository airConditionDataRepository;
@@ -65,17 +65,17 @@ public class TestDatabaseWithMockedRepo {
 
     @Test
     public void saveData_AlreadyContainsData() {
-        List<SynopticStation> synopticStationList = mockSynopticStation.getSynopticStationList();
-        testEntityManager.persist(synopticStationList.get(0));
+        List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
+        testEntityManager.persist(synopticDataList.get(0));
 
-        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticStationList.get(0)));
+        when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
 
-        List<AirConditionData> mockAirConditionDataList = mockAirConditionData.getAirConditionDataList();
-        testEntityManager.persist(mockAirConditionDataList.get(0));
+        List<AirData> mockAirDataList = mockAirConditionData.getAirConditionDataList();
+        testEntityManager.persist(mockAirDataList.get(0));
 
-        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirConditionDataList.get(0)));
+        when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataList.get(0)));
 
-        ApiService = new ApiServiceImpl(imgwApiRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository, levelRepository);
+        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository, levelRepository);
         ApiService.saveData();
 
         verify(apiProvider,times(0)).getAllSynopticStation();

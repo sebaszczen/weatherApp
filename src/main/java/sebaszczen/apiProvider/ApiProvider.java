@@ -1,22 +1,21 @@
 package sebaszczen.apiProvider;
 
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.StationLocalization;
-import sebaszczen.model.SynopticStation;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.airModel.AirMeasurementLocalization;
+import sebaszczen.model.SynopticData;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ApiProvider {
-    List<SynopticStation> getAllSynopticStation();
+    List<SynopticData> getAllSynopticStation();
 
-    Optional<SynopticStation> getSynopticDataByStationName(String cityName) throws ResourceAccessException;
+    Optional<SynopticData> getSynopticDataByStationName(String cityName) throws ResourceAccessException;
 
-    List<StationLocalization> getStationLocalization();
+    List<AirMeasurementLocalization> getStationLocalization();
 
-    List<AirConditionData> getAllAirConditionData();
+    List<AirData> getAllAirConditionData();
 
-    Optional<AirConditionData> getAirConditionDataByStationIndex(int index);
+    Optional<AirData> getAirConditionDataByStationIndex(int index);
 }

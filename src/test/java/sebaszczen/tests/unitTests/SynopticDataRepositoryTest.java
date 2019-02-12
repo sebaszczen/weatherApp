@@ -8,8 +8,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-import sebaszczen.model.SynopticStation;
-import sebaszczen.repository.ImgwApiRepository;
+import sebaszczen.model.SynopticData;
+import sebaszczen.repository.SynopticDataRepository;
 import sebaszczen.respository.MockSynopticStation;
 
 import java.util.List;
@@ -21,23 +21,23 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = NONE )
-public class ImgwApiRepositoryTest {
+public class SynopticDataRepositoryTest {
 
     @Autowired
     private TestEntityManager testEntityManager;
 
     @Autowired
-    private ImgwApiRepository imgwApiRepository;
+    private SynopticDataRepository synopticDataRepository;
 
     private MockSynopticStation mockSynopticStation =new MockSynopticStation();
 
     @Test
     public void saveImgwData() {
-        List<SynopticStation.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
-        List<SynopticStation> synopticStationList = synopticStationDtoList.parallelStream().map(SynopticStation::new).collect(Collectors.toList());
-        synopticStationList.forEach(testEntityManager::persist);
-        List<SynopticStation> all = imgwApiRepository.findAll();
-        Assertions.assertThat(all).isEqualTo(synopticStationList);
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
+        List<SynopticData> synopticDataList = synopticStationDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
+        synopticDataList.forEach(testEntityManager::persist);
+        List<SynopticData> all = synopticDataRepository.findAll();
+        Assertions.assertThat(all).isEqualTo(synopticDataList);
     }
 
 }

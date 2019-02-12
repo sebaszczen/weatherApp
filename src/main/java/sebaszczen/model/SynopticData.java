@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
-public class SynopticStation {
+public class SynopticData {
     @Id
     @GeneratedValue
     private Long id;
@@ -26,10 +26,10 @@ public class SynopticStation {
         return localDateTime;
     }
 
-    public SynopticStation() {
+    public SynopticData() {
     }
 
-    public SynopticStation(SynopticStationDto synopticStationDto) {
+    public SynopticData(SynopticStationDto synopticStationDto) {
         this.city = synopticStationDto.stacja;
 //        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synopticStationDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synopticStationDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
         this.localDateTime = LocalDateTime.of(synopticStationDto.getData_pomiaru(), synopticStationDto.getGodzina_pomiaru());
@@ -103,8 +103,8 @@ public class SynopticStation {
             return this;
         }
 
-        public SynopticStation convertToEntity() {
-            return new SynopticStation(this);
+        public SynopticData convertToEntity() {
+            return new SynopticData(this);
         }
 
         public Long getId_stacji() {
@@ -153,7 +153,7 @@ public class SynopticStation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SynopticStation that = (SynopticStation) o;
+        SynopticData that = (SynopticData) o;
         return Float.compare(that.temperatura, temperatura) == 0 &&
                 Float.compare(that.predkosc_wiatru, predkosc_wiatru) == 0 &&
                 kierunek_wiatru == that.kierunek_wiatru &&

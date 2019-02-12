@@ -1,37 +1,36 @@
-package sebaszczen.model;
+package sebaszczen.model.airModel;
 
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Level {
+public class AirQuality {
     @Id
     private Long id;
     private int airConditionLevel;
     private String airConditionInWord;
 //    @OneToMany(  orphanRemoval = true,mappedBy = "stIndexLevel")
-//    private List<AirConditionData>airConditionDataList;
+//    private List<AirData>airConditionDataList;
 //    @OneToMany( mappedBy = "so2IndexLevel")
-//    private List<AirConditionData>airConditionDataList2;
+//    private List<AirData>airConditionDataList2;
 //    @OneToMany( mappedBy = "no2IndexLevel")
-//    private List<AirConditionData>airConditionDataList3;
+//    private List<AirData>airConditionDataList3;
 //    @OneToMany( mappedBy = "coIndexLevel")
-//    private List<AirConditionData>airConditionDataList4;
+//    private List<AirData>airConditionDataList4;
 //    @OneToMany( mappedBy = "pm10IndexLevel")
-//    private List<AirConditionData>airConditionDataList5;
+//    private List<AirData>airConditionDataList5;
 //    @OneToMany( mappedBy = "pm25IndexLevel")
-//    private List<AirConditionData>airConditionDataList6;
+//    private List<AirData>airConditionDataList6;
 //    @OneToMany( mappedBy = "o3IndexLevel")
-//    private List<AirConditionData>airConditionDataList7;
+//    private List<AirData>airConditionDataList7;
 //    @OneToMany( mappedBy = "c6h6IndexLevel")
-//    private List<AirConditionData>airConditionDataList8;
+//    private List<AirData>airConditionDataList8;
 
-    public Level() {
+    public AirQuality() {
     }
 
-    public Level(Long id, String airConditionInWord, int airLevelByNumber) {
+    public AirQuality(Long id, String airConditionInWord, int airLevelByNumber) {
         this.id=id;
         this.airConditionInWord = airConditionInWord;
         this.airConditionLevel = airLevelByNumber;
@@ -52,10 +51,10 @@ public class Level {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Level)) return false;
-        Level level = (Level) o;
-        return airConditionLevel == level.airConditionLevel &&
-                Objects.equals(airConditionInWord, level.airConditionInWord);
+        if (!(o instanceof AirQuality)) return false;
+        AirQuality airQuality = (AirQuality) o;
+        return airConditionLevel == airQuality.airConditionLevel &&
+                Objects.equals(airConditionInWord, airQuality.airConditionInWord);
     }
 
     @Override

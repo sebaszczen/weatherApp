@@ -1,7 +1,7 @@
 package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import sebaszczen.model.StationLocalization;
+import sebaszczen.model.airModel.AirMeasurementLocalization;
 
 public class StationLocalizationDto {
     @JsonProperty("id")
@@ -61,7 +61,7 @@ public class StationLocalizationDto {
         this.addressStreet = addressStreet;
     }
 
-    public StationLocalization convertToEntity() {
-        return new StationLocalization(this);
+    public AirMeasurementLocalization convertToEntity() {
+        return new AirMeasurementLocalization(this);
     }
 }

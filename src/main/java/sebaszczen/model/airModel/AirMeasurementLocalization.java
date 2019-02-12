@@ -1,16 +1,14 @@
-package sebaszczen.model;
+package sebaszczen.model.airModel;
 
 import sebaszczen.dto.CityDto;
-import sebaszczen.dto.CommuneDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import javax.persistence.*;
-import javax.swing.text.html.Option;
 import java.util.Objects;
 import java.util.Optional;
 
 @Entity
-public class StationLocalization {
+public class AirMeasurementLocalization {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,17 +16,17 @@ public class StationLocalization {
     private String gegrLat;
     private String gegrLon;
     @Embedded
-    private City city;
+    private AirMeasurementCity airMeasurementCity;
     private String addressStreet;
 
-    public StationLocalization(StationLocalizationDto stationLocalizationDto) {
+    public AirMeasurementLocalization(StationLocalizationDto stationLocalizationDto) {
         this.stationId = stationLocalizationDto.getStationId();
         this.gegrLat = stationLocalizationDto.getGegrLat();
         this.gegrLon = stationLocalizationDto.getGegrLon();
 //        CityDto cityDto = Optional.ofNullable(stationLocalizationDto.getCityDto()).orElse(new CityDto(0,"no data",new CommuneDto()));
-//        this.city = new City(cityDto.getCityId(),cityDto.getCityName(),cityDto.getCommuneDto()) ;
+//        this.airMeasurementCity = new AirMeasurementCity(cityDto.getCityId(),cityDto.getCityName(),cityDto.getCommuneDto()) ;
         CityDto cityDto = stationLocalizationDto.getCityDto();
-        this.city=Optional.ofNullable(cityDto).isPresent()?new City(cityDto):new City();
+        this.airMeasurementCity =Optional.ofNullable(cityDto).isPresent()?new AirMeasurementCity(cityDto):new AirMeasurementCity();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
 
     }
@@ -41,18 +39,18 @@ public class StationLocalization {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StationLocalization that = (StationLocalization) o;
+        AirMeasurementLocalization that = (AirMeasurementLocalization) o;
         return stationId == that.stationId &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(gegrLat, that.gegrLat) &&
                 Objects.equals(gegrLon, that.gegrLon) &&
-                Objects.equals(city, that.city) &&
+                Objects.equals(airMeasurementCity, that.airMeasurementCity) &&
         Objects.equals(addressStreet, that.addressStreet);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, stationId, gegrLat, gegrLon, city, addressStreet);
+        return Objects.hash(id, stationId, gegrLat, gegrLon, airMeasurementCity, addressStreet);
     }
 }
