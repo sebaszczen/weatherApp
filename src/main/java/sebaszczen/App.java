@@ -1,19 +1,13 @@
 package sebaszczen;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.apiProvider.ApiProviderImpl;
-import sebaszczen.dto.AirConditionDataDto;
-import sebaszczen.model.AirConditionData;
-import sebaszczen.model.SynopticStation;
+import sebaszczen.repository.AirConditionDataRepository;
 
-import javax.sql.rowset.spi.SyncProvider;
 import java.util.logging.Logger;
 
 /**
@@ -37,6 +31,9 @@ public class App implements CommandLineRunner
 //    @Autowired
 //    private ApiService apiService;
 
+    @Autowired
+    AirConditionDataRepository airConditionDataRepository;
+
     public static void main( String[] args )
     {
         SpringApplication.run(App.class);
@@ -48,5 +45,7 @@ public class App implements CommandLineRunner
 //        AirConditionData map = modelMapper.map(airConditionDataByStationIndex, AirConditionData.class);
 
 //        apiProvider.getSynopticDataByStationName("warszawa");
+//        Thread.sleep(40000);
+//        airConditionDataRepository.delete(12l);
     }
 }

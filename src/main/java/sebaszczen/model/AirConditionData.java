@@ -1,5 +1,7 @@
 package sebaszczen.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.LevelDto;
 
@@ -14,22 +16,21 @@ public class AirConditionData {
     private Long id;
     private int stationId;
     private LocalDateTime stCalcDate;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level stIndexLevel; //powietrze ogólnie
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level so2IndexLevel; //dwutlenek siarki
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level no2IndexLevel; //dwutlenek azotu
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level coIndexLevel;//tlenek wegla
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level pm10IndexLevel; //pył zawieszony PM10
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level pm25IndexLevel;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Level o3IndexLevel;
-    @ManyToOne(cascade = CascadeType.ALL)
-
+    @ManyToOne
     private Level c6h6IndexLevel;
 
     public AirConditionData() {
@@ -39,21 +40,21 @@ public class AirConditionData {
         this.stationId = airConditionDataDto.getStationId();
         this.stCalcDate = airConditionDataDto.getStCalcDate();
         LevelDto stIndexLevel = airConditionDataDto.getStIndexLevel();
-        this.stIndexLevel = stIndexLevel == null ? new Level() : new Level(stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
+        this.stIndexLevel = stIndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
         LevelDto so2IndexLevel = airConditionDataDto.getSo2IndexLevel();
-        this.so2IndexLevel = so2IndexLevel == null ? new Level() : new Level(so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
+        this.so2IndexLevel = so2IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
         LevelDto no2IndexLevel = airConditionDataDto.getNo2IndexLevel();
-        this.no2IndexLevel = no2IndexLevel == null ? new Level() : new Level(no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
+        this.no2IndexLevel = no2IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
         LevelDto coIndexLevel = airConditionDataDto.getCoIndexLevel();
-        this.coIndexLevel = coIndexLevel == null ? new Level() : new Level(coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
+        this.coIndexLevel = coIndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
         LevelDto pm10IndexLevel = airConditionDataDto.getPm10IndexLevel();
-        this.pm10IndexLevel = pm10IndexLevel == null ? new Level() : new Level(pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
+        this.pm10IndexLevel = pm10IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
         LevelDto pm25IndexLevel = airConditionDataDto.getPm25IndexLevel();
-        this.pm25IndexLevel = pm25IndexLevel == null ? new Level() : new Level(pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
+        this.pm25IndexLevel = pm25IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
         LevelDto o3IndexLevel = airConditionDataDto.getO3IndexLevel();
-        this.o3IndexLevel = o3IndexLevel == null ? new Level() : new Level(o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
+        this.o3IndexLevel = o3IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
         LevelDto c6h6IndexLevel = airConditionDataDto.getC6h6IndexLevel();
-        this.c6h6IndexLevel = c6h6IndexLevel == null ? new Level() : new Level(c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+        this.c6h6IndexLevel = c6h6IndexLevel == null ? new Level(-11L,"brak danych",-1) : new Level((long) stIndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
     }
 
     public LocalDateTime getStCalcDate() {
