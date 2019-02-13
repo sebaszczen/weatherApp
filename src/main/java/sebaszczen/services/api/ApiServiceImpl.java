@@ -27,18 +27,18 @@ public class ApiServiceImpl implements ApiService {
 
     private final AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
-    private final AirDataRepository giosApiRepository;
+    private final AirDataRepository airDataRepository;
 
     private final AirQualityRepository airQualityRepository;
 
     private final CityRepository cityRepository;
 
     @Autowired
-    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository giosApiRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository) {
+    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository) {
         this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
         this.airMeasurementLocalizationRepository = airMeasurementLocalizationRepository;
-        this.giosApiRepository = giosApiRepository;
+        this.airDataRepository = airDataRepository;
         this.airQualityRepository = airQualityRepository;
         this.cityRepository = cityRepository;
     }
@@ -78,7 +78,7 @@ public class ApiServiceImpl implements ApiService {
 
             if (giosApiIsUpToDate()) {
                 List<AirMeasurementLocalization> airMeasurementLocalizationList = apiProvider.getStationLocalization();
-                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
+//                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
 
                 List<AirData> airDataList = apiProvider.getAllAirConditionData();
                 airDataList.forEach(airConditionData -> {
@@ -86,7 +86,7 @@ public class ApiServiceImpl implements ApiService {
                     ,airConditionData.getNo2IndexAirQuality(),airConditionData.getO3IndexAirQuality(),airConditionData.getPm10IndexAirQuality()
                     ,airConditionData.getPm25IndexAirQuality(),airConditionData.getSo2IndexAirQuality(),airConditionData.getStIndexAirQuality()};
                     Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
-                        giosApiRepository.save(airConditionData);
+                        airDataRepository.save(airConditionData);
                 });
             }
         }
@@ -121,7 +121,7 @@ public class ApiServiceImpl implements ApiService {
                 AirData airData = airConditionDataByStationIndex.get();
                 int hour1 = airData.getStCalcDate().getHour();
                 int dayOfMonth1 = airData.getStCalcDate().getDayOfMonth();
-                return giosApiRepository.checkIfContain(hour1, dayOfMonth1) == 0;
+                return airDataRepository.checkIfContain(hour1, dayOfMonth1) == 0;
             }
         }
         return false;
