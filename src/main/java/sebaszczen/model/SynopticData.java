@@ -41,6 +41,10 @@ public class SynopticData {
         this.cisnienie = synopticStationDto.cisnienie;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     public static class SynopticStationDto {
         private Long id_stacji;
         private String stacja;

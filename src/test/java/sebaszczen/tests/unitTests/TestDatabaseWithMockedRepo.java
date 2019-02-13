@@ -13,10 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.SynopticData;
-import sebaszczen.repository.AirConditionDataRepository;
-import sebaszczen.repository.SynopticDataRepository;
-import sebaszczen.repository.LevelRepository;
-import sebaszczen.repository.StationLocalizationRepository;
+import sebaszczen.repository.*;
 import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockSynopticStation;
 import sebaszczen.services.api.ApiService;
@@ -63,6 +60,9 @@ public class TestDatabaseWithMockedRepo {
     @Autowired
     private LevelRepository levelRepository;
 
+    @Autowired
+    private CityRepository cityRepository;
+
     @Test
     public void saveData_AlreadyContainsData() {
         List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
@@ -75,7 +75,7 @@ public class TestDatabaseWithMockedRepo {
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataList.get(0)));
 
-        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository, levelRepository);
+        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository, levelRepository, cityRepository);
         ApiService.saveData();
 
         verify(apiProvider,times(0)).getAllSynopticStation();
