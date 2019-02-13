@@ -18,6 +18,7 @@ import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockSynopticStation;
 import sebaszczen.services.api.ApiService;
 import sebaszczen.services.api.ApiServiceImpl;
+import sebaszczen.services.api.EntitiesMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,9 @@ public class TestDatabaseWithMockedRepo {
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private EntitiesMapper entitiesMapper;
+
     @Test
     public void saveData_AlreadyContainsData() {
         List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
@@ -75,11 +79,11 @@ public class TestDatabaseWithMockedRepo {
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataList.get(0)));
 
-        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, airMeasurementLocalizationRepository, airDataRepository, airQualityRepository, cityRepository);
+        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, airMeasurementLocalizationRepository, airDataRepository, airQualityRepository, cityRepository, entitiesMapper);
         ApiService.saveData();
 
         verify(apiProvider,times(0)).getAllSynopticStation();
         verify(apiProvider,times(0)).getStationLocalization();
-        verify(apiProvider,times(0)).getAllAirConditionData();
+        verify(apiProvider,times(0)).getAirData();
     }
 }

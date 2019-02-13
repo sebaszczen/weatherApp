@@ -29,6 +29,14 @@ public class AirMeasurementCity {
         this.airMeasurementCommune = airMeasurementCommune;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public AirMeasurementCommune getAirMeasurementCommune() {
+        return airMeasurementCommune;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

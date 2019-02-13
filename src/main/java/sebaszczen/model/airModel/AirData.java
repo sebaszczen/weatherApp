@@ -2,6 +2,7 @@ package sebaszczen.model.airModel;
 
 import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.LevelDto;
+import sebaszczen.model.City;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,6 +33,8 @@ public class AirData {
     private AirQuality c6H6IndexAirQuality;
     @OneToOne(cascade = CascadeType.PERSIST)
     private AirMeasurementLocalization airMeasurementLocalization;
+    @ManyToOne
+    private City city;
 
     public AirData() {
     }
@@ -59,6 +62,10 @@ public class AirData {
 
     public void setAirMeasurementLocalization(AirMeasurementLocalization airMeasurementLocalization) {
         this.airMeasurementLocalization = airMeasurementLocalization;
+    }
+
+    public AirMeasurementLocalization getAirMeasurementLocalization() {
+        return airMeasurementLocalization;
     }
 
     public LocalDateTime getStCalcDate() {

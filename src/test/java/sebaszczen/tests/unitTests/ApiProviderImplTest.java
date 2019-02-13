@@ -102,7 +102,7 @@ public class ApiProviderImplTest {
                 AirConditionDataDto.class)).thenReturn(new ResponseEntity<>(airConditionDataDto1,HttpStatus.OK));
         when(restTemplate.getForEntity("http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/113",
                 AirConditionDataDto.class)).thenReturn(new ResponseEntity<>(airConditionDataDto2,HttpStatus.OK));
-        List<AirData> allAirData = apiProvider.getAllAirConditionData();
+        List<AirData> allAirData = apiProvider.getAirData();
         assertEquals(allAirData.size(),1);
     }
 

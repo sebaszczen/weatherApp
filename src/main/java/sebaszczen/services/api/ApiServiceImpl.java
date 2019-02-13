@@ -11,7 +11,6 @@ import sebaszczen.model.City;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirQuality;
 import sebaszczen.model.SynopticData;
-import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.repository.*;
 
 import java.util.*;
@@ -33,14 +32,17 @@ public class ApiServiceImpl implements ApiService {
 
     private final CityRepository cityRepository;
 
+    private EntitiesMapper entitiesMapper;
+
     @Autowired
-    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository) {
+    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
         this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
         this.airMeasurementLocalizationRepository = airMeasurementLocalizationRepository;
         this.airDataRepository = airDataRepository;
         this.airQualityRepository = airQualityRepository;
         this.cityRepository = cityRepository;
+        this.entitiesMapper = entitiesMapper;
     }
 
     @Override
@@ -55,40 +57,30 @@ public class ApiServiceImpl implements ApiService {
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
 
+        Map<String, List<SynopticData>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
+        Map<String, List<AirData>> cityToAirData = entitiesMapper.mapCityToAirData();
         try {
-            if (imgwApiIsUpToDate()) {
-                Map<String,List<SynopticData>> cityToSynopticData = new HashMap<>();
-                List<SynopticData> synopticDataList = apiProvider.getAllSynopticStation();
-                for (SynopticData synopticData : synopticDataList) {
-                    String key = synopticData.getCity();
-                    if (cityToSynopticData.containsKey(key)) {
-                        List<SynopticData> value = cityToSynopticData.get(key);
-                        value.add(synopticData);
-                        cityToSynopticData.put(key, value);
-                    }
-                    else {
-                        cityToSynopticData.put(key, Arrays.asList(synopticData));
-                    }
-                }
+            if (synopticDataIsNotUpToDate()) {
                 for (String cityName : cityToSynopticData.keySet()) {
                     cityRepository.save(new City(cityName, cityToSynopticData.get(cityName)));
                 }
-//                synopticDataList.forEach(synopticDataRepository::save);
+                cityToSynopticData.values().forEach(synopticDataRepository::save);
             }
 
-            if (giosApiIsUpToDate()) {
-                Map<Integer, AirMeasurementLocalization> airMeasurementLocalizationMap = apiProvider.getStationLocalization();
+            if (airDataIsNotUpToDate()) {
 //                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
 
-                List<AirData> airDataList = apiProvider.getAllAirConditionData();
-                airDataList.forEach(airConditionData -> {
-                    airConditionData.setAirMeasurementLocalization(airMeasurementLocalizationMap.get(airConditionData.getStationId()));
-                    AirQuality[] airQualities = {airConditionData.getC6H6IndexAirQuality(),airConditionData.getCoIndexAirQuality()
-                    ,airConditionData.getNo2IndexAirQuality(),airConditionData.getO3IndexAirQuality(),airConditionData.getPm10IndexAirQuality()
-                    ,airConditionData.getPm25IndexAirQuality(),airConditionData.getSo2IndexAirQuality(),airConditionData.getStIndexAirQuality()};
+                List<AirData> airDataList = entitiesMapper.mapAirMeasurementLocalizationToAirData();
+                airDataList.forEach(airData -> {
+                    AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(),airData.getCoIndexAirQuality()
+                    ,airData.getNo2IndexAirQuality(),airData.getO3IndexAirQuality(),airData.getPm10IndexAirQuality()
+                    ,airData.getPm25IndexAirQuality(),airData.getSo2IndexAirQuality(),airData.getStIndexAirQuality()};
                     Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
-                        airDataRepository.save(airConditionData);
+                        airDataRepository.save(airData);
                 });
+                for (String cityName : cityToAirData.keySet()) {
+                    cityRepository.save(new City(cityToAirData.get(cityName),cityName));
+                }
             }
         }
         catch (ResourceAccessException e)
@@ -98,7 +90,7 @@ public class ApiServiceImpl implements ApiService {
 
 }
 
-    private boolean imgwApiIsUpToDate()throws ResourceAccessException {
+    private boolean synopticDataIsNotUpToDate()throws ResourceAccessException {
         String stationNames[]={"warszawa","chojnice","hel","katowice","kielce"};
         for (String stationName : stationNames) {
             Optional<SynopticData> station;
@@ -114,7 +106,7 @@ public class ApiServiceImpl implements ApiService {
         return false;
     }
 
-    private boolean giosApiIsUpToDate() {
+    private boolean airDataIsNotUpToDate() {
         int[] stationIndex = {114, 115, 116, 117};
         for (int index : stationIndex) {
             Optional<AirData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
@@ -122,7 +114,7 @@ public class ApiServiceImpl implements ApiService {
                 AirData airData = airConditionDataByStationIndex.get();
                 int hour1 = airData.getStCalcDate().getHour();
                 int dayOfMonth1 = airData.getStCalcDate().getDayOfMonth();
-                return airDataRepository.checkIfContain(hour1, dayOfMonth1) == 0;
+                return airDataRepository.contain(hour1, dayOfMonth1) == 0;
             }
         }
         return false;

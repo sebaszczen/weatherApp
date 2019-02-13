@@ -83,7 +83,7 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public List<AirData> getAllAirConditionData(){
+    public List<AirData> getAirData(){
         List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().values().parallelStream()
                 .map(station ->
                         getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class).getBody())

@@ -16,7 +16,7 @@ public interface ApiProvider {
 
     Map<Integer, AirMeasurementLocalization> getStationLocalization();
 
-    List<AirData> getAllAirConditionData();
+    List<AirData> getAirData();
 
     Optional<AirData> getAirConditionDataByStationIndex(int index);
 }

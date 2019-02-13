@@ -60,7 +60,7 @@ public class ApiServiceImplTest {
         List<AirMeasurementLocalization> mockAirMeasurementLocalizationDtoList = mockStationLocalization.getStationLocalizationList();
 
         given(apiProvider.getAllSynopticStation()).willReturn(synopticDataList);
-        given(apiProvider.getAllAirConditionData()).willReturn(mockAirDataDtoList);
+        given(apiProvider.getAirData()).willReturn(mockAirDataDtoList);
 //        given(apiProvider.getStationLocalization()).willReturn(mockAirMeasurementLocalizationDtoList);
         when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataDtoList.get(0)));

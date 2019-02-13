@@ -3,6 +3,7 @@ package sebaszczen.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ public class SynopticData {
     @Id
     @GeneratedValue
     private Long id;
-    private String city;
+    private String cityName;
     private LocalDateTime localDateTime;
     private float temperatura;
     private float predkosc_wiatru;
@@ -21,6 +22,8 @@ public class SynopticData {
     private float wilgotnosc_wzgledna;
     private float suma_opadu;
     private float cisnienie;
+    @ManyToOne
+    private City city;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
@@ -30,7 +33,7 @@ public class SynopticData {
     }
 
     public SynopticData(SynopticStationDto synopticStationDto) {
-        this.city = synopticStationDto.stacja;
+        this.cityName = synopticStationDto.stacja;
 //        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synopticStationDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synopticStationDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
         this.localDateTime = LocalDateTime.of(synopticStationDto.getData_pomiaru(), synopticStationDto.getGodzina_pomiaru());
         this.temperatura = synopticStationDto.temperatura;
@@ -41,8 +44,8 @@ public class SynopticData {
         this.cisnienie = synopticStationDto.cisnienie;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
     public static class SynopticStationDto {
@@ -165,13 +168,13 @@ public class SynopticData {
                 Float.compare(that.suma_opadu, suma_opadu) == 0 &&
                 Float.compare(that.cisnienie, cisnienie) == 0 &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(city, that.city) &&
+                Objects.equals(cityName, that.cityName) &&
                 Objects.equals(localDateTime, that.localDateTime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, city, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
+        return Objects.hash(id, cityName, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
     }
 }

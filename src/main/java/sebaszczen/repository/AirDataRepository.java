@@ -11,6 +11,6 @@ public interface AirDataRepository extends JpaRepository<AirData,Long>{
 
     @Query(value = "select count(*) from air_data " +
             "where extract(hour from st_calc_date)=:hour and extract(day from st_calc_date)=:day",nativeQuery = true)
-    public int checkIfContain(@Param("hour")int hour, @Param("day")int day);
+    public int contain(@Param("hour")int hour, @Param("day")int day);
 
 }

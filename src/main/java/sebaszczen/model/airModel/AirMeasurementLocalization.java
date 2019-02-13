@@ -35,6 +35,22 @@ public class AirMeasurementLocalization {
         return stationId;
     }
 
+    public String getGegrLat() {
+        return gegrLat;
+    }
+
+    public String getGegrLon() {
+        return gegrLon;
+    }
+
+    public AirMeasurementCity getAirMeasurementCity() {
+        return airMeasurementCity;
+    }
+
+    public String getAddressStreet() {
+        return addressStreet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
