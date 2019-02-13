@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
 
 @Repository
-public interface StationLocalizationRepository extends JpaRepository<AirMeasurementLocalization, Long> {
+public interface AirMeasurementLocalizationRepository extends JpaRepository<AirMeasurementLocalization, Long> {
 
 
 }
