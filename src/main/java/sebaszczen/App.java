@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import sebaszczen.repository.AirConditionDataRepository;
+import sebaszczen.repository.AirDataRepository;
 
 import java.util.logging.Logger;
 
@@ -32,7 +32,7 @@ public class App implements CommandLineRunner
 //    private ApiService apiService;
 
     @Autowired
-    AirConditionDataRepository airConditionDataRepository;
+    AirDataRepository airDataRepository;
 
     public static void main( String[] args )
     {
@@ -46,6 +46,6 @@ public class App implements CommandLineRunner
 
 //        apiProvider.getSynopticDataByStationName("warszawa");
 //        Thread.sleep(40000);
-//        airConditionDataRepository.delete(12l);
+//        airDataRepository.delete(12l);
     }
 }

@@ -30,6 +30,8 @@ public class AirData {
     private AirQuality o3IndexAirQuality;
     @ManyToOne
     private AirQuality c6H6IndexAirQuality;
+    @OneToOne
+    private AirMeasurementLocalization airMeasurementLocalization;
 
     public AirData() {
     }

@@ -8,9 +8,9 @@ import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.SynopticData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
-import sebaszczen.repository.AirConditionDataRepository;
+import sebaszczen.repository.AirDataRepository;
 import sebaszczen.repository.SynopticDataRepository;
-import sebaszczen.repository.StationLocalizationRepository;
+import sebaszczen.repository.AirMeasurementLocalizationRepository;
 import sebaszczen.respository.MockAirConditionData;
 import sebaszczen.respository.MockStationLocalization;
 import sebaszczen.respository.MockSynopticStation;
@@ -29,10 +29,10 @@ public class ApiServiceImplTest {
     private SynopticDataRepository synopticDataRepository;
 
     @Mock
-    private AirConditionDataRepository airConditionDataRepository;
+    private AirDataRepository airDataRepository;
 
     @Mock
-    private StationLocalizationRepository stationLocalizationRepository;
+    private AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
     @Mock
     private ApiProvider apiProvider;
@@ -66,14 +66,14 @@ public class ApiServiceImplTest {
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataDtoList.get(0)));
 
         when(synopticDataRepository.save(any(SynopticData.class))).thenReturn(synopticDataList.get(0));
-        when(stationLocalizationRepository.save(any(AirMeasurementLocalization.class))).thenReturn(mockAirMeasurementLocalizationDtoList.get(0));
-        when(airConditionDataRepository.save(any(AirData.class))).thenReturn(mockAirDataDtoList.get(0));
+        when(airMeasurementLocalizationRepository.save(any(AirMeasurementLocalization.class))).thenReturn(mockAirMeasurementLocalizationDtoList.get(0));
+        when(airDataRepository.save(any(AirData.class))).thenReturn(mockAirDataDtoList.get(0));
 
         apiServiceImpl.saveData();
 
         verify(synopticDataRepository,times(2)).save(any(SynopticData.class));
-        verify(stationLocalizationRepository,times(3)).save(any(AirMeasurementLocalization.class));
-        verify(airConditionDataRepository,times(2)).save(any(AirData.class));
+        verify(airMeasurementLocalizationRepository,times(3)).save(any(AirMeasurementLocalization.class));
+        verify(airDataRepository,times(2)).save(any(AirData.class));
 
     }
 }

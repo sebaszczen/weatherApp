@@ -25,21 +25,21 @@ public class ApiServiceImpl implements ApiService {
 
     private final ApiProvider apiProvider;
 
-    private final StationLocalizationRepository stationLocalizationRepository;
+    private final AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
-    private final AirConditionDataRepository giosApiRepository;
+    private final AirDataRepository giosApiRepository;
 
-    private final LevelRepository levelRepository;
+    private final AirQualityRepository airQualityRepository;
 
     private final CityRepository cityRepository;
 
     @Autowired
-    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, StationLocalizationRepository stationLocalizationRepository, AirConditionDataRepository giosApiRepository, LevelRepository levelRepository, CityRepository cityRepository) {
+    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository giosApiRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository) {
         this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
-        this.stationLocalizationRepository = stationLocalizationRepository;
+        this.airMeasurementLocalizationRepository = airMeasurementLocalizationRepository;
         this.giosApiRepository = giosApiRepository;
-        this.levelRepository = levelRepository;
+        this.airQualityRepository = airQualityRepository;
         this.cityRepository = cityRepository;
     }
 
@@ -78,14 +78,14 @@ public class ApiServiceImpl implements ApiService {
 
             if (giosApiIsUpToDate()) {
                 List<AirMeasurementLocalization> airMeasurementLocalizationList = apiProvider.getStationLocalization();
-                airMeasurementLocalizationList.forEach(stationLocalizationRepository::save);
+                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
 
                 List<AirData> airDataList = apiProvider.getAllAirConditionData();
                 airDataList.forEach(airConditionData -> {
                     AirQuality[] airQualities = {airConditionData.getC6H6IndexAirQuality(),airConditionData.getCoIndexAirQuality()
                     ,airConditionData.getNo2IndexAirQuality(),airConditionData.getO3IndexAirQuality(),airConditionData.getPm10IndexAirQuality()
                     ,airConditionData.getPm25IndexAirQuality(),airConditionData.getSo2IndexAirQuality(),airConditionData.getStIndexAirQuality()};
-                    Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(levelRepository::save);
+                    Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
                         giosApiRepository.save(airConditionData);
                 });
             }

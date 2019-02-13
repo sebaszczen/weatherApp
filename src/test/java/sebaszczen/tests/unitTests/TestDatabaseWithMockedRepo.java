@@ -52,13 +52,13 @@ public class TestDatabaseWithMockedRepo {
     private SynopticDataRepository synopticDataRepository;
 
     @Autowired
-    private AirConditionDataRepository airConditionDataRepository;
+    private AirDataRepository airDataRepository;
 
     @Autowired
-    private StationLocalizationRepository stationLocalizationRepository;
+    private AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
     @Autowired
-    private LevelRepository levelRepository;
+    private AirQualityRepository airQualityRepository;
 
     @Autowired
     private CityRepository cityRepository;
@@ -75,7 +75,7 @@ public class TestDatabaseWithMockedRepo {
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataList.get(0)));
 
-        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, stationLocalizationRepository, airConditionDataRepository, levelRepository, cityRepository);
+        ApiService = new ApiServiceImpl(synopticDataRepository, apiProvider, airMeasurementLocalizationRepository, airDataRepository, airQualityRepository, cityRepository);
         ApiService.saveData();
 
         verify(apiProvider,times(0)).getAllSynopticStation();
