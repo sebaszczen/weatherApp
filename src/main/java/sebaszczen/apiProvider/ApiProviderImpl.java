@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -74,16 +75,16 @@ public class ApiProviderImpl implements ApiProvider {
     }
 
     @Override
-    public List<AirMeasurementLocalization> getStationLocalization() {
+    public Map<Integer, AirMeasurementLocalization> getStationLocalization() {
         ResponseEntity<StationLocalizationDto[]> responseEntity = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         StationLocalizationDto[] stationLocalizationDtos = responseEntity.getBody();
         List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDtos).parallel().collect(Collectors.toList());
-        return stationLocalizationDtoList.parallelStream().map(StationLocalizationDto::convertToEntity).collect(Collectors.toList());
+        return stationLocalizationDtoList.parallelStream().map(StationLocalizationDto::convertToEntity).collect(Collectors.toMap(AirMeasurementLocalization::getStationId,y->y));
     }
 
     @Override
     public List<AirData> getAllAirConditionData(){
-        List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().parallelStream()
+        List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().values().parallelStream()
                 .map(station ->
                         getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class).getBody())
                 .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());

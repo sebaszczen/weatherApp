@@ -30,7 +30,7 @@ public class AirData {
     private AirQuality o3IndexAirQuality;
     @ManyToOne
     private AirQuality c6H6IndexAirQuality;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private AirMeasurementLocalization airMeasurementLocalization;
 
     public AirData() {
@@ -55,6 +55,10 @@ public class AirData {
         this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
         LevelDto c6h6IndexLevel = airConditionDataDto.getC6h6IndexLevel();
         this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+    }
+
+    public void setAirMeasurementLocalization(AirMeasurementLocalization airMeasurementLocalization) {
+        this.airMeasurementLocalization = airMeasurementLocalization;
     }
 
     public LocalDateTime getStCalcDate() {

@@ -77,11 +77,12 @@ public class ApiServiceImpl implements ApiService {
             }
 
             if (giosApiIsUpToDate()) {
-                List<AirMeasurementLocalization> airMeasurementLocalizationList = apiProvider.getStationLocalization();
+                Map<Integer, AirMeasurementLocalization> airMeasurementLocalizationMap = apiProvider.getStationLocalization();
 //                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
 
                 List<AirData> airDataList = apiProvider.getAllAirConditionData();
                 airDataList.forEach(airConditionData -> {
+                    airConditionData.setAirMeasurementLocalization(airMeasurementLocalizationMap.get(airConditionData.getStationId()));
                     AirQuality[] airQualities = {airConditionData.getC6H6IndexAirQuality(),airConditionData.getCoIndexAirQuality()
                     ,airConditionData.getNo2IndexAirQuality(),airConditionData.getO3IndexAirQuality(),airConditionData.getPm10IndexAirQuality()
                     ,airConditionData.getPm25IndexAirQuality(),airConditionData.getSo2IndexAirQuality(),airConditionData.getStIndexAirQuality()};

@@ -1,5 +1,7 @@
 package sebaszczen.model;
 
+import sebaszczen.model.airModel.AirData;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,13 +16,15 @@ public class City {
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "city_id")
-    private List<SynopticData> synopticData;
+    private List<SynopticData> synopticDataList;
+    @OneToMany
+    private List<AirData> airDataList;
 
     public City() {
     }
 
-    public City(String name, List<SynopticData> synopticData) {
+    public City(String name, List<SynopticData> synopticDataList) {
         this.name = name;
-        this.synopticData = synopticData;
+        this.synopticDataList = synopticDataList;
     }
 }

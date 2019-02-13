@@ -6,6 +6,7 @@ import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.model.SynopticData;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ApiProvider {
@@ -13,7 +14,7 @@ public interface ApiProvider {
 
     Optional<SynopticData> getSynopticDataByStationName(String cityName) throws ResourceAccessException;
 
-    List<AirMeasurementLocalization> getStationLocalization();
+    Map<Integer, AirMeasurementLocalization> getStationLocalization();
 
     List<AirData> getAllAirConditionData();
 
