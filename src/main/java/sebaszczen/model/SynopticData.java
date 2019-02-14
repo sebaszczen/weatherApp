@@ -22,8 +22,8 @@ public class SynopticData {
     private float wilgotnosc_wzgledna;
     private float suma_opadu;
     private float cisnienie;
-    @ManyToOne
-    private City city;
+//    @ManyToOne
+//    private City city;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;

@@ -24,7 +24,6 @@ public class ApiServiceImpl implements ApiService {
 
     private final ApiProvider apiProvider;
 
-    private final AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
     private final AirDataRepository airDataRepository;
 
@@ -35,10 +34,9 @@ public class ApiServiceImpl implements ApiService {
     private EntitiesMapper entitiesMapper;
 
     @Autowired
-    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository, AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
+    public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider,  AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
         this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
-        this.airMeasurementLocalizationRepository = airMeasurementLocalizationRepository;
         this.airDataRepository = airDataRepository;
         this.airQualityRepository = airQualityRepository;
         this.cityRepository = cityRepository;
@@ -62,11 +60,18 @@ public class ApiServiceImpl implements ApiService {
         try {
             if (synopticDataIsNotUpToDate()) {
                 for (String cityName : cityToSynopticData.keySet()) {
-                    cityRepository.save(new City(cityName, cityToSynopticData.get(cityName)));
+                    List<SynopticData> synopticDataList = cityToSynopticData.get(cityName);
+                    if (cityRepository.existsAllByName(cityName)){
+                        City cityByName = cityRepository.findCityByName(cityName);
+                        cityByName.getSynopticDataList().addAll(synopticDataList);
+                        cityRepository.save(cityByName);
+                    }
+                    else {
+                        cityRepository.save(new City(cityName, synopticDataList, new ArrayList<>()));
+                    }
                 }
-                cityToSynopticData.values().forEach(synopticDataRepository::save);
+//                cityToSynopticData.values().forEach(synopticDataRepository::save);
             }
-
             if (airDataIsNotUpToDate()) {
 //                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
 
@@ -76,10 +81,19 @@ public class ApiServiceImpl implements ApiService {
                     ,airData.getNo2IndexAirQuality(),airData.getO3IndexAirQuality(),airData.getPm10IndexAirQuality()
                     ,airData.getPm25IndexAirQuality(),airData.getSo2IndexAirQuality(),airData.getStIndexAirQuality()};
                     Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
-                        airDataRepository.save(airData);
+//                        airDataRepository.save(airData);
                 });
                 for (String cityName : cityToAirData.keySet()) {
-                    cityRepository.save(new City(cityToAirData.get(cityName),cityName));
+                    List<AirData> cityToAirDataValue = cityToAirData.get(cityName);
+                    if (cityToAirDataValue.size()!=0) {
+                        if (cityRepository.existsAllByName(cityName)) {
+                            City cityByName = cityRepository.findCityByName(cityName);
+                            cityByName.getAirDataList().addAll(cityToAirDataValue);
+                            cityRepository.save(cityByName);
+                        } else {
+                            cityRepository.save(new City(cityName, new ArrayList<>(), cityToAirDataValue));
+                        }
+                    }
                 }
             }
         }
@@ -87,7 +101,6 @@ public class ApiServiceImpl implements ApiService {
         {
             logger.error("couldnt connect with external api "+e);
         }
-
 }
 
     private boolean synopticDataIsNotUpToDate()throws ResourceAccessException {
