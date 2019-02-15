@@ -67,33 +67,36 @@ public class ApiServiceImpl implements ApiService {
                         cityRepository.save(cityByName);
                     }
                     else {
-                        cityRepository.save(new City(cityName, synopticDataList, new ArrayList<>()));
+                        cityRepository.save(new City(cityName, synopticDataList, null));
                     }
                 }
-//                cityToSynopticData.values().forEach(synopticDataRepository::save);
             }
             if (airDataIsNotUpToDate()) {
-//                airMeasurementLocalizationList.forEach(airMeasurementLocalizationRepository::save);
-
                 List<AirData> airDataList = entitiesMapper.mapAirMeasurementLocalizationToAirData();
                 airDataList.forEach(airData -> {
                     AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(),airData.getCoIndexAirQuality()
                     ,airData.getNo2IndexAirQuality(),airData.getO3IndexAirQuality(),airData.getPm10IndexAirQuality()
                     ,airData.getPm25IndexAirQuality(),airData.getSo2IndexAirQuality(),airData.getStIndexAirQuality()};
                     Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
-//                        airDataRepository.save(airData);
                 });
-                for (String cityName : cityToAirData.keySet()) {
-                    List<AirData> cityToAirDataValue = cityToAirData.get(cityName);
-                    if (cityToAirDataValue.size()!=0) {
-                        if (cityRepository.existsAllByName(cityName)) {
-                            City cityByName = cityRepository.findCityByName(cityName);
-                            cityByName.getAirDataList().addAll(cityToAirDataValue);
+                for (String key : cityToAirData.keySet()) {
+                    List<AirData> value = cityToAirData.get(key);
+                    if (key.equals("Kraków")){
+                        System.out.println("sdfsd");
+                    }
+                        if (cityRepository.existsAllByName(key)) {
+                            City cityByName = cityRepository.findCityByName(key);
+                            List<AirData> airDataList1 = cityByName.getAirDataList();
+                            if (airDataList1!=null) {
+                                airDataList1.addAll(value);
+                            }
+                            else {
+                                cityByName.setAirDataList(value);
+                            }
                             cityRepository.save(cityByName);
                         } else {
-                            cityRepository.save(new City(cityName, new ArrayList<>(), cityToAirDataValue));
+                            cityRepository.save(new City(key, null, value));
                         }
-                    }
                 }
             }
         }

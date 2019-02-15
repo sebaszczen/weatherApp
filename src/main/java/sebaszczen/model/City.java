@@ -13,12 +13,11 @@ public class City {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany( cascade = CascadeType.PERSIST)
+    @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private List<SynopticData> synopticDataList;
-    @NotNull
-    @OneToMany( cascade = CascadeType.PERSIST)
-    @JoinColumn
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id")
     private List<AirData> airDataList;
 
     public City() {

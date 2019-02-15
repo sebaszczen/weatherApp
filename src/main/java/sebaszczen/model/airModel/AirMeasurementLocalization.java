@@ -28,7 +28,9 @@ public class AirMeasurementLocalization {
         CityDto cityDto = stationLocalizationDto.getCityDto();
         this.airMeasurementCity =Optional.ofNullable(cityDto).isPresent()?new AirMeasurementCity(cityDto):new AirMeasurementCity();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
+    }
 
+    public AirMeasurementLocalization() {
     }
 
     public int getStationId() {

@@ -31,10 +31,8 @@ public class AirData {
     private AirQuality o3IndexAirQuality;
     @ManyToOne
     private AirQuality c6H6IndexAirQuality;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private AirMeasurementLocalization airMeasurementLocalization;
-    @ManyToOne
-    private City city;
 
     public AirData() {
     }
