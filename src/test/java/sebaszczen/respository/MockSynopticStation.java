@@ -27,7 +27,7 @@ public class MockSynopticStation {
         return list;
     }
 
-    public List<SynopticData> getSynopticStationList() {
+    public List<SynopticData> getSynopticData() {
         List<SynopticData.SynopticStationDto> synopticStationDtoList = getSynopticStationDtoList();
         return synopticStationDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
     }

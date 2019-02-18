@@ -12,5 +12,5 @@ public interface EntitiesMapper {
 
     public Map<String, List<SynopticData>> mapCityToSynopticData();
     public Map<String, List<AirData>> mapCityToAirData();
-    public List<AirData> mapAirMeasurementLocalizationToAirData();
+    public List<AirData> injectLocalizationToAirData();
 }

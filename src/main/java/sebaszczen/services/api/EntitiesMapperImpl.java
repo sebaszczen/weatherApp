@@ -38,7 +38,7 @@ public class EntitiesMapperImpl implements EntitiesMapper {
     @Override
     public Map<String, List<AirData>> mapCityToAirData() {
         Map<String, List<AirData>> cityToAirData = new HashMap<>();
-        List<AirData> airDataList = mapAirMeasurementLocalizationToAirData();
+        List<AirData> airDataList = injectLocalizationToAirData();
         for (AirData airData : airDataList) {
             String key = airData.getAirMeasurementLocalization().getAirMeasurementCity().getCity();
             if (cityToAirData.containsKey(key)) {
@@ -53,7 +53,7 @@ public class EntitiesMapperImpl implements EntitiesMapper {
     }
 
     @Override
-    public List<AirData> mapAirMeasurementLocalizationToAirData() {
+    public List<AirData> injectLocalizationToAirData() {
         Map<Integer, AirMeasurementLocalization> airMeasurementLocalizationMap = apiProvider.getStationLocalization();
         List<AirData> airDataList = apiProvider.getAirData();
         airDataList.forEach(airData -> airData.setAirMeasurementLocalization(airMeasurementLocalizationMap.get(airData.getStationId())));

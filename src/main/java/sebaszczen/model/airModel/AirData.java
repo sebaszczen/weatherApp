@@ -43,19 +43,19 @@ public class AirData {
         LevelDto stIndexLevel = airConditionDataDto.getStIndexLevel();
         this.stIndexAirQuality = stIndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
         LevelDto so2IndexLevel = airConditionDataDto.getSo2IndexLevel();
-        this.so2IndexAirQuality = so2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
+        this.so2IndexAirQuality = so2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) so2IndexLevel.getAirLevelByNumber(),so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
         LevelDto no2IndexLevel = airConditionDataDto.getNo2IndexLevel();
-        this.no2IndexAirQuality = no2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
+        this.no2IndexAirQuality = no2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) no2IndexLevel.getAirLevelByNumber(),no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
         LevelDto coIndexLevel = airConditionDataDto.getCoIndexLevel();
-        this.coIndexAirQuality = coIndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
+        this.coIndexAirQuality = coIndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) coIndexLevel.getAirLevelByNumber(),coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
         LevelDto pm10IndexLevel = airConditionDataDto.getPm10IndexLevel();
-        this.pm10IndexAirQuality = pm10IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
+        this.pm10IndexAirQuality = pm10IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) pm10IndexLevel.getAirLevelByNumber(),pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
         LevelDto pm25IndexLevel = airConditionDataDto.getPm25IndexLevel();
-        this.pm25IndexAirQuality = pm25IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
+        this.pm25IndexAirQuality = pm25IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) pm25IndexLevel.getAirLevelByNumber(),pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
         LevelDto o3IndexLevel = airConditionDataDto.getO3IndexLevel();
-        this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
+        this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) o3IndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
         LevelDto c6h6IndexLevel = airConditionDataDto.getC6h6IndexLevel();
-        this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+        this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) c6h6IndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
     }
 
     public void setAirMeasurementLocalization(AirMeasurementLocalization airMeasurementLocalization) {

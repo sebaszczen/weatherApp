@@ -9,11 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import sebaszczen.controller.ApiController;
 import sebaszczen.services.api.ApiService;
 
 import static org.mockito.Mockito.doNothing;
 
-@WebMvcTest
+@WebMvcTest(ApiController.class)
 @RunWith(SpringRunner.class)
 public class ApiControllerTest {
 

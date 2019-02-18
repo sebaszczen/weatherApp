@@ -69,12 +69,12 @@ public class TestDatabaseWithMockedRepo {
 
     @Test
     public void saveData_AlreadyContainsData() {
-        List<SynopticData> synopticDataList = mockSynopticStation.getSynopticStationList();
+        List<SynopticData> synopticDataList = mockSynopticStation.getSynopticData();
         testEntityManager.persist(synopticDataList.get(0));
 
         when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
 
-        List<AirData> mockAirDataList = mockAirConditionData.getAirConditionDataList();
+        List<AirData> mockAirDataList = mockAirConditionData.getAirData();
         testEntityManager.persist(mockAirDataList.get(0));
 
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataList.get(0)));

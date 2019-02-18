@@ -22,16 +22,15 @@ public class ApiServiceImpl implements ApiService {
 
     private final SynopticDataRepository synopticDataRepository;
 
-    private final ApiProvider apiProvider;
-
-
     private final AirDataRepository airDataRepository;
+
+    private final ApiProvider apiProvider;
 
     private final AirQualityRepository airQualityRepository;
 
     private final CityRepository cityRepository;
 
-    private EntitiesMapper entitiesMapper;
+    private final EntitiesMapper entitiesMapper;
 
     @Autowired
     public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider,  AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
@@ -45,59 +44,16 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     @Transactional
-    public void saveImgwData() {
-        List<SynopticData> synopticDataList = apiProvider.getAllSynopticStation();
-        synopticDataList.forEach(synopticDataRepository::save);
-    }
-
-    @Override
-    @Transactional
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
-
         Map<String, List<SynopticData>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
         Map<String, List<AirData>> cityToAirData = entitiesMapper.mapCityToAirData();
         try {
             if (synopticDataIsNotUpToDate()) {
-                for (String cityName : cityToSynopticData.keySet()) {
-                    List<SynopticData> synopticDataList = cityToSynopticData.get(cityName);
-                    if (cityRepository.existsAllByName(cityName)){
-                        City cityByName = cityRepository.findCityByName(cityName);
-                        cityByName.getSynopticDataList().addAll(synopticDataList);
-                        cityRepository.save(cityByName);
-                    }
-                    else {
-                        cityRepository.save(new City(cityName, synopticDataList, null));
-                    }
-                }
+                updateCitySynopticData(cityToSynopticData);
             }
             if (airDataIsNotUpToDate()) {
-                List<AirData> airDataList = entitiesMapper.mapAirMeasurementLocalizationToAirData();
-                airDataList.forEach(airData -> {
-                    AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(),airData.getCoIndexAirQuality()
-                    ,airData.getNo2IndexAirQuality(),airData.getO3IndexAirQuality(),airData.getPm10IndexAirQuality()
-                    ,airData.getPm25IndexAirQuality(),airData.getSo2IndexAirQuality(),airData.getStIndexAirQuality()};
-                    Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
-                });
-                for (String key : cityToAirData.keySet()) {
-                    List<AirData> value = cityToAirData.get(key);
-                    if (key.equals("Kraków")){
-                        System.out.println("sdfsd");
-                    }
-                        if (cityRepository.existsAllByName(key)) {
-                            City cityByName = cityRepository.findCityByName(key);
-                            List<AirData> airDataList1 = cityByName.getAirDataList();
-                            if (airDataList1!=null) {
-                                airDataList1.addAll(value);
-                            }
-                            else {
-                                cityByName.setAirDataList(value);
-                            }
-                            cityRepository.save(cityByName);
-                        } else {
-                            cityRepository.save(new City(key, null, value));
-                        }
-                }
+                updateCityAirData(cityToAirData);
             }
         }
         catch (ResourceAccessException e)
@@ -105,6 +61,50 @@ public class ApiServiceImpl implements ApiService {
             logger.error("couldnt connect with external api "+e);
         }
 }
+
+    private void updateCityAirData(Map<String, List<AirData>> cityToAirData) {
+        saveAirQualityData();
+        for (String cityName : cityToAirData.keySet()) {
+            List<AirData> value = cityToAirData.get(cityName);
+                if (cityRepository.existsAllByName(cityName)) {
+                    City cityByName = cityRepository.findCityByName(cityName);
+                    List<AirData> airDataList1 = cityByName.getAirDataList();
+                    if (airDataList1!=null) {
+                        airDataList1.addAll(value);
+                    }
+                    else {
+                        cityByName.setAirDataList(value);
+                    }
+                    cityRepository.save(cityByName);
+                } else {
+                    cityRepository.save(new City(cityName, null, value));
+                }
+        }
+    }
+
+    private void saveAirQualityData() {
+        List<AirData> airDataList = entitiesMapper.injectLocalizationToAirData();
+        airDataList.forEach(airData -> {
+            AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(),airData.getCoIndexAirQuality()
+            ,airData.getNo2IndexAirQuality(),airData.getO3IndexAirQuality(),airData.getPm10IndexAirQuality()
+            ,airData.getPm25IndexAirQuality(),airData.getSo2IndexAirQuality(),airData.getStIndexAirQuality()};
+            Arrays.stream(airQualities).filter(airQuality -> airQuality !=null&& airQuality.getId()!=null).forEach(airQualityRepository::save);
+        });
+    }
+
+    private void updateCitySynopticData(Map<String, List<SynopticData>> cityToSynopticData) {
+        for (String cityName : cityToSynopticData.keySet()) {
+            List<SynopticData> synopticDataList = cityToSynopticData.get(cityName);
+            if (cityRepository.existsAllByName(cityName)){
+                City cityByName = cityRepository.findCityByName(cityName);
+                cityByName.getSynopticDataList().addAll(synopticDataList);
+                cityRepository.save(cityByName);
+            }
+            else {
+                cityRepository.save(new City(cityName, synopticDataList, null));
+            }
+        }
+    }
 
     private boolean synopticDataIsNotUpToDate()throws ResourceAccessException {
         String stationNames[]={"warszawa","chojnice","hel","katowice","kielce"};

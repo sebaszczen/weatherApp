@@ -37,7 +37,7 @@ public class MockAirConditionData {
         return list;
     }
 
-    public List<AirData> getAirConditionDataList() {
+    public List<AirData> getAirData() {
         return getMockAirConditionDataDtoList().parallelStream().map(AirData::new).collect(Collectors.toList());
     }
 }

@@ -24,7 +24,6 @@ public class ApiController {
     public ResponseEntity saveCurrentDataOnDemand
             (@RequestParam(value = "provider")String type) {
         if (type.equals("imgw")) {
-            synopticDataService.saveImgwData();
         }
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
