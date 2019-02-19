@@ -1,28 +1,28 @@
 package sebaszczen.tests.unitTests.dto;
 
 import org.junit.Test;
-import sebaszczen.dto.AirConditionDataDto;
+import sebaszczen.dto.AirDataDto;
 import sebaszczen.model.airModel.AirData;
-import sebaszczen.respository.MockAirConditionData;
+import sebaszczen.respository.MockAirData;
 
 import static org.junit.Assert.*;
 
 public class AirDataDtoTest {
 
-    private MockAirConditionData mockAirConditionData = new MockAirConditionData();
+    private MockAirData mockAirData = new MockAirData();
 
     @Test
     public void convertToEntity_null() {
-        AirConditionDataDto airConditionDataDto = new AirConditionDataDto();
-        AirData airData = new AirData(airConditionDataDto);
-        assertEquals(airData,airConditionDataDto.convertToEntity());
+        AirDataDto airDataDto = new AirDataDto();
+        AirData airData = new AirData(airDataDto);
+        assertEquals(airData, airDataDto.convertToEntity());
     }
 
     @Test
     public void convertToEntity() {
-        AirConditionDataDto airConditionDataDto = mockAirConditionData.getMockAirConditionDataDtoList().get(0);
-        AirData airData = new AirData(airConditionDataDto);
-        assertEquals(airData,airConditionDataDto.convertToEntity());
+        AirDataDto airDataDto = mockAirData.getMockedAirDataDto().get(0);
+        AirData airData = new AirData(airDataDto);
+        assertEquals(airData, airDataDto.convertToEntity());
     }
 
 

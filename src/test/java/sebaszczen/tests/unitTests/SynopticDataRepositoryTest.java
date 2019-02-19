@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.model.SynopticData;
 import sebaszczen.repository.SynopticDataRepository;
-import sebaszczen.respository.MockSynopticStation;
+import sebaszczen.respository.MockSynopticData;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,11 +29,11 @@ public class SynopticDataRepositoryTest {
     @Autowired
     private SynopticDataRepository synopticDataRepository;
 
-    private MockSynopticStation mockSynopticStation =new MockSynopticStation();
+    private MockSynopticData mockSynopticData =new MockSynopticData();
 
     @Test
     public void saveImgwData() {
-        List<SynopticData.SynopticStationDto> synopticStationDtoList = mockSynopticStation.getSynopticStationDtoList();
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = mockSynopticData.getSynopticStationDto();
         List<SynopticData> synopticDataList = synopticStationDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
         synopticDataList.forEach(testEntityManager::persist);
         List<SynopticData> all = synopticDataRepository.findAll();

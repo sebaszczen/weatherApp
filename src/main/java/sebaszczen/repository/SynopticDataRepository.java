@@ -11,5 +11,5 @@ public interface SynopticDataRepository extends JpaRepository<SynopticData,Long>
 
     @Query(value = "select count(*) from synoptic_data" +
             " where extract(hour from local_date_time)=:hour and extract(day from local_date_time)=:day",nativeQuery = true)
-    int checkIfContain(@Param("hour")int hour, @Param("day")int day);
+    int contain(@Param("hour")int hour, @Param("day")int day);
 }

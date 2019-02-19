@@ -2,7 +2,7 @@ package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CityDto {
+public class AirCityDto {
     @JsonProperty("id")
     private int cityId;
     @JsonProperty("name")
@@ -10,13 +10,13 @@ public class CityDto {
     @JsonProperty("commune")
     private CommuneDto communeDto;
 
-    public CityDto(int cityId, String cityName, CommuneDto communeDto) {
+    public AirCityDto(int cityId, String cityName, CommuneDto communeDto) {
         this.cityId = cityId;
         this.cityName = cityName;
         this.communeDto = communeDto;
     }
 
-    public CityDto() {
+    public AirCityDto() {
     }
 
     public int getCityId() {

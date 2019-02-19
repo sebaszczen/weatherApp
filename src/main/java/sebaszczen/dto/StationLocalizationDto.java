@@ -10,7 +10,7 @@ public class StationLocalizationDto {
     private String gegrLat;
     private String gegrLon;
     @JsonProperty("city")
-    private CityDto cityDto;
+    private AirCityDto airCityDto;
     private String addressStreet;
 
     public int getStationId() {
@@ -29,8 +29,8 @@ public class StationLocalizationDto {
         return gegrLon;
     }
 
-    public CityDto getCityDto() {
-        return cityDto;
+    public AirCityDto getAirCityDto() {
+        return airCityDto;
     }
 
     public String getAddressStreet() {
@@ -53,8 +53,8 @@ public class StationLocalizationDto {
         this.gegrLon = gegrLon;
     }
 
-    public void setCityDto(CityDto cityDto) {
-        this.cityDto = cityDto;
+    public void setAirCityDto(AirCityDto airCityDto) {
+        this.airCityDto = airCityDto;
     }
 
     public void setAddressStreet(String addressStreet) {

@@ -1,6 +1,6 @@
 package sebaszczen.model.airModel;
 
-import sebaszczen.dto.CityDto;
+import sebaszczen.dto.AirCityDto;
 import sebaszczen.dto.CommuneDto;
 
 import javax.persistence.*;
@@ -12,9 +12,9 @@ public class AirMeasurementCity {
     @Embedded
     private AirMeasurementCommune airMeasurementCommune;
 
-    public AirMeasurementCity(CityDto cityDto) {
-        this.city = cityDto.getCityName();
-        CommuneDto communeDto = cityDto.getCommuneDto();
+    public AirMeasurementCity(AirCityDto airCityDto) {
+        this.city = airCityDto.getCityName();
+        CommuneDto communeDto = airCityDto.getCommuneDto();
         this.airMeasurementCommune = new AirMeasurementCommune(communeDto.getProvinceName());
     }
 

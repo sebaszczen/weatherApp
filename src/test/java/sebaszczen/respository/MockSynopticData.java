@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockSynopticStation {
+public class MockSynopticData {
 
-    public List<SynopticData.SynopticStationDto> getSynopticStationDtoList() {
+    public List<SynopticData.SynopticStationDto> getSynopticStationDto() {
         List <SynopticData.SynopticStationDto>  list = new ArrayList();
 
         SynopticData.SynopticStationDto synopticStationDto = new SynopticData.SynopticStationDto();
@@ -28,7 +28,7 @@ public class MockSynopticStation {
     }
 
     public List<SynopticData> getSynopticData() {
-        List<SynopticData.SynopticStationDto> synopticStationDtoList = getSynopticStationDtoList();
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = getSynopticStationDto();
         return synopticStationDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
     }
 }

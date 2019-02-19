@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
-public class AirConditionDataDto {
+public class AirDataDto {
     @JsonProperty("id")
     private int stationId;
     private LocalDateTime stCalcDate;
-    private LevelDto stIndexLevel; //powietrze ogólnie
-    private LevelDto so2IndexLevel; //dwutlenek siarki
+    private AirQualityDto stIndexLevel; //powietrze ogólnie
+    private AirQualityDto so2IndexLevel; //dwutlenek siarki
     private String so2SourceDataDate;
-    private LevelDto no2IndexLevel; //dwutlenek azotu
-    private LevelDto coIndexLevel;//tlenek wegla
+    private AirQualityDto no2IndexLevel; //dwutlenek azotu
+    private AirQualityDto coIndexLevel;//tlenek wegla
     private String coSourceDataDate;
-    private LevelDto pm10IndexLevel; //pył zawieszony PM10
-    private LevelDto pm25IndexLevel;
-    private LevelDto o3IndexLevel;
-    private LevelDto c6h6IndexLevel;
+    private AirQualityDto pm10IndexLevel; //pył zawieszony PM10
+    private AirQualityDto pm25IndexLevel;
+    private AirQualityDto o3IndexLevel;
+    private AirQualityDto c6h6IndexLevel;
 
     public void setStationId(int stationId) {
         this.stationId = stationId;
@@ -36,11 +36,11 @@ public class AirConditionDataDto {
         return new AirData(this);
     }
 
-    public void setStIndexLevel(LevelDto stIndexLevel) {
+    public void setStIndexLevel(AirQualityDto stIndexLevel) {
         this.stIndexLevel = stIndexLevel;
     }
 
-    public void setSo2IndexLevel(LevelDto so2IndexLevel) {
+    public void setSo2IndexLevel(AirQualityDto so2IndexLevel) {
         this.so2IndexLevel = so2IndexLevel;
     }
 
@@ -48,11 +48,11 @@ public class AirConditionDataDto {
         this.so2SourceDataDate = so2SourceDataDate;
     }
 
-    public void setNo2IndexLevel(LevelDto no2IndexLevel) {
+    public void setNo2IndexLevel(AirQualityDto no2IndexLevel) {
         this.no2IndexLevel = no2IndexLevel;
     }
 
-    public void setCoIndexLevel(LevelDto coIndexLevel) {
+    public void setCoIndexLevel(AirQualityDto coIndexLevel) {
         this.coIndexLevel = coIndexLevel;
     }
 
@@ -60,19 +60,19 @@ public class AirConditionDataDto {
         this.coSourceDataDate = coSourceDataDate;
     }
 
-    public void setPm10IndexLevel(LevelDto pm10IndexLevel) {
+    public void setPm10IndexLevel(AirQualityDto pm10IndexLevel) {
         this.pm10IndexLevel = pm10IndexLevel;
     }
 
-    public void setPm25IndexLevel(LevelDto pm25IndexLevel) {
+    public void setPm25IndexLevel(AirQualityDto pm25IndexLevel) {
         this.pm25IndexLevel = pm25IndexLevel;
     }
 
-    public void setO3IndexLevel(LevelDto o3IndexLevel) {
+    public void setO3IndexLevel(AirQualityDto o3IndexLevel) {
         this.o3IndexLevel = o3IndexLevel;
     }
 
-    public void setC6h6IndexLevel(LevelDto c6h6IndexLevel) {
+    public void setC6h6IndexLevel(AirQualityDto c6h6IndexLevel) {
         this.c6h6IndexLevel = c6h6IndexLevel;
     }
 
@@ -84,11 +84,11 @@ public class AirConditionDataDto {
         return stCalcDate;
     }
 
-    public LevelDto getStIndexLevel() {
+    public AirQualityDto getStIndexLevel() {
         return stIndexLevel;
     }
 
-    public LevelDto getSo2IndexLevel() {
+    public AirQualityDto getSo2IndexLevel() {
         return so2IndexLevel;
     }
 
@@ -96,11 +96,11 @@ public class AirConditionDataDto {
         return so2SourceDataDate;
     }
 
-    public LevelDto getNo2IndexLevel() {
+    public AirQualityDto getNo2IndexLevel() {
         return no2IndexLevel;
     }
 
-    public LevelDto getCoIndexLevel() {
+    public AirQualityDto getCoIndexLevel() {
         return coIndexLevel;
     }
 
@@ -108,19 +108,19 @@ public class AirConditionDataDto {
         return coSourceDataDate;
     }
 
-    public LevelDto getPm10IndexLevel() {
+    public AirQualityDto getPm10IndexLevel() {
         return pm10IndexLevel;
     }
 
-    public LevelDto getPm25IndexLevel() {
+    public AirQualityDto getPm25IndexLevel() {
         return pm25IndexLevel;
     }
 
-    public LevelDto getO3IndexLevel() {
+    public AirQualityDto getO3IndexLevel() {
         return o3IndexLevel;
     }
 
-    public LevelDto getC6h6IndexLevel() {
+    public AirQualityDto getC6h6IndexLevel() {
         return c6h6IndexLevel;
     }
 

@@ -9,10 +9,10 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import sebaszczen.dto.AirDataDto;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.model.SynopticData;
-import sebaszczen.dto.AirConditionDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
@@ -84,25 +84,25 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<AirData> getAirData(){
-        List<AirConditionDataDto> airConditionDataDtoList = getStationLocalization().values().parallelStream()
+        List<AirDataDto> airDataDtoList = getStationLocalization().values().parallelStream()
                 .map(station ->
-                        getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirConditionDataDto.class).getBody())
+                        getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirDataDto.class).getBody())
                 .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());
-        return airConditionDataDtoList.parallelStream().map(AirConditionDataDto::convertToEntity).collect(Collectors.toList());
+        return airDataDtoList.parallelStream().map(AirDataDto::convertToEntity).collect(Collectors.toList());
     }
 
     public Optional<AirData> getAirConditionDataByStationIndex(int index){
-        ResponseEntity<AirConditionDataDto> responseEntity = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirConditionDataDto.class);
-        AirConditionDataDto airConditionDataDto = responseEntity.getBody();
-        Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airConditionDataDto.getStCalcDate());
+        ResponseEntity<AirDataDto> responseEntity = getForObject(MEASURING_STATION_API_URL_BY_ID + index, AirDataDto.class);
+        AirDataDto airDataDto = responseEntity.getBody();
+        Optional<LocalDateTime> stCalcDate = Optional.ofNullable(airDataDto.getStCalcDate());
         if (stCalcDate.isPresent()){
-        return Optional.of(airConditionDataDto.convertToEntity());
+        return Optional.of(airDataDto.convertToEntity());
         }
         else {
             return Optional.empty();
 
         }
-//        return airConditionDataDto.convertToEntity();
+//        return airDataDto.convertToEntity();
     }
 }
 

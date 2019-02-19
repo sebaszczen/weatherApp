@@ -3,17 +3,17 @@ package sebaszczen.tests.unitTests.dto;
 import org.junit.Test;
 import sebaszczen.dto.StationLocalizationDto;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
-import sebaszczen.respository.MockStationLocalization;
+import sebaszczen.respository.MockStationLocalizationDto;
 
 import static org.junit.Assert.*;
 
 public class AirMeasurementLocalizationDtoTest {
 
-    private MockStationLocalization mockStationLocalization = new MockStationLocalization();
+    private MockStationLocalizationDto mockStationLocalizationDto = new MockStationLocalizationDto();
 
     @Test
     public void convertToEntity() {
-        StationLocalizationDto stationLocalizationDto = mockStationLocalization.getMockStationLocalizationDtoList().get(0);
+        StationLocalizationDto stationLocalizationDto = mockStationLocalizationDto.getMockStationLocalizationDtoList().get(0);
         AirMeasurementLocalization airMeasurementLocalization = new AirMeasurementLocalization(stationLocalizationDto);
         assertEquals(airMeasurementLocalization,stationLocalizationDto.convertToEntity());
     }

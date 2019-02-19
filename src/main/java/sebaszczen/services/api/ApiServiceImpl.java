@@ -115,8 +115,7 @@ public class ApiServiceImpl implements ApiService {
                     SynopticData synopticData = station.get();
                     int hour = synopticData.getLocalDateTime().getHour();
                     int dayOfMonth = synopticData.getLocalDateTime().getDayOfMonth();
-                    synopticDataRepository.findAll();
-                    return synopticDataRepository.checkIfContain(hour, dayOfMonth) == 0;
+                    return synopticDataRepository.contain(hour, dayOfMonth) == 0;
                 }
         }
         return false;

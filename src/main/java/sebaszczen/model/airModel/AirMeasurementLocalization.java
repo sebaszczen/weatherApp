@@ -1,6 +1,6 @@
 package sebaszczen.model.airModel;
 
-import sebaszczen.dto.CityDto;
+import sebaszczen.dto.AirCityDto;
 import sebaszczen.dto.StationLocalizationDto;
 
 import javax.persistence.*;
@@ -23,10 +23,10 @@ public class AirMeasurementLocalization {
         this.stationId = stationLocalizationDto.getStationId();
         this.gegrLat = stationLocalizationDto.getGegrLat();
         this.gegrLon = stationLocalizationDto.getGegrLon();
-//        CityDto cityDto = Optional.ofNullable(stationLocalizationDto.getCityDto()).orElse(new CityDto(0,"no data",new CommuneDto()));
-//        this.airMeasurementCity = new AirMeasurementCity(cityDto.getCityId(),cityDto.getCityName(),cityDto.getCommuneDto()) ;
-        CityDto cityDto = stationLocalizationDto.getCityDto();
-        this.airMeasurementCity =Optional.ofNullable(cityDto).isPresent()?new AirMeasurementCity(cityDto):new AirMeasurementCity();
+//        AirCityDto airCityDto = Optional.ofNullable(stationLocalizationDto.getAirCityDto()).orElse(new AirCityDto(0,"no data",new CommuneDto()));
+//        this.airMeasurementCity = new AirMeasurementCity(airCityDto.getCityId(),airCityDto.getCityName(),airCityDto.getCommuneDto()) ;
+        AirCityDto airCityDto = stationLocalizationDto.getAirCityDto();
+        this.airMeasurementCity =Optional.ofNullable(airCityDto).isPresent()?new AirMeasurementCity(airCityDto):new AirMeasurementCity();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
     }
 
