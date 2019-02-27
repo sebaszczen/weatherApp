@@ -1,14 +1,15 @@
 package sebaszczen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sebaszczen.model.City;
 import sebaszczen.model.SynopticData;
+import sebaszczen.repository.AirDataRepository;
 import sebaszczen.repository.CityRepository;
+import sebaszczen.repository.SynopticDataRepository;
+import sebaszczen.services.DataService;
 
-import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -16,11 +17,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class DataController {
 
     @Autowired
-    private CityRepository cityRepository;
+    private DataService dataService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/city", method = GET)
-    public List<SynopticData> getCity(@RequestParam(value = "name")String name) {
-        return cityRepository.findCityByName(name).getSynopticDataList();
+    public City getCity(@RequestParam(value = "name")String name) {
+        return dataService.findLastDataForCityName(name);
     }
 }

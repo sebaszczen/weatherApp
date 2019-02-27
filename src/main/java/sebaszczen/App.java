@@ -1,10 +1,12 @@
 package sebaszczen;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import sebaszczen.repository.CityRepository;
 
 import java.util.logging.Logger;
 
@@ -19,7 +21,8 @@ import java.util.logging.Logger;
 public class App implements CommandLineRunner
 {
     private static Logger logger = Logger.getLogger(App.class.getName());
-
+    @Autowired
+    private CityRepository cityRepository;
 
     public static void main( String[] args )
     {
@@ -29,4 +32,5 @@ public class App implements CommandLineRunner
     @Override
     public void run(String... strings) throws Exception {
     }
+
 }

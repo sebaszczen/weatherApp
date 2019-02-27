@@ -1,5 +1,6 @@
 package sebaszczen.model.airModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import sebaszczen.dto.AirCityDto;
 import sebaszczen.dto.StationLocalizationDto;
 
@@ -33,6 +34,7 @@ public class AirMeasurementLocalization {
     public AirMeasurementLocalization() {
     }
 
+    @JsonIgnore
     public int getStationId() {
         return stationId;
     }
@@ -45,6 +47,7 @@ public class AirMeasurementLocalization {
         return gegrLon;
     }
 
+    @JsonIgnore
     public AirMeasurementCity getAirMeasurementCity() {
         return airMeasurementCity;
     }

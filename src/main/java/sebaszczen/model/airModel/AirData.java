@@ -1,7 +1,10 @@
 package sebaszczen.model.airModel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.dto.AirQualityDto;
+import sebaszczen.model.City;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +16,7 @@ public class AirData {
     @GeneratedValue
     private Long id;
     private int stationId;
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private LocalDateTime stCalcDate;
     @ManyToOne
     private AirQuality stIndexAirQuality; //powietrze ogólnie
@@ -32,6 +36,9 @@ public class AirData {
     private AirQuality c6H6IndexAirQuality;
     @OneToOne(cascade = CascadeType.ALL)
     private AirMeasurementLocalization airMeasurementLocalization;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public AirData() {
     }
@@ -69,6 +76,7 @@ public class AirData {
         return stCalcDate;
     }
 
+    @JsonIgnore
     public int getStationId() {
         return stationId;
     }

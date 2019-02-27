@@ -1,9 +1,10 @@
 package sebaszczen.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,15 +16,18 @@ public class SynopticData {
     @GeneratedValue
     private Long id;
     private String cityName;
-    private LocalDateTime localDateTime;
+    //    @JsonDeserialize(using = LocalDateDeserializer.class)
     private float temperatura;
     private float predkosc_wiatru;
     private int kierunek_wiatru;
     private float wilgotnosc_wzgledna;
     private float suma_opadu;
     private float cisnienie;
-//    @ManyToOne
-//    private City city;
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
+    private LocalDateTime localDateTime;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
@@ -46,6 +50,62 @@ public class SynopticData {
 
     public String getCityName() {
         return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public float getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(float temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    public float getPredkosc_wiatru() {
+        return predkosc_wiatru;
+    }
+
+    public void setPredkosc_wiatru(float predkosc_wiatru) {
+        this.predkosc_wiatru = predkosc_wiatru;
+    }
+
+    public int getKierunek_wiatru() {
+        return kierunek_wiatru;
+    }
+
+    public void setKierunek_wiatru(int kierunek_wiatru) {
+        this.kierunek_wiatru = kierunek_wiatru;
+    }
+
+    public float getWilgotnosc_wzgledna() {
+        return wilgotnosc_wzgledna;
+    }
+
+    public void setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
+        this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
+    }
+
+    public float getSuma_opadu() {
+        return suma_opadu;
+    }
+
+    public void setSuma_opadu(float suma_opadu) {
+        this.suma_opadu = suma_opadu;
+    }
+
+    public float getCisnienie() {
+        return cisnienie;
+    }
+
+    public void setCisnienie(float cisnienie) {
+        this.cisnienie = cisnienie;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public static class SynopticStationDto {

@@ -1,6 +1,8 @@
 package sebaszczen.model.airModel;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,22 +12,6 @@ public class AirQuality {
     private Long id;
     private int airConditionLevel;
     private String airConditionInWord;
-//    @OneToMany(  orphanRemoval = true,mappedBy = "stIndexLevel")
-//    private List<AirData>airConditionDataList;
-//    @OneToMany( mappedBy = "so2IndexLevel")
-//    private List<AirData>airConditionDataList2;
-//    @OneToMany( mappedBy = "no2IndexLevel")
-//    private List<AirData>airConditionDataList3;
-//    @OneToMany( mappedBy = "coIndexLevel")
-//    private List<AirData>airConditionDataList4;
-//    @OneToMany( mappedBy = "pm10IndexLevel")
-//    private List<AirData>airConditionDataList5;
-//    @OneToMany( mappedBy = "pm25IndexLevel")
-//    private List<AirData>airConditionDataList6;
-//    @OneToMany( mappedBy = "o3IndexLevel")
-//    private List<AirData>airConditionDataList7;
-//    @OneToMany( mappedBy = "c6h6IndexLevel")
-//    private List<AirData>airConditionDataList8;
 
     public AirQuality() {
     }
@@ -44,6 +30,7 @@ public class AirQuality {
         this.airConditionLevel = airConditionLevel;
     }
 
+    @JsonIgnore
     public Long getId() {
         return id;
     }
