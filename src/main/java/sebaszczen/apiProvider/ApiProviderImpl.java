@@ -36,7 +36,6 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Autowired
     public ApiProviderImpl(RestTemplate restTemplate) {
-//        this.restTemplate = restTemplateBuilder.errorHandler(new RestTemplateResponseErrorHandler()).build();
         this.restTemplate = restTemplate;
     }
 

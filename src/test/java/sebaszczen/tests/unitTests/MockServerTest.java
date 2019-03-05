@@ -29,10 +29,6 @@ public class MockServerTest {
     private MockRestServiceServer server;
 
     @Autowired
-    @Qualifier("restbean")
-    private RestTemplate restTemplate;
-
-    @Autowired
     private ApiProviderImpl apiProvider;
 
     @Test(expected = NotFoundException.class)

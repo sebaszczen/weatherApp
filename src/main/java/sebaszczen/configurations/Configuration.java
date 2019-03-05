@@ -5,9 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.RestTemplate;
 import sebaszczen.apiProvider.RestTemplateResponseErrorHandler;
 
@@ -33,11 +31,6 @@ public class Configuration {
     }
 
     @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
-
-    @Bean(name = "restbean")
     public RestTemplate restTemplate() {
         return restTemplateBuilder.errorHandler(new RestTemplateResponseErrorHandler()).build();
     }

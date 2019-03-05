@@ -26,8 +26,4 @@ public class ApiControllerTest {
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-    @Test
-    public void getWeatehr() {
-//        testRestTemplate.exchange("/weather")
-    }
 }
