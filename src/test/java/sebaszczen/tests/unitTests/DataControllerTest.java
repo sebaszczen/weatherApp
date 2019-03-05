@@ -9,26 +9,28 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import sebaszczen.controller.ApiController;
-import sebaszczen.services.api.ApiService;
+import sebaszczen.controller.DataController;
+import sebaszczen.model.City;
+import sebaszczen.services.DataService;
 
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
-@WebMvcTest(ApiController.class)
+@WebMvcTest(DataController.class)
 @RunWith(SpringRunner.class)
-public class ApiControllerTest {
+public class DataControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ApiService ApiService;
+    private DataService dataService;
 
     @Test
     public void saveCurrentDataOnDemand() throws Exception {
-//        doNothing().when(ApiService).saveImgwData();
-//        mockMvc.perform(MockMvcRequestBuilders.post("/api?provider=imgw"))
-//                .andExpect(MockMvcResultMatchers.status().isCreated());
+        when(dataService.findLastDataForCityName(anyString())).thenReturn(new City());
+        mockMvc.perform(MockMvcRequestBuilders.get("/cities?name=warszawa"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }

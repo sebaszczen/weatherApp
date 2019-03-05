@@ -21,8 +21,6 @@ import java.util.logging.Logger;
 public class App implements CommandLineRunner
 {
     private static Logger logger = Logger.getLogger(App.class.getName());
-    @Autowired
-    private CityRepository cityRepository;
 
     public static void main( String[] args )
     {

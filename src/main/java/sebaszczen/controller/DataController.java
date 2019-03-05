@@ -1,6 +1,8 @@
 package sebaszczen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sebaszczen.model.City;
 import sebaszczen.model.SynopticData;
@@ -20,8 +22,9 @@ public class DataController {
     private DataService dataService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @RequestMapping(value = "/city", method = GET)
-    public City getCity(@RequestParam(value = "name")String name) {
-        return dataService.findLastDataForCityName(name);
+    @RequestMapping(value = "/cities", method = GET)
+    public ResponseEntity<City> getCity(@RequestParam(value = "name")String name) {
+        City lastDataForCityName = dataService.findLastDataForCityName(name);
+        return new ResponseEntity<City>(lastDataForCityName, HttpStatus.OK);
     }
 }

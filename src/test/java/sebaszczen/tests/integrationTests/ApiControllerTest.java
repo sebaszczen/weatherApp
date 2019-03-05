@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
+import sebaszczen.model.City;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -20,10 +21,10 @@ public class ApiControllerTest {
 
     @Test
     public void saveSynopticData() {
-        ResponseEntity<Void> responseEntity = testRestTemplate.exchange("/api?provider=imgw", HttpMethod.POST, new HttpEntity<>(void.class), void.class);
+        ResponseEntity<City> responseEntity = testRestTemplate.exchange("/cities?name=warszawa", HttpMethod.GET, new HttpEntity<>(City.class), City.class);
 //        String actual = responseEntity.getHeaders().get(HttpHeaders.LOCATION).get(0);
 //        Assertions.assertThat(actual.contains(""))
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
 }
