@@ -28,9 +28,6 @@ public class MockServerTest {
     @Autowired
     private MockRestServiceServer server;
 
-//    @Autowired
-//    private RestTemplateBuilder builder;
-
     @Autowired
     @Qualifier("restbean")
     private RestTemplate restTemplate;

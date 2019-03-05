@@ -13,9 +13,9 @@ import java.util.List;
 public interface SynopticDataRepository extends JpaRepository<SynopticData,Long> {
 
     @Query(value = "select count(*) from synoptic_data" +
-            " where extract(hour from local_date_time)=:hour and extract(day from local_date_time)=:day",
+            " where extract(hour from local_date_time)=:hour and extract(day from local_date_time)=:day and extract(month from local_date_time)=:month and extract(year from local_date_time)=:year",
             nativeQuery = true)
-    int contain(@Param("hour")int hour, @Param("day")int day);
+    int contain(@Param("hour")int hour, @Param("day")int day, @Param("month")int month, @Param("year")int year);
 
     @Query(value = "select s from SynopticData s where s.localDateTime=(select max(s.localDateTime)" +
             " from SynopticData s where s.city.name=:name ) and s.city.name=:name")

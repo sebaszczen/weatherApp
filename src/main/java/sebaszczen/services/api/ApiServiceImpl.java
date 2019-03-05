@@ -2,6 +2,7 @@ package sebaszczen.services.api;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,10 +43,12 @@ public class ApiServiceImpl implements ApiService {
         this.entitiesMapper = entitiesMapper;
     }
 
+//    @Async
     @Override
     @Transactional
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
+        System.out.println("tutaj"+Thread.currentThread().getName());
         Map<String, List<SynopticData>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
         Map<String, List<AirData>> cityToAirData = entitiesMapper.mapCityToAirData();
         try {
@@ -70,10 +73,10 @@ public class ApiServiceImpl implements ApiService {
                     City cityByName = cityRepository.findCityByName(cityName);
                     List<AirData> airDataList1 = cityByName.getAirDataList();
                     if (airDataList1!=null) {
-                        airDataList1.addAll(value);
+                        cityByName.addAirData(value);
                     }
                     else {
-                        cityByName.setAirDataList(value);
+                        cityByName.addAirData(value);
                     }
                     cityRepository.save(cityByName);
                 } else {
@@ -97,7 +100,7 @@ public class ApiServiceImpl implements ApiService {
             List<SynopticData> synopticDataList = cityToSynopticData.get(cityName);
             if (cityRepository.existsAllByName(cityName)){
                 City cityByName = cityRepository.findCityByName(cityName);
-                cityByName.getSynopticDataList().addAll(synopticDataList);
+                cityByName.addSynopticData(synopticDataList);
                 cityRepository.save(cityByName);
             }
             else {
@@ -115,7 +118,9 @@ public class ApiServiceImpl implements ApiService {
                     SynopticData synopticData = station.get();
                     int hour = synopticData.getLocalDateTime().getHour();
                     int dayOfMonth = synopticData.getLocalDateTime().getDayOfMonth();
-                    return synopticDataRepository.contain(hour, dayOfMonth) == 0;
+                    int month = synopticData.getLocalDateTime().getMonth().getValue();
+                    int year = synopticData.getLocalDateTime().getYear();
+                    return synopticDataRepository.contain(hour, dayOfMonth,month,year) == 0;
                 }
         }
         return false;
@@ -129,7 +134,9 @@ public class ApiServiceImpl implements ApiService {
                 AirData airData = airConditionDataByStationIndex.get();
                 int hour1 = airData.getStCalcDate().getHour();
                 int dayOfMonth1 = airData.getStCalcDate().getDayOfMonth();
-                return airDataRepository.contain(hour1, dayOfMonth1) == 0;
+                int month = airData.getStCalcDate().getMonth().getValue();
+                int year = airData.getStCalcDate().getYear();
+                return airDataRepository.contain(hour1, dayOfMonth1,month,year) == 0;
             }
         }
         return false;

@@ -1,6 +1,7 @@
 package sebaszczen.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
@@ -25,8 +26,9 @@ public class SynopticData {
     private float cisnienie;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private LocalDateTime localDateTime;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
+    @JsonIgnore
     private City city;
 
     public LocalDateTime getLocalDateTime() {
@@ -46,6 +48,15 @@ public class SynopticData {
         this.wilgotnosc_wzgledna = synopticStationDto.wilgotnosc_wzgledna;
         this.suma_opadu = synopticStationDto.suma_opadu;
         this.cisnienie = synopticStationDto.cisnienie;
+    }
+
+    @JsonIgnore
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getCityName() {

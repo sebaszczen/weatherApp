@@ -1,10 +1,13 @@
 package sebaszczen.configurations;
 
+import org.apache.logging.log4j.LogManager;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.RestTemplate;
 import sebaszczen.apiProvider.RestTemplateResponseErrorHandler;
 
@@ -12,6 +15,8 @@ import java.util.concurrent.Executor;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
+    org.apache.logging.log4j.Logger logger = LogManager.getLogger(Configuration.class);
+
 
     @Autowired
     RestTemplateBuilder restTemplateBuilder;

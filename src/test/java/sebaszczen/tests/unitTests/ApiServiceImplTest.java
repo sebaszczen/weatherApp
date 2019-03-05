@@ -63,8 +63,8 @@ public class ApiServiceImplTest {
         when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
         when(apiProvider.getAirConditionDataByStationIndex(any(int.class))).thenReturn(Optional.of(mockAirDataDtoList.get(0)));
         when(synopticDataRepository.save(any(SynopticData.class))).thenReturn(synopticDataList.get(0));
-        when(synopticDataRepository.contain(any(int.class), any(int.class))).thenReturn(0);
-        when(airDataRepository.contain(any(int.class), any(int.class))).thenReturn(0);
+        when(synopticDataRepository.contain(any(int.class), any(int.class), any(int.class),any(int.class))).thenReturn(0);
+        when(airDataRepository.contain(any(int.class), any(int.class),any(int.class), any(int.class))).thenReturn(0);
         when(cityRepository.existsAllByName(any(String.class))).thenReturn(false);
         when(cityRepository.save(any(City.class))).thenReturn(mockedCity.get(0));
         when(entitiesMapper.injectLocalizationToAirData()).thenReturn(mockAirDataDtoList);

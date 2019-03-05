@@ -48,7 +48,9 @@ public class ApiProviderImpl implements ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("" + city).build().encode().toUri();
     }
 
-    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result) throws ResourceAccessException {
+    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result)
+//            throws ResourceAccessException
+    {
             return restTemplate.getForEntity(uri, result);
     }
 

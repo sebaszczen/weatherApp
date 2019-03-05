@@ -1,10 +1,8 @@
 package sebaszczen.model;
 
-import org.hibernate.annotations.IndexColumn;
 import sebaszczen.model.airModel.AirData;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,18 +13,32 @@ public class City {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    private List<SynopticData> synopticDataList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    private List<AirData> airDataList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
+    private List<SynopticData> synopticDataList= new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
+    private List<AirData> airDataList= new ArrayList<>();
 
     public City() {
     }
 
     public City(String name, List<SynopticData> synopticDataList, List<AirData> airDataList) {
         this.name = name;
-        this.synopticDataList = synopticDataList;
-        this.airDataList = airDataList;
+        if (synopticDataList!=null) {
+            addSynopticData(synopticDataList);
+        }
+        if (airDataList!=null) {
+            addAirData(airDataList);
+        }
+    }
+
+    public void addSynopticData(List<SynopticData> synopticData) {
+        synopticDataList.addAll(synopticData);
+        synopticData.forEach(synopticData1 -> synopticData1.setCity(this));
+    }
+
+    public void addAirData(List<AirData> airData) {
+        airDataList.addAll(airData);
+        airData.forEach(airData1 -> airData1.setCity(this));
     }
 
     public String getName() {

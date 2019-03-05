@@ -36,8 +36,9 @@ public class AirData {
     private AirQuality c6H6IndexAirQuality;
     @OneToOne(cascade = CascadeType.ALL)
     private AirMeasurementLocalization airMeasurementLocalization;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
+    @JsonIgnore
     private City city;
 
     public AirData() {
@@ -62,6 +63,15 @@ public class AirData {
         this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) o3IndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
         AirQualityDto c6h6IndexLevel = airDataDto.getC6h6IndexLevel();
         this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) c6h6IndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+    }
+
+    @JsonIgnore
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public void setAirMeasurementLocalization(AirMeasurementLocalization airMeasurementLocalization) {
