@@ -1,7 +1,6 @@
 package sebaszczen.apiProvider;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -32,7 +31,8 @@ public class ApiProviderImpl implements ApiProvider {
     private final static String ALL_SYNOPTIC_STATIONS_API_URL = "https://danepubliczne.imgw.pl/api/data/synop";
     private final static String SYNOPTIC_STATION_BY_CITY = "https://danepubliczne.imgw.pl/api/data/synop/station/";
     private RestTemplate restTemplate;
-    private Logger logger = LogManager.getLogger(ApiProviderImpl.class);
+
+//    private org.slf4j.Logger logger = LoggerFactory.getLogger(ApiProviderImpl.class);
 
     @Autowired
     public ApiProviderImpl(RestTemplate restTemplate) {
