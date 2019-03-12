@@ -8,6 +8,7 @@ import sebaszczen.model.SynopticData;
 import sebaszczen.model.airModel.AirData;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SynopticDataRepository extends JpaRepository<SynopticData,Long> {
@@ -19,5 +20,5 @@ public interface SynopticDataRepository extends JpaRepository<SynopticData,Long>
 
     @Query(value = "select s from SynopticData s where s.localDateTime=(select max(s.localDateTime)" +
             " from SynopticData s where s.city.name=:name ) and s.city.name=:name")
-    public List<SynopticData> findLastDataforCity(@Param("name") String name);
+    public Optional<List<SynopticData>> findLastDataforCity(@Param("name") String name);
 }

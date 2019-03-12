@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import sebaszczen.model.airModel.AirData;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AirDataRepository extends JpaRepository<AirData,Long>{
@@ -18,5 +19,5 @@ public interface AirDataRepository extends JpaRepository<AirData,Long>{
 
     @Query(value = "select a from AirData a where a.stCalcDate=(select max(a.stCalcDate)" +
             " from AirData a where a.city.name=:name ) and a.city.name=:name")
-    public List<AirData> findLastDataforCity(@Param("name") String name);
+    public Optional<List<AirData>> findLastDataforCity(@Param("name") String name);
 }
