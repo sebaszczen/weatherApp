@@ -8,22 +8,25 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 @Configuration
-@EnableScheduling
-public class ScheduleConfiguration implements SchedulingConfigurer {
-    @Override
-    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
-        scheduledTaskRegistrar.setScheduler(taskScheduler());
-    }
+//@EnableScheduling
+public class ScheduleConfiguration
+//        implements SchedulingConfigurer
+{
+//    @Override
+//    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+//        scheduledTaskRegistrar.setScheduler(taskScheduler());
+//    }
 
-    @Bean
-    public Executor taskScheduler() {
-        ThreadPoolTaskScheduler t = new ThreadPoolTaskScheduler();
-        t.setPoolSize(2);
-        t.setErrorHandler(x-> System.out.println("tuteeeeeej"));
-        t.setThreadNamePrefix("taskScheduler - ");
-        t.initialize();
-        return t;
-    }
+//    @Bean
+//    public Executor taskScheduler() {
+//        ThreadPoolTaskScheduler t = new ThreadPoolTaskScheduler();
+//        t.setPoolSize(2);
+//        t.setErrorHandler(x-> System.out.println("tuteeeeeej"));
+//        t.setThreadNamePrefix("taskScheduler - ");
+//        t.initialize();
+//        return t;
+//    }
 }

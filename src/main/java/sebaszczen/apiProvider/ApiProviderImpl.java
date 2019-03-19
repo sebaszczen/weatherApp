@@ -47,9 +47,7 @@ public class ApiProviderImpl implements ApiProvider {
         return UriComponentsBuilder.fromHttpUrl(SYNOPTIC_STATION_BY_CITY).path("" + city).build().encode().toUri();
     }
 
-    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result)
-//            throws ResourceAccessException
-    {
+    private <T> ResponseEntity<T> getForObject(String uri, Class<T> result) {
             return restTemplate.getForEntity(uri, result);
     }
 
@@ -80,7 +78,7 @@ public class ApiProviderImpl implements ApiProvider {
         ResponseEntity<StationLocalizationDto[]> responseEntity = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         StationLocalizationDto[] stationLocalizationDtos = responseEntity.getBody();
         List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDtos).parallel().collect(Collectors.toList());
-        return stationLocalizationDtoList.parallelStream().map(StationLocalizationDto::convertToEntity).collect(Collectors.toMap(AirMeasurementLocalization::getStationId,y->y));
+        return stationLocalizationDtoList.parallelStream().filter(stationLocalizationDto -> stationLocalizationDto.getAirCityDto()!=null).map(StationLocalizationDto::convertToEntity).collect(Collectors.toMap(AirMeasurementLocalization::getStationId,y->y));
     }
 
     @Override

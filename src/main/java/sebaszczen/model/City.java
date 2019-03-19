@@ -1,5 +1,7 @@
 package sebaszczen.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import sebaszczen.model.airModel.AirData;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,11 +16,10 @@ public class City {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
+    @OneToMany(fetch =FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
     private List<SynopticData> synopticDataList= new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
+    @OneToMany(fetch =FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
     private List<AirData> airDataList= new ArrayList<>();
-    private LocalDateTime cacheModified;
 
     public City() {
     }
@@ -31,14 +32,6 @@ public class City {
         if (airDataList!=null) {
             addAirData(airDataList);
         }
-    }
-
-    public LocalDateTime getCacheModified() {
-        return cacheModified;
-    }
-
-    public void setCacheModified(LocalDateTime cacheModified) {
-        this.cacheModified = cacheModified;
     }
 
     public void addSynopticData(List<SynopticData> synopticData) {

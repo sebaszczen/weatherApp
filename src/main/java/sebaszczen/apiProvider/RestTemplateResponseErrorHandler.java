@@ -42,7 +42,7 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
             // handle CLIENT_ERROR
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
                 logger.error("Api connection error: "+httpResponse.getStatusCode().toString()+" "+ httpResponse.getStatusText().toString());
-                throw new NotFoundException();
+                throw new IOException();
             }
         }
     }

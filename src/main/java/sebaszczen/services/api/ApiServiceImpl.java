@@ -1,8 +1,8 @@
 package sebaszczen.services.api;
 
 import org.apache.logging.log4j.LogManager;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +14,9 @@ import sebaszczen.model.airModel.AirQuality;
 import sebaszczen.model.SynopticData;
 import sebaszczen.repository.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.util.*;
 
 @Service
@@ -34,6 +37,9 @@ public class ApiServiceImpl implements ApiService {
     private final EntitiesMapper entitiesMapper;
 
     @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
     public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider,  AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
         this.synopticDataRepository = synopticDataRepository;
         this.apiProvider = apiProvider;
@@ -43,7 +49,6 @@ public class ApiServiceImpl implements ApiService {
         this.entitiesMapper = entitiesMapper;
     }
 
-//    @Async
     @Override
     @Transactional
     @Scheduled(fixedRate = 3600000)
@@ -51,6 +56,8 @@ public class ApiServiceImpl implements ApiService {
         System.out.println("tutaj"+Thread.currentThread().getName());
         Map<String, List<SynopticData>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
         Map<String, List<AirData>> cityToAirData = entitiesMapper.mapCityToAirData();
+
+        saveAirQualityData();
         try {
             if (synopticDataIsNotUpToDate()) {
                 updateCitySynopticData(cityToSynopticData);
@@ -66,18 +73,13 @@ public class ApiServiceImpl implements ApiService {
 }
 
     private void updateCityAirData(Map<String, List<AirData>> cityToAirData) {
-        saveAirQualityData();
+//        saveAirQualityData();
         for (String cityName : cityToAirData.keySet()) {
-            List<AirData> value = cityToAirData.get(cityName);
+             List<AirData> value = cityToAirData.get(cityName);
                 if (cityRepository.existsAllByName(cityName)) {
                     City cityByName = cityRepository.findCityByName(cityName);
-                    List<AirData> airDataList1 = cityByName.getAirDataList();
-                    if (airDataList1!=null) {
-                        cityByName.addAirData(value);
-                    }
-                    else {
-                        cityByName.addAirData(value);
-                    }
+                    Hibernate.initialize(cityByName.getAirDataList());
+                        cityByName.addAirData( value);
                     cityRepository.save(cityByName);
                 } else {
                     cityRepository.save(new City(cityName, null, value));

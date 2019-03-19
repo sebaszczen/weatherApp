@@ -2,6 +2,7 @@ package sebaszczen.model.airModel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.dto.AirQualityDto;
 import sebaszczen.model.City;
@@ -18,25 +19,35 @@ public class AirData {
     private int stationId;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private LocalDateTime stCalcDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality stIndexAirQuality; //powietrze ogólnie
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality so2IndexAirQuality; //dwutlenek siarki
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality no2IndexAirQuality; //dwutlenek azotu
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality coIndexAirQuality;//tlenek wegla
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality pm10IndexAirQuality; //pył zawieszony PM10
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality pm25IndexAirQuality;
-    @ManyToOne
-    private AirQuality o3IndexAirQuality;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirQuality c6H6IndexAirQuality;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private AirQuality o3IndexAirQuality;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AirMeasurementLocalization airMeasurementLocalization;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "city_id")
     @JsonIgnore
     private City city;
@@ -48,21 +59,21 @@ public class AirData {
         this.stationId = airDataDto.getStationId();
         this.stCalcDate = airDataDto.getStCalcDate();
         AirQualityDto stIndexLevel = airDataDto.getStIndexLevel();
-        this.stIndexAirQuality = stIndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(),stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
+        this.stIndexAirQuality = stIndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) stIndexLevel.getAirLevelByNumber(), stIndexLevel.getAirConditionInWord(), stIndexLevel.getAirLevelByNumber());
         AirQualityDto so2IndexLevel = airDataDto.getSo2IndexLevel();
-        this.so2IndexAirQuality = so2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) so2IndexLevel.getAirLevelByNumber(),so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
+        this.so2IndexAirQuality = so2IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) so2IndexLevel.getAirLevelByNumber(), so2IndexLevel.getAirConditionInWord(), so2IndexLevel.getAirLevelByNumber());
         AirQualityDto no2IndexLevel = airDataDto.getNo2IndexLevel();
-        this.no2IndexAirQuality = no2IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) no2IndexLevel.getAirLevelByNumber(),no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
+        this.no2IndexAirQuality = no2IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) no2IndexLevel.getAirLevelByNumber(), no2IndexLevel.getAirConditionInWord(), no2IndexLevel.getAirLevelByNumber());
         AirQualityDto coIndexLevel = airDataDto.getCoIndexLevel();
-        this.coIndexAirQuality = coIndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) coIndexLevel.getAirLevelByNumber(),coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
+        this.coIndexAirQuality = coIndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) coIndexLevel.getAirLevelByNumber(), coIndexLevel.getAirConditionInWord(), coIndexLevel.getAirLevelByNumber());
         AirQualityDto pm10IndexLevel = airDataDto.getPm10IndexLevel();
-        this.pm10IndexAirQuality = pm10IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) pm10IndexLevel.getAirLevelByNumber(),pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
+        this.pm10IndexAirQuality = pm10IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) pm10IndexLevel.getAirLevelByNumber(), pm10IndexLevel.getAirConditionInWord(), pm10IndexLevel.getAirLevelByNumber());
         AirQualityDto pm25IndexLevel = airDataDto.getPm25IndexLevel();
-        this.pm25IndexAirQuality = pm25IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) pm25IndexLevel.getAirLevelByNumber(),pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
-        AirQualityDto o3IndexLevel = airDataDto.getO3IndexLevel();
-        this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) o3IndexLevel.getAirLevelByNumber(),o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
+        this.pm25IndexAirQuality = pm25IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) pm25IndexLevel.getAirLevelByNumber(), pm25IndexLevel.getAirConditionInWord(), pm25IndexLevel.getAirLevelByNumber());
         AirQualityDto c6h6IndexLevel = airDataDto.getC6h6IndexLevel();
-        this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L,"brak danych",-1) : new AirQuality((long) c6h6IndexLevel.getAirLevelByNumber(),c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+        this.c6H6IndexAirQuality = c6h6IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) c6h6IndexLevel.getAirLevelByNumber(), c6h6IndexLevel.getAirConditionInWord(), c6h6IndexLevel.getAirLevelByNumber());
+        AirQualityDto o3IndexLevel = airDataDto.getO3IndexLevel();
+        this.o3IndexAirQuality = o3IndexLevel == null ? new AirQuality(-11L, "brak danych", -1) : new AirQuality((long) o3IndexLevel.getAirLevelByNumber(), o3IndexLevel.getAirConditionInWord(), o3IndexLevel.getAirLevelByNumber());
     }
 
     @JsonIgnore
@@ -115,12 +126,12 @@ public class AirData {
         return pm25IndexAirQuality;
     }
 
-    public AirQuality getO3IndexAirQuality() {
-        return o3IndexAirQuality;
-    }
-
     public AirQuality getC6H6IndexAirQuality() {
         return c6H6IndexAirQuality;
+    }
+
+    public AirQuality getO3IndexAirQuality() {
+        return o3IndexAirQuality;
     }
 
     @Override

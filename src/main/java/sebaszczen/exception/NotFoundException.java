@@ -1,4 +1,4 @@
 package sebaszczen.exception;
 
-public class NotFoundException extends RuntimeException {
+public class NotFoundException extends Exception {
 }
