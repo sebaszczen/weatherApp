@@ -14,7 +14,7 @@ import java.util.Objects;
 @Entity
 public class SynopticData {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cityName;
     //    @JsonDeserialize(using = LocalDateDeserializer.class)

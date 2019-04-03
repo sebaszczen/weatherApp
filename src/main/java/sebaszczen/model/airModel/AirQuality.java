@@ -12,6 +12,7 @@ public class AirQuality {
     private Long id;
     private int airConditionLevel;
     private String airConditionInWord;
+    private boolean saved=false;
 
     public AirQuality() {
     }
@@ -56,5 +57,13 @@ public class AirQuality {
 
     public String getAirConditionInWord() {
         return airConditionInWord;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    public boolean isSaved() {
+        return saved;
     }
 }

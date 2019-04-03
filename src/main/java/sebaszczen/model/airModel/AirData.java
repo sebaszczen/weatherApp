@@ -14,7 +14,7 @@ import java.util.Objects;
 @Entity
 public class AirData {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int stationId;
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm")

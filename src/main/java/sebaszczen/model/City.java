@@ -1,7 +1,9 @@
 package sebaszczen.model;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.transaction.annotation.Transactional;
 import sebaszczen.model.airModel.AirData;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,10 +12,11 @@ import java.util.List;
 
 @Entity
 //@Table(indexes = {@Index(columnList ="name, id" ,name="indeks")})
+@NamedEntityGraph(name = "cityWithSynopticData", attributeNodes = { @NamedAttributeNode("synopticDataList") })
 public class City {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToMany(fetch =FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
@@ -40,7 +43,7 @@ public class City {
     }
 
     public void addAirData(List<AirData> airData) {
-        airDataList.addAll(airData);
+        getAirDataList().addAll(airData);
         airData.forEach(airData1 -> airData1.setCity(this));
     }
 

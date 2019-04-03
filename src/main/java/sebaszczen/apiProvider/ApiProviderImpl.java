@@ -55,7 +55,7 @@ public class ApiProviderImpl implements ApiProvider {
     public List<SynopticData> getAllSynopticStation() throws RestClientException {
         ResponseEntity<SynopticData.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticData.SynopticStationDto[].class);
         SynopticData.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
-        List<SynopticData.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos)
+        List<SynopticData.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos).parallel()
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
         return synopticStationDtoList.parallelStream().map(SynopticData.SynopticStationDto::convertToEntity).collect(Collectors.toList());
@@ -101,7 +101,6 @@ public class ApiProviderImpl implements ApiProvider {
             return Optional.empty();
 
         }
-//        return airDataDto.convertToEntity();
     }
 }
 

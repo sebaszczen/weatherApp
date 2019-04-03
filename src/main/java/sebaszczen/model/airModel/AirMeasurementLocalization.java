@@ -11,7 +11,7 @@ import java.util.Optional;
 @Entity
 public class AirMeasurementLocalization {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int stationId;
     private String gegrLat;
@@ -24,8 +24,6 @@ public class AirMeasurementLocalization {
         this.stationId = stationLocalizationDto.getStationId();
         this.gegrLat = stationLocalizationDto.getGegrLat();
         this.gegrLon = stationLocalizationDto.getGegrLon();
-//        AirCityDto airCityDto = Optional.ofNullable(stationLocalizationDto.getAirCityDto()).orElse(new AirCityDto(0,"no data",new CommuneDto()));
-//        this.airMeasurementCity = new AirMeasurementCity(airCityDto.getCityId(),airCityDto.getCityName(),airCityDto.getCommuneDto()) ;
         AirCityDto airCityDto = stationLocalizationDto.getAirCityDto();
         this.airMeasurementCity =Optional.ofNullable(airCityDto).isPresent()?new AirMeasurementCity(airCityDto):new AirMeasurementCity();
         this.addressStreet = stationLocalizationDto.getAddressStreet();
