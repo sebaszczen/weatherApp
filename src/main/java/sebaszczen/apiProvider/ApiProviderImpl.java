@@ -83,7 +83,8 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<AirData> getAirData(){
-        List<AirDataDto> airDataDtoList = getStationLocalization().values().parallelStream()
+        List<AirDataDto> airDataDtoList = getStationLocalization().
+                values().parallelStream()
                 .map(station ->
                         getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirDataDto.class).getBody())
                 .filter(station->station.getStCalcDate()!=null).collect(Collectors.toList());

@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.scheduling.annotation.AsyncResult;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.City;
 import sebaszczen.model.airModel.AirData;
@@ -17,6 +18,8 @@ import sebaszczen.services.api.EntitiesMapper;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static org.mockito.Mockito.*;
 
@@ -51,11 +54,11 @@ public class ApiServiceImplTest {
     private MockCity mockCity = new MockCity();
 
     @Test
-    public void saveData_getDataSaved() {
+    public void saveData_getDataSaved() throws ExecutionException, InterruptedException {
         List<SynopticData> synopticDataList = mockSynopticData.getSynopticData();
         List<AirData> mockAirDataDtoList = mockAirData.getMockedAirData();
-        Map<String, List<AirData>> cityToAirDataMock = mockCityToAirDataMap.getCityToAirDataMock();
-        Map<String, List<SynopticData>> cityToSynopticDataMock = mockCityToSynopticDataMap.getCityToSynopticDataMock();
+        Future<Map<String, List<AirData>>> cityToAirDataMock = new AsyncResult<>(mockCityToAirDataMap.getCityToAirDataMock());
+        Future<Map<String, List<SynopticData>>> cityToSynopticDataMock = new AsyncResult<>(mockCityToSynopticDataMap.getCityToSynopticDataMock());
         List<City> mockedCity = mockCity.getMockedCity();
 
         when(entitiesMapper.mapCityToSynopticData()).thenReturn(cityToSynopticDataMock);
@@ -72,7 +75,7 @@ public class ApiServiceImplTest {
 
         apiServiceImpl.saveData();
 
-        verify(cityRepository,times(cityToAirDataMock.size()+cityToSynopticDataMock.size())).save(any(City.class));
+        verify(cityRepository,times(cityToAirDataMock.get().size()+cityToSynopticDataMock.get().size())).save(any(City.class));
 //        verify(airDataRepository,times(2)).save(any(AirData.class));
 
     }

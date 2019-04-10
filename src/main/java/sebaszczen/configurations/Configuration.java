@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import sebaszczen.apiProvider.RestTemplateResponseErrorHandler;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {

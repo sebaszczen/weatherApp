@@ -15,6 +15,10 @@ import sebaszczen.model.SynopticData;
 import sebaszczen.repository.*;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class ApiServiceImpl implements ApiService {
@@ -47,20 +51,34 @@ public class ApiServiceImpl implements ApiService {
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
         System.out.println("tutaj" + Thread.currentThread().getName());
-        Map<String, List<SynopticData>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
-        Map<String, List<AirData>> cityToAirData = entitiesMapper.mapCityToAirData();
+        Future<Map<String, List<SynopticData>>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
+        Future<Map<String, List<AirData>>> cityToAirData = entitiesMapper.mapCityToAirData();
 
 //        saveAirQualityData();
         try {
             if (synopticDataIsNotUpToDate()) {
-                updateCitySynopticData(cityToSynopticData);
+                try {
+                    try {
+                        updateCitySynopticData(cityToSynopticData.get(5, TimeUnit.MINUTES));
+                    } catch (TimeoutException e) {
+                        e.printStackTrace();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
             if (airDataIsNotUpToDate()) {
-                saveAirQualityData();
-                updateCityAirData(cityToAirData);
+                saveAirQualityData(cityToAirData);
+                updateCityAirData(cityToAirData.get());
             }
         } catch (ResourceAccessException e) {
             logger.error("couldnt connect with external api " + e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
@@ -80,17 +98,17 @@ public class ApiServiceImpl implements ApiService {
         }
     }
 
-    private void saveAirQualityData() {
-        List<AirData> airDataList = entitiesMapper.injectLocalizationToAirData();
-        airDataList.forEach(airData -> {
+    private void saveAirQualityData(Future<Map<String, List<AirData>>> cityToAirData) throws ExecutionException, InterruptedException {
+
+        cityToAirData.get().values().forEach(airDataList1 ->airDataList1.forEach(airData -> {
             AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(), airData.getCoIndexAirQuality()
                     , airData.getNo2IndexAirQuality(), airData.getO3IndexAirQuality(), airData.getPm10IndexAirQuality()
                     , airData.getPm25IndexAirQuality(), airData.getSo2IndexAirQuality(), airData.getStIndexAirQuality()};
             Arrays.stream(airQualities).filter(airQuality -> airQuality != null && airQuality.getId() != null && !airQuality.isSaved()).
                     forEach(airQuality->{airQualityRepository.save(airQuality);
-                    airQuality.setSaved(true);
+                        airQuality.setSaved(true);
                     });
-        });
+        })) ;
     }
 
     @Transactional

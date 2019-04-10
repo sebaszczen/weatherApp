@@ -2,6 +2,8 @@ package sebaszczen.services.api;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.SynopticData;
@@ -11,6 +13,7 @@ import sebaszczen.model.airModel.AirMeasurementLocalization;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 @Service
 public class EntitiesMapperImpl implements EntitiesMapper {
@@ -19,7 +22,8 @@ public class EntitiesMapperImpl implements EntitiesMapper {
     private ApiProvider apiProvider;
 
     @Override
-    public Map<String, List<SynopticData>> mapCityToSynopticData() {
+    @Async
+    public Future<Map<String, List<SynopticData>>> mapCityToSynopticData() {
         Map<String, List<SynopticData>> cityToSynopticData = new HashMap<>();
         List<SynopticData> synopticDataList = apiProvider.getAllSynopticStation();
         for (SynopticData synopticData : synopticDataList) {
@@ -32,11 +36,11 @@ public class EntitiesMapperImpl implements EntitiesMapper {
                 cityToSynopticData.put(key, Lists.newArrayList(synopticData));
             }
         }
-        return cityToSynopticData;
+        return new AsyncResult<>(cityToSynopticData);
     }
 
     @Override
-    public Map<String, List<AirData>> mapCityToAirData() {
+    public Future<Map<String, List<AirData>>> mapCityToAirData() {
         Map<String, List<AirData>> cityToAirData = new HashMap<>();
         List<AirData> airDataList = injectLocalizationToAirData();
         for (AirData airData : airDataList) {
@@ -49,7 +53,7 @@ public class EntitiesMapperImpl implements EntitiesMapper {
                 cityToAirData.put(key, Lists.newArrayList(airData));
             }
         }
-        return cityToAirData;
+        return new AsyncResult<>(cityToAirData);
     }
 
     @Override
