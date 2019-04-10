@@ -54,7 +54,6 @@ public class ApiServiceImpl implements ApiService {
         Future<Map<String, List<SynopticData>>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
         Future<Map<String, List<AirData>>> cityToAirData = entitiesMapper.mapCityToAirData();
 
-//        saveAirQualityData();
         try {
             if (synopticDataIsNotUpToDate()) {
                 try {

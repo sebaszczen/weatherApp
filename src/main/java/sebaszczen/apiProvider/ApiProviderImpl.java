@@ -18,10 +18,8 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -78,12 +76,15 @@ public class ApiProviderImpl implements ApiProvider {
         ResponseEntity<StationLocalizationDto[]> responseEntity = getForObject(ALL_MEASURING_STATIONS_API_URL, StationLocalizationDto[].class);
         StationLocalizationDto[] stationLocalizationDtos = responseEntity.getBody();
         List<StationLocalizationDto> stationLocalizationDtoList = Arrays.stream(stationLocalizationDtos).parallel().collect(Collectors.toList());
+
         return stationLocalizationDtoList.parallelStream().filter(stationLocalizationDto -> stationLocalizationDto.getAirCityDto()!=null).map(StationLocalizationDto::convertToEntity).collect(Collectors.toMap(AirMeasurementLocalization::getStationId,y->y));
     }
 
     @Override
-    public List<AirData> getAirData(){
-        List<AirDataDto> airDataDtoList = getStationLocalization().
+    public List<AirData> getAirData() {
+        Map<Integer, AirMeasurementLocalization> stationLocalization = getStationLocalization();
+
+        List<AirDataDto> airDataDtoList = stationLocalization.
                 values().parallelStream()
                 .map(station ->
                         getForObject(MEASURING_STATION_API_URL_BY_ID + station.getStationId(), AirDataDto.class).getBody())

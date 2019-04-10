@@ -13,6 +13,7 @@ import sebaszczen.model.airModel.AirMeasurementLocalization;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 @Service
@@ -40,6 +41,7 @@ public class EntitiesMapperImpl implements EntitiesMapper {
     }
 
     @Override
+    @Async
     public Future<Map<String, List<AirData>>> mapCityToAirData() {
         Map<String, List<AirData>> cityToAirData = new HashMap<>();
         List<AirData> airDataList = injectLocalizationToAirData();
