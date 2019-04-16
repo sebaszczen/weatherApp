@@ -21,8 +21,7 @@ public class CityDto extends ResourceSupport {
     public CityDto(City city) {
         this.name = city.getName();
         city.getAirDataList().forEach(airData->{
-            AirDataDto airDataDto = new AirDataDto();
-            BeanUtils.copyProperties(airData,airDataDto);
+            AirDataDto airDataDto = new AirDataDto(airData);
             airDataDtoList.add(airDataDto);
         });
         city.getSynopticDataList().forEach(synopticData -> {

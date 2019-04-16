@@ -1,8 +1,11 @@
 package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.transaction.annotation.Transactional;
 import sebaszczen.controller.DataController;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirQuality;
@@ -30,7 +33,30 @@ public class AirDataDto extends ResourceSupport {
     private AirQualityDto c6h6IndexLevel;
 
     public AirDataDto(AirData airData) {
-        BeanUtils.copyProperties(airData,this);
+        this.stationId=airData.getStationId();
+        this.stCalcDate = airData.getStCalcDate();
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getStIndexLevel()),stIndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getSo2IndexLevel()),so2IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getNo2IndexLevel()),no2IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getCoIndexLevel()),coIndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getPm10IndexLevel()),pm10IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getPm25IndexLevel()),pm25IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getO3IndexLevel()),o3IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(initializeAndUnproxy(airData.getC6H6IndexLevel()),c6h6IndexLevel=new AirQualityDto());
+    }
+
+    public static <T> T initializeAndUnproxy(T entity) {
+        if (entity == null) {
+            throw new
+                    NullPointerException("Entity passed for initialization is null");
+        }
+
+        Hibernate.initialize(entity);
+        if (entity instanceof HibernateProxy) {
+            entity = (T) ((HibernateProxy) entity).getHibernateLazyInitializer()
+                    .getImplementation();
+        }
+        return entity;
     }
 
     public AirDataDto() {
@@ -54,7 +80,7 @@ public class AirDataDto extends ResourceSupport {
         return new AirData(this);
     }
 
-    public void setStIndexLevel(AirQuality stIndexLevel) {
+    public void setStIndexLevel(AirQualityDto stIndexLevel) {
         this.stIndexLevel = stIndexLevel;
     }
 
