@@ -1,14 +1,13 @@
 package sebaszczen.apiProvider;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
-import sebaszczen.exception.NotFoundException;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import static org.springframework.http.HttpStatus.Series.CLIENT_ERROR;
 import static org.springframework.http.HttpStatus.Series.SERVER_ERROR;
@@ -16,14 +15,13 @@ import static org.springframework.http.HttpStatus.Series.SERVER_ERROR;
 @Component
 public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
-    Logger logger = LogManager.getLogger(RestTemplateResponseErrorHandler.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(RestTemplateResponseErrorHandler.class);
 
     @Override
     public boolean hasError(ClientHttpResponse httpResponse)
-            throws IOException {
+            throws IOException, UnknownHostException {
 
-        return (
-                httpResponse.getStatusCode().series() == CLIENT_ERROR
+            return (httpResponse.getStatusCode().series() == CLIENT_ERROR
                         || httpResponse.getStatusCode().series() == SERVER_ERROR);
     }
 
@@ -33,15 +31,15 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 
         if (httpResponse.getStatusCode()
                 .series() == SERVER_ERROR) {
-            logger.error("Api connection error: ",httpResponse.getStatusCode(),httpResponse.getStatusText());
+            logger.error("Server error: ",httpResponse.getStatusCode(),httpResponse.getStatusText());
             // handle SERVER_ERROR
         } else if (httpResponse.getStatusCode()
                 .series() == CLIENT_ERROR) {
-            logger.error("Api connection error: ",httpResponse.getStatusCode(),httpResponse.getStatusText());
+            logger.error("Client error: ",httpResponse.getStatusCode(),httpResponse.getStatusText());
 
             // handle CLIENT_ERROR
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
-                logger.error("Api connection error: "+httpResponse.getStatusCode().toString()+" "+ httpResponse.getStatusText().toString());
+                logger.error("Api connection error: "+httpResponse.getStatusCode().toString()+" "+ httpResponse.getStatusText());
                 throw new IOException();
             }
         }

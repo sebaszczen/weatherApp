@@ -1,4 +1,4 @@
-package sebaszczen.services.api;
+package sebaszczen.services.externalApi;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import sebaszczen.model.airModel.AirMeasurementLocalization;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 @Service

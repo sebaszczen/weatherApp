@@ -1,19 +1,7 @@
 package sebaszczen.configurations;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.interceptor.CacheErrorHandler;
-import org.springframework.cache.interceptor.CacheResolver;
-import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.cache.interceptor.SimpleCacheErrorHandler;
-import org.springframework.cache.interceptor.SimpleCacheResolver;
-import org.springframework.cache.interceptor.SimpleKeyGenerator;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import net.sf.ehcache.config.CacheConfiguration;
 
 @Configuration
 @EnableCaching
@@ -28,7 +16,7 @@ public class CachingConfig
 //        cacheConfiguration.setMemoryStoreEvictionPolicy("LRU");
 //        cacheConfiguration.setMaxEntriesLocalHeap(1000);
 //
-//        net.sf.ehcache.config.Configuration config = new net.sf.ehcache.config.Configuration();
+//        net.sf.ehcache.config.BeanFabric config = new net.sf.ehcache.config.BeanFabric();
 //        config.addCache(cacheConfiguration);
 //
 //        return net.sf.ehcache.CacheManager.newInstance(config);

@@ -13,9 +13,9 @@ public class SynopticDataTest {
 
     @Test
     public void synopticStation_convertToEntity() {
-        SynopticData.SynopticStationDto synopticStationDto = mockSynopticData.getSynopticStationDto().get(0);
-        SynopticData synopticData = new SynopticData(synopticStationDto);
-        assertEquals(synopticData,synopticStationDto.convertToEntity());
+        SynopticData.SynoptiDataDto synoptiDataDto = mockSynopticData.getSynopticStationDto().get(0);
+        SynopticData synopticData = new SynopticData(synoptiDataDto);
+        assertEquals(synopticData, synoptiDataDto.convertToEntity());
     }
 
 }

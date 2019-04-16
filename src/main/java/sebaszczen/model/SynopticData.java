@@ -2,8 +2,7 @@ package sebaszczen.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -38,16 +37,16 @@ public class SynopticData {
     public SynopticData() {
     }
 
-    public SynopticData(SynopticStationDto synopticStationDto) {
-        this.cityName = synopticStationDto.stacja;
-//        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synopticStationDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synopticStationDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
-        this.localDateTime = LocalDateTime.of(synopticStationDto.getData_pomiaru(), synopticStationDto.getGodzina_pomiaru());
-        this.temperatura = synopticStationDto.temperatura;
-        this.predkosc_wiatru = synopticStationDto.predkosc_wiatru;
-        this.kierunek_wiatru = synopticStationDto.kierunek_wiatru;
-        this.wilgotnosc_wzgledna = synopticStationDto.wilgotnosc_wzgledna;
-        this.suma_opadu = synopticStationDto.suma_opadu;
-        this.cisnienie = synopticStationDto.cisnienie;
+    public SynopticData(SynoptiDataDto synoptiDataDto) {
+        this.cityName = synoptiDataDto.stacja;
+//        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synoptiDataDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synoptiDataDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
+        this.localDateTime = LocalDateTime.of(synoptiDataDto.getData_pomiaru(), synoptiDataDto.getGodzina_pomiaru());
+        this.temperatura = synoptiDataDto.temperatura;
+        this.predkosc_wiatru = synoptiDataDto.predkosc_wiatru;
+        this.kierunek_wiatru = synoptiDataDto.kierunek_wiatru;
+        this.wilgotnosc_wzgledna = synoptiDataDto.wilgotnosc_wzgledna;
+        this.suma_opadu = synoptiDataDto.suma_opadu;
+        this.cisnienie = synoptiDataDto.cisnienie;
     }
 
     @JsonIgnore
@@ -119,7 +118,7 @@ public class SynopticData {
         this.localDateTime = localDateTime;
     }
 
-    public static class SynopticStationDto {
+    public static class SynoptiDataDto extends ResourceSupport {
         private Long id_stacji;
         private String stacja;
         private LocalDate data_pomiaru;
@@ -131,52 +130,52 @@ public class SynopticData {
         private float suma_opadu;
         private float cisnienie;
 
-        public SynopticStationDto setId_stacji(Long id_stacji) {
+        public SynoptiDataDto setId_stacji(Long id_stacji) {
             this.id_stacji = id_stacji;
             return this;
         }
 
-        public SynopticStationDto setStacja(String stacja) {
+        public SynoptiDataDto setStacja(String stacja) {
             this.stacja = stacja;
             return this;
         }
 
-        public SynopticStationDto setData_pomiaru(LocalDate data_pomiaru) {
+        public SynoptiDataDto setData_pomiaru(LocalDate data_pomiaru) {
             this.data_pomiaru = data_pomiaru;
             return this;
         }
 
-        public SynopticStationDto setGodzina_pomiaru(int godzina_pomiaru) {
+        public SynoptiDataDto setGodzina_pomiaru(int godzina_pomiaru) {
             this.godzina_pomiaru = LocalTime.of(godzina_pomiaru, 0, 0, 0);
             return this;
         }
 
-        public SynopticStationDto setTemperatura(float temperatura) {
+        public SynoptiDataDto setTemperatura(float temperatura) {
             this.temperatura = temperatura;
             return this;
         }
 
-        public SynopticStationDto setPredkosc_wiatru(float predkosc_wiatru) {
+        public SynoptiDataDto setPredkosc_wiatru(float predkosc_wiatru) {
             this.predkosc_wiatru = predkosc_wiatru;
             return this;
         }
 
-        public SynopticStationDto setKierunek_wiatru(int kierunek_wiatru) {
+        public SynoptiDataDto setKierunek_wiatru(int kierunek_wiatru) {
             this.kierunek_wiatru = kierunek_wiatru;
             return this;
         }
 
-        public SynopticStationDto setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
+        public SynoptiDataDto setWilgotnosc_wzgledna(float wilgotnosc_wzgledna) {
             this.wilgotnosc_wzgledna = wilgotnosc_wzgledna;
             return this;
         }
 
-        public SynopticStationDto setSuma_opadu(float suma_opadu) {
+        public SynoptiDataDto setSuma_opadu(float suma_opadu) {
             this.suma_opadu = suma_opadu;
             return this;
         }
 
-        public SynopticStationDto setCisnienie(float cisnienie) {
+        public SynoptiDataDto setCisnienie(float cisnienie) {
             this.cisnienie = cisnienie;
             return this;
         }

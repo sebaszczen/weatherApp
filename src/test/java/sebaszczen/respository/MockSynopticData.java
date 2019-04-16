@@ -9,26 +9,26 @@ import java.util.stream.Collectors;
 
 public class MockSynopticData {
 
-    public List<SynopticData.SynopticStationDto> getSynopticStationDto() {
-        List <SynopticData.SynopticStationDto>  list = new ArrayList();
+    public List<SynopticData.SynoptiDataDto> getSynopticStationDto() {
+        List <SynopticData.SynoptiDataDto>  list = new ArrayList();
 
-        SynopticData.SynopticStationDto synopticStationDto = new SynopticData.SynopticStationDto();
-        synopticStationDto.setCisnienie(1001).setData_pomiaru(LocalDate.of(2018,8,23))
+        SynopticData.SynoptiDataDto synoptiDataDto = new SynopticData.SynoptiDataDto();
+        synoptiDataDto.setCisnienie(1001).setData_pomiaru(LocalDate.of(2018,8,23))
                 .setGodzina_pomiaru(11).setId_stacji(22L).setKierunek_wiatru(23).setPredkosc_wiatru(40)
                 .setStacja("mock").setSuma_opadu(223).setTemperatura(20).setWilgotnosc_wzgledna(23);
 
-        SynopticData.SynopticStationDto synopticStationDto2 = new SynopticData.SynopticStationDto();
-        synopticStationDto2.setCisnienie(1001).setData_pomiaru(LocalDate.of(2018,8,23))
+        SynopticData.SynoptiDataDto synoptiDataDto2 = new SynopticData.SynoptiDataDto();
+        synoptiDataDto2.setCisnienie(1001).setData_pomiaru(LocalDate.of(2018,8,23))
                 .setGodzina_pomiaru(11).setId_stacji(22L).setKierunek_wiatru(23).setPredkosc_wiatru(40)
                 .setStacja("mock").setSuma_opadu(223).setTemperatura(20).setWilgotnosc_wzgledna(23);
 
-        list.add(synopticStationDto);
-        list.add(synopticStationDto2);
+        list.add(synoptiDataDto);
+        list.add(synoptiDataDto2);
         return list;
     }
 
     public List<SynopticData> getSynopticData() {
-        List<SynopticData.SynopticStationDto> synopticStationDtoList = getSynopticStationDto();
-        return synopticStationDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
+        List<SynopticData.SynoptiDataDto> synoptiDataDtoList = getSynopticStationDto();
+        return synoptiDataDtoList.parallelStream().map(SynopticData::new).collect(Collectors.toList());
     }
 }

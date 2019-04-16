@@ -1,7 +1,7 @@
-package sebaszczen.services.api;
+package sebaszczen.services.externalApi;
 
-import org.apache.logging.log4j.LogManager;
-import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,11 @@ import sebaszczen.repository.*;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 @Service
 public class ApiServiceImpl implements ApiService {
 
-    org.apache.logging.log4j.Logger logger = LogManager.getLogger(ApiServiceImpl.class);
+    Logger logger = LoggerFactory.getLogger(ApiServiceImpl.class);
 
     private final SynopticDataRepository synopticDataRepository;
 
@@ -50,59 +48,59 @@ public class ApiServiceImpl implements ApiService {
     @Override
     @Scheduled(fixedRate = 3600000)
     public void saveData() {
-        System.out.println("tutaj" + Thread.currentThread().getName());
         Future<Map<String, List<SynopticData>>> cityToSynopticData = entitiesMapper.mapCityToSynopticData();
         Future<Map<String, List<AirData>>> cityToAirData = entitiesMapper.mapCityToAirData();
 
         try {
             if (synopticDataIsNotUpToDate()) {
                 try {
-                    try {
-                        updateCitySynopticData(cityToSynopticData.get(5, TimeUnit.MINUTES));
-                    } catch (TimeoutException e) {
-                        e.printStackTrace();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    updateCitySynopticData(cityToSynopticData.get());
+//                    throw new InterruptedException();
+                } catch (InterruptedException | ExecutionException  e) {
+                    logger.warn("Error occured during stopping thread", e);
                 }
             }
-            if (airDataIsNotUpToDate()) {
-                saveAirQualityData(cityToAirData);
-                updateCityAirData(cityToAirData.get());
-            }
         } catch (ResourceAccessException e) {
-            logger.error("couldnt connect with external api " + e);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            logger.warn("Error occured during updating synoptic data",e);
+        }
+        try {
+            if (airDataIsNotUpToDate()) {
+                    try {
+                        saveAirQualityData(cityToAirData);
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        updateCityAirData(cityToAirData.get());
+                    } catch (InterruptedException | ExecutionException  e) {
+                        logger.warn("Error occured during stopping thread", e);
+                    }
+                }
+        } catch (ResourceAccessException e) {
+            logger.warn("Error occured during updating air data",e);
         }
     }
 
     @Transactional
     private void updateCityAirData(Map<String, List<AirData>> cityToAirData) {
         for (String cityName : cityToAirData.keySet()) {
-            List<AirData> value = cityToAirData.get(cityName);
+            List<AirData> airDataList = cityToAirData.get(cityName);
             if (cityRepository.existsAllByName(cityName)) {
-//                City cityWithAirData = cityRepository.findCityWithAirData(cityName);
                 City cityWithAirData = cityRepository.findCityWithAirData(cityName);
-                 cityRepository.findCityWithAirData2(cityName);
-                cityWithAirData.addAirData(value);
+                cityRepository.save(cityWithAirData);
+                cityWithAirData.addAirData(airDataList);
                 cityRepository.save(cityWithAirData);
             } else {
-                cityRepository.save(new City(cityName, null, value));
+                cityRepository.save(new City(cityName, null, airDataList));
             }
         }
     }
 
     private void saveAirQualityData(Future<Map<String, List<AirData>>> cityToAirData) throws ExecutionException, InterruptedException {
-
         cityToAirData.get().values().forEach(airDataList1 ->airDataList1.forEach(airData -> {
-            AirQuality[] airQualities = {airData.getC6H6IndexAirQuality(), airData.getCoIndexAirQuality()
-                    , airData.getNo2IndexAirQuality(), airData.getO3IndexAirQuality(), airData.getPm10IndexAirQuality()
-                    , airData.getPm25IndexAirQuality(), airData.getSo2IndexAirQuality(), airData.getStIndexAirQuality()};
+            AirQuality[] airQualities = {airData.getC6H6IndexLevel(), airData.getCoIndexLevel()
+                    , airData.getNo2IndexLevel(), airData.getO3IndexLevel(), airData.getPm10IndexLevel()
+                    , airData.getPm25IndexLevel(), airData.getSo2IndexLevel(), airData.getStIndexLevel()};
             Arrays.stream(airQualities).filter(airQuality -> airQuality != null && airQuality.getId() != null && !airQuality.isSaved()).
                     forEach(airQuality->{airQualityRepository.save(airQuality);
                         airQuality.setSaved(true);

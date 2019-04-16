@@ -1,8 +1,8 @@
 package sebaszczen.apiProvider;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
@@ -19,7 +19,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,7 +29,6 @@ public class ApiProviderImpl implements ApiProvider {
     private final static String SYNOPTIC_STATION_BY_CITY = "https://danepubliczne.imgw.pl/api/data/synop/station/";
     private RestTemplate restTemplate;
 
-//    private org.slf4j.Logger logger = LoggerFactory.getLogger(ApiProviderImpl.class);
 
     @Autowired
     public ApiProviderImpl(RestTemplate restTemplate) {
@@ -51,18 +49,18 @@ public class ApiProviderImpl implements ApiProvider {
 
     @Override
     public List<SynopticData> getAllSynopticStation() throws RestClientException {
-        ResponseEntity<SynopticData.SynopticStationDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticData.SynopticStationDto[].class);
-        SynopticData.SynopticStationDto[] synopticStationDtos = responseEntity.getBody();
-        List<SynopticData.SynopticStationDto> synopticStationDtoList = Arrays.stream(synopticStationDtos).parallel()
+        ResponseEntity<SynopticData.SynoptiDataDto[]> responseEntity = getForObject(getAllSynopticDataUri().toString(), SynopticData.SynoptiDataDto[].class);
+        SynopticData.SynoptiDataDto[] synoptiDataDtos = responseEntity.getBody();
+        List<SynopticData.SynoptiDataDto> synoptiDataDtoList = Arrays.stream(synoptiDataDtos).parallel()
                 .filter(synopticStationDto -> synopticStationDto.getData_pomiaru()
                         != null&&synopticStationDto.getGodzina_pomiaru()!=null).collect(Collectors.toList());
-        return synopticStationDtoList.parallelStream().map(SynopticData.SynopticStationDto::convertToEntity).collect(Collectors.toList());
+        return synoptiDataDtoList.parallelStream().map(SynopticData.SynoptiDataDto::convertToEntity).collect(Collectors.toList());
     }
 
     @Override
     public Optional<SynopticData> getSynopticDataByStationName(String cityName) throws ResourceAccessException {
-        ResponseEntity<SynopticData.SynopticStationDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticData.SynopticStationDto.class);
-        SynopticData.SynopticStationDto stationDto = responseEntity.getBody();
+        ResponseEntity<SynopticData.SynoptiDataDto> responseEntity = getForObject(getSynopticDataByStationNameUri(cityName.toLowerCase()).toString(), SynopticData.SynoptiDataDto.class);
+        SynopticData.SynoptiDataDto stationDto = responseEntity.getBody();
         Optional<LocalDate> data_pomiaru = Optional.ofNullable(stationDto.getData_pomiaru());
         Optional<LocalTime> godzina_pomiaru = Optional.ofNullable(stationDto.getGodzina_pomiaru());
         if (data_pomiaru.isPresent()&&godzina_pomiaru.isPresent()){

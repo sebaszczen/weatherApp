@@ -3,6 +3,7 @@ package sebaszczen.model;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.transaction.annotation.Transactional;
 import sebaszczen.model.airModel.AirData;
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 //@Table(indexes = {@Index(columnList ="name, id" ,name="indeks")})
 @NamedEntityGraph(name = "cityWithSynopticData", attributeNodes = { @NamedAttributeNode("synopticDataList") })
-public class City {
+public class City{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

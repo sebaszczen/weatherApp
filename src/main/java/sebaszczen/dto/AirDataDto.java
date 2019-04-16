@@ -1,14 +1,20 @@
 package sebaszczen.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.BeanUtils;
+import org.springframework.hateoas.ResourceSupport;
+import sebaszczen.controller.DataController;
 import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.airModel.AirQuality;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
-public class AirDataDto {
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+public class AirDataDto extends ResourceSupport {
     @JsonProperty("id")
     private int stationId;
     private LocalDateTime stCalcDate;
@@ -23,6 +29,13 @@ public class AirDataDto {
     private AirQualityDto o3IndexLevel;
     private AirQualityDto c6h6IndexLevel;
 
+    public AirDataDto(AirData airData) {
+        BeanUtils.copyProperties(airData,this);
+    }
+
+    public AirDataDto() {
+    }
+
     public void setStationId(int stationId) {
         this.stationId = stationId;
     }
@@ -32,11 +45,16 @@ public class AirDataDto {
         this.stCalcDate = split==null?null: LocalDateTime.of(LocalDate.parse(split[0]), LocalTime.parse(split[1]));
     }
 
+
+    public void setStCalcDate(LocalDateTime stCalcDate) {
+        this.stCalcDate = stCalcDate;
+    }
+
     public AirData convertToEntity() {
         return new AirData(this);
     }
 
-    public void setStIndexLevel(AirQualityDto stIndexLevel) {
+    public void setStIndexLevel(AirQuality stIndexLevel) {
         this.stIndexLevel = stIndexLevel;
     }
 

@@ -1,4 +1,4 @@
-package sebaszczen.services.api;
+package sebaszczen.services.externalApi;
 
 public interface ApiService {
     void saveData();

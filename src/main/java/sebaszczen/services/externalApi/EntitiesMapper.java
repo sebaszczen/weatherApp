@@ -1,4 +1,4 @@
-package sebaszczen.services.api;
+package sebaszczen.services.externalApi;
 
 import sebaszczen.model.SynopticData;
 import sebaszczen.model.airModel.AirData;

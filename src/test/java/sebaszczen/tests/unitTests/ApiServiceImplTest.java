@@ -12,8 +12,8 @@ import sebaszczen.model.SynopticData;
 import sebaszczen.model.airModel.AirQuality;
 import sebaszczen.repository.*;
 import sebaszczen.respository.*;
-import sebaszczen.services.api.ApiServiceImpl;
-import sebaszczen.services.api.EntitiesMapper;
+import sebaszczen.services.externalApi.ApiServiceImpl;
+import sebaszczen.services.externalApi.EntitiesMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -71,7 +71,7 @@ public class ApiServiceImplTest {
         when(cityRepository.existsAllByName(any(String.class))).thenReturn(false);
         when(cityRepository.save(any(City.class))).thenReturn(mockedCity.get(0));
         when(entitiesMapper.injectLocalizationToAirData()).thenReturn(mockAirDataDtoList);
-        when(airQualityRepository.save(any(AirQuality.class))).thenReturn(mockAirDataDtoList.get(0).getC6H6IndexAirQuality());
+        when(airQualityRepository.save(any(AirQuality.class))).thenReturn(mockAirDataDtoList.get(0).getC6H6IndexLevel());
 
         apiServiceImpl.saveData();
 

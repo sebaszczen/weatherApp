@@ -13,13 +13,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.SynopticData;
-import sebaszczen.model.airModel.AirQuality;
 import sebaszczen.repository.*;
 import sebaszczen.respository.MockAirData;
 import sebaszczen.respository.MockSynopticData;
-import sebaszczen.services.api.ApiService;
-import sebaszczen.services.api.ApiServiceImpl;
-import sebaszczen.services.api.EntitiesMapperImpl;
+import sebaszczen.services.externalApi.ApiService;
+import sebaszczen.services.externalApi.ApiServiceImpl;
+import sebaszczen.services.externalApi.EntitiesMapperImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -76,14 +75,14 @@ public class TestDatabaseWithMockedRepo {
         when(apiProvider.getSynopticDataByStationName(anyString())).thenReturn(Optional.of(synopticDataList.get(0)));
 
         List<AirData> mockAirDataList = mockAirData.getMockedAirData();
-        saveEntity(mockAirDataList.get(0).getC6H6IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getCoIndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getNo2IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getO3IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getPm10IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getPm25IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getSo2IndexAirQuality());
-        saveEntity(mockAirDataList.get(0).getStIndexAirQuality());
+        saveEntity(mockAirDataList.get(0).getC6H6IndexLevel());
+        saveEntity(mockAirDataList.get(0).getCoIndexLevel());
+        saveEntity(mockAirDataList.get(0).getNo2IndexLevel());
+        saveEntity(mockAirDataList.get(0).getO3IndexLevel());
+        saveEntity(mockAirDataList.get(0).getPm10IndexLevel());
+        saveEntity(mockAirDataList.get(0).getPm25IndexLevel());
+        saveEntity(mockAirDataList.get(0).getSo2IndexLevel());
+        saveEntity(mockAirDataList.get(0).getStIndexLevel());
         saveEntity(mockAirDataList.get(0));
 
 

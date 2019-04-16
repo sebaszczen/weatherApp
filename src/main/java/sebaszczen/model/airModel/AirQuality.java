@@ -66,4 +66,14 @@ public class AirQuality {
     public boolean isSaved() {
         return saved;
     }
+
+    @Override
+    public String toString() {
+        return "AirQuality{" +
+                "id=" + id +
+                ", airConditionLevel=" + airConditionLevel +
+                ", airConditionInWord='" + airConditionInWord + '\'' +
+                ", saved=" + saved +
+                '}';
+    }
 }
