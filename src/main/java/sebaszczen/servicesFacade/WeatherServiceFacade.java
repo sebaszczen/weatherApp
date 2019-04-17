@@ -11,5 +11,6 @@ public interface WeatherServiceFacade {
 
     List<CityDto> findAllCities();
 
-    List<AirDataDto> findAirDataForCity(String name);
+    List<AirDataDto> findAllAirDataForCity(String name);
+
 }

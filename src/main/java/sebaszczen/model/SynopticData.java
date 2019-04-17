@@ -2,6 +2,7 @@ package sebaszczen.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class SynopticData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_stacji;
     private String cityName;
     //    @JsonDeserialize(using = LocalDateDeserializer.class)
     private float temperatura;
@@ -38,7 +39,7 @@ public class SynopticData {
     }
 
     public SynopticData(SynoptiDataDto synoptiDataDto) {
-        this.cityName = synoptiDataDto.stacja;
+        this.cityName = synoptiDataDto.cityName;
 //        this.localDateTime = LocalDateTime.of(Optional.ofNullable(synoptiDataDto.data_pomiaru).orElse(LocalDate.of(0,1,1)), Optional.ofNullable(synoptiDataDto.godzina_pomiaru).orElse(LocalTime.of(0,0,0)));
         this.localDateTime = LocalDateTime.of(synoptiDataDto.getData_pomiaru(), synoptiDataDto.getGodzina_pomiaru());
         this.temperatura = synoptiDataDto.temperatura;
@@ -52,6 +53,10 @@ public class SynopticData {
     @JsonIgnore
     public City getCity() {
         return city;
+    }
+
+    public Long getId_stacji() {
+        return id_stacji;
     }
 
     public void setCity(City city) {
@@ -120,7 +125,8 @@ public class SynopticData {
 
     public static class SynoptiDataDto extends ResourceSupport {
         private Long id_stacji;
-        private String stacja;
+        @JsonProperty("stacja")
+        private String cityName;
         private LocalDate data_pomiaru;
         private LocalTime godzina_pomiaru;
         private float temperatura;
@@ -130,13 +136,17 @@ public class SynopticData {
         private float suma_opadu;
         private float cisnienie;
 
+        public void setGodzina_pomiaru(LocalTime godzina_pomiaru) {
+            this.godzina_pomiaru = godzina_pomiaru;
+        }
+
         public SynoptiDataDto setId_stacji(Long id_stacji) {
             this.id_stacji = id_stacji;
             return this;
         }
 
-        public SynoptiDataDto setStacja(String stacja) {
-            this.stacja = stacja;
+        public SynoptiDataDto setCityName(String cityName) {
+            this.cityName = cityName;
             return this;
         }
 
@@ -188,8 +198,8 @@ public class SynopticData {
             return id_stacji;
         }
 
-        public String getStacja() {
-            return stacja;
+        public String getCityName() {
+            return cityName;
         }
 
         public LocalDate getData_pomiaru() {
@@ -237,7 +247,7 @@ public class SynopticData {
                 Float.compare(that.wilgotnosc_wzgledna, wilgotnosc_wzgledna) == 0 &&
                 Float.compare(that.suma_opadu, suma_opadu) == 0 &&
                 Float.compare(that.cisnienie, cisnienie) == 0 &&
-                Objects.equals(id, that.id) &&
+                Objects.equals(id_stacji, that.id_stacji) &&
                 Objects.equals(cityName, that.cityName) &&
                 Objects.equals(localDateTime, that.localDateTime);
     }
@@ -245,6 +255,6 @@ public class SynopticData {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, cityName, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
+        return Objects.hash(id_stacji, cityName, localDateTime, temperatura, predkosc_wiatru, kierunek_wiatru, wilgotnosc_wzgledna, suma_opadu, cisnienie);
     }
 }

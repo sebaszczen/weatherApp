@@ -34,7 +34,7 @@ public class WeatherServiceFacadeImpl implements WeatherServiceFacade {
     }
 
     @Override
-    public List<AirDataDto> findAirDataForCity(String name) {
+    public List<AirDataDto> findAllAirDataForCity(String name) {
         return dataService.getLastAirDataforCity(name).get().stream().map(AirDataDto::new).collect(Collectors.toList());
     }
 

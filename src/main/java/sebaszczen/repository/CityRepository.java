@@ -18,9 +18,6 @@ public interface CityRepository extends JpaRepository<City,Long> {
     @Query(value = "select c from City c left join fetch c.airDataList where c.name=:name")
     City findCityWithAirData(@Param("name")String cityName);
 
-    @Query(value = "select c from City c left join fetch c.airDataList where c.name=:name")
-    List<City> findCityWithAirData2(@Param("name")String cityName);
-
     @EntityGraph(value = "cityWithSynopticData", type = EntityGraph.EntityGraphType.LOAD)
     City findCityByName(String name);
     boolean existsAllByName(String name);

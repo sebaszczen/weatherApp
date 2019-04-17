@@ -47,7 +47,7 @@ public class DataController {
         final List<CityDto> cityDtoList = weatherServiceFacade.findAllCities();
         for (CityDto cityDto : cityDtoList) {
             if (cityDto.getAirDataDtoList().size() > 0) {
-                Link airDataLinks = linkTo(methodOn(DataController.class).getAirDataForCity(cityDto.getName())).withRel("airData");
+                Link airDataLinks = linkTo(methodOn(DataController.class).getAllAirDataForCity(cityDto.getName())).withRel("airData");
                 cityDto.add(airDataLinks);
             }
         }
@@ -59,8 +59,8 @@ public class DataController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{name}/airData")
-    public ResponseEntity<List<AirDataDto>> getAirDataForCity(@PathVariable String name) {
-        List<AirDataDto> airDataList = weatherServiceFacade.findAirDataForCity(name);
+    public ResponseEntity<List<AirDataDto>> getAllAirDataForCity(@PathVariable String name) {
+        List<AirDataDto> airDataList = weatherServiceFacade.findAllAirDataForCity(name);
         return new ResponseEntity<>(airDataList,HttpStatus.OK);
     }
 }

@@ -35,14 +35,14 @@ public class AirDataDto extends ResourceSupport {
     public AirDataDto(AirData airData) {
         this.stationId=airData.getStationId();
         this.stCalcDate = airData.getStCalcDate();
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getStIndexLevel()),stIndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getSo2IndexLevel()),so2IndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getNo2IndexLevel()),no2IndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getCoIndexLevel()),coIndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getPm10IndexLevel()),pm10IndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getPm25IndexLevel()),pm25IndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getO3IndexLevel()),o3IndexLevel=new AirQualityDto());
-        BeanUtils.copyProperties(initializeAndUnproxy(airData.getC6H6IndexLevel()),c6h6IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getStIndexLevel()),stIndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getSo2IndexLevel()),so2IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getNo2IndexLevel()),no2IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getCoIndexLevel()),coIndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getPm10IndexLevel()),pm10IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getPm25IndexLevel()),pm25IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getO3IndexLevel()),o3IndexLevel=new AirQualityDto());
+        BeanUtils.copyProperties(Hibernate.unproxy(airData.getC6H6IndexLevel()),c6h6IndexLevel=new AirQualityDto());
     }
 
     public static <T> T initializeAndUnproxy(T entity) {
