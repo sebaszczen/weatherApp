@@ -3,15 +3,20 @@ package sebaszczen.model.airModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.dto.AirQualityDto;
-import sebaszczen.model.City;
+import sebaszczen.model.cityModel.City;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AirData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +26,7 @@ public class AirData {
     private LocalDateTime stCalcDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private AirQuality stIndexLevel; //powietrze ogólnie
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

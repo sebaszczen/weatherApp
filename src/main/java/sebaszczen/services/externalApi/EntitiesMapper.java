@@ -1,6 +1,6 @@
 package sebaszczen.services.externalApi;
 
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.model.airModel.AirData;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package sebaszczen.apiProvider;
 import org.springframework.web.client.ResourceAccessException;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.util.List;
 import java.util.Map;

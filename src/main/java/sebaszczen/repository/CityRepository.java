@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import sebaszczen.model.City;
+import sebaszczen.model.cityModel.City;
 
-import javax.persistence.JoinColumn;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,4 +20,13 @@ public interface CityRepository extends JpaRepository<City,Long> {
     @EntityGraph(value = "cityWithSynopticData", type = EntityGraph.EntityGraphType.LOAD)
     City findCityByName(String name);
     boolean existsAllByName(String name);
+
+    @Query(value = "select c from City c left join fetch c.synopticDataList s")
+    List<City> findAllWithSynopticInitialized();
+
+    @Query(value = "select distinct c from City c left join fetch c.airDataList a left join fetch a.stIndexLevel left join fetch a.so2IndexLevel left join fetch a.no2IndexLevel left join fetch a.coIndexLevel left join fetch a.pm10IndexLevel left join fetch a.pm25IndexLevel left join fetch a.c6H6IndexLevel left join fetch a.o3IndexLevel left join fetch a.airMeasurementLocalization ")
+    List<City> findAllWithAirInitialized();
+
+//    @EntityGraph(value = "cityWithSynopticDataAndAirData", type = EntityGraph.EntityGraphType.LOAD)
+//    List<City> findAll();
 }

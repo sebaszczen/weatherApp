@@ -2,7 +2,6 @@ package sebaszczen.apiProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
@@ -11,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;

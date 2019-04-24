@@ -3,8 +3,8 @@ package sebaszczen.dto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.ResourceSupport;
 import sebaszczen.controller.DataController;
-import sebaszczen.model.City;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.cityModel.City;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,7 +17,7 @@ public interface AirDataRepository extends JpaRepository<AirData,Long>{
             "extract(month from st_calc_date)=:month and extract(year from st_calc_date)=:year",nativeQuery = true)
     public int contain(@Param("hour")int hour, @Param("day")int day, @Param("month")int month, @Param("year") int year);
 
-    @Query(value = "select a from AirData a where a.stCalcDate=(select max(a.stCalcDate)" +
+    @Query(value = "select distinct a from AirData a left join fetch a.stIndexLevel left join fetch a.so2IndexLevel left join fetch a.no2IndexLevel left join fetch a.coIndexLevel left join fetch a.pm10IndexLevel left join fetch a.pm25IndexLevel left join fetch a.c6H6IndexLevel left join fetch a.o3IndexLevel left join fetch a.airMeasurementLocalization where a.stCalcDate=(select max(a.stCalcDate)" +
             " from AirData a where a.city.name=:name ) and a.city.name=:name")
     public Optional<List<AirData>> findLastDataforCity(@Param("name") String name);
 }

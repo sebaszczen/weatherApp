@@ -1,19 +1,21 @@
-package sebaszczen.model;
+package sebaszczen.model.cityModel;
 
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.model.airModel.AirData;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 //@Table(indexes = {@Index(columnList ="name, id" ,name="indeks")})
 @NamedEntityGraph(name = "cityWithSynopticData", attributeNodes = { @NamedAttributeNode("synopticDataList") })
+@NamedEntityGraph(name = "cityWithSynopticDataAndAirData",
+        attributeNodes = { @NamedAttributeNode("synopticDataList"), @NamedAttributeNode("airDataList")})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class City{
 
     @Id
@@ -23,6 +25,7 @@ public class City{
     @OneToMany(fetch =FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
     private List<SynopticData> synopticDataList= new ArrayList<>();
     @OneToMany(fetch =FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "city", orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<AirData> airDataList= new ArrayList<>();
 
     public City() {
@@ -39,8 +42,8 @@ public class City{
     }
 
     public void addSynopticData(List<SynopticData> synopticData) {
-        synopticDataList.addAll(synopticData);
         synopticData.forEach(synopticData1 -> synopticData1.setCity(this));
+        synopticDataList.addAll(synopticData);
     }
 
     public void addAirData(List<AirData> airData) {

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import sebaszczen.servicesFacade.WeatherServiceFacade;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -38,7 +40,8 @@ public class DataController {
         CityDto lastDataForCityName = weatherServiceFacade.findLastDataForCityName(name);
         Link selfLink = ControllerLinkBuilder.linkTo(methodOn(DataController.class).getDataForCity(name)).slash(name).withSelfRel();
         lastDataForCityName.add(selfLink);
-        return new ResponseEntity<>(lastDataForCityName, HttpStatus.OK);
+//        return new ResponseEntity<>(lastDataForCityName, HttpStatus.OK);
+        return ResponseEntity.ok().cacheControl(CacheControl.maxAge(20, TimeUnit.MINUTES).cachePublic()).body(lastDataForCityName);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -54,6 +57,8 @@ public class DataController {
         final Resources<CityDto> resources = new Resources<>(cityDtoList);
         final String uriString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
         resources.add(new Link(uriString, "self"));
+//        return ResponseEntity.ok().
+//                cacheControl(CacheControl.maxAge(22, TimeUnit.MINUTES).cachePublic()).body(resources);
         return new ResponseEntity<>(resources, HttpStatus.OK);
     }
 

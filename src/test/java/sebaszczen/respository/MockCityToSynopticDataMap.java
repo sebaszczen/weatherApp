@@ -1,7 +1,6 @@
 package sebaszczen.respository;
 
-import sebaszczen.model.SynopticData;
-import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.util.HashMap;
 import java.util.List;

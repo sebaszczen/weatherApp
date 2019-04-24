@@ -15,7 +15,7 @@ import sebaszczen.apiProvider.ApiProviderImpl;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.dto.StationLocalizationDto;
 import sebaszczen.model.airModel.AirData;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.respository.MockAirData;
 import sebaszczen.respository.MockSynopticData;
 

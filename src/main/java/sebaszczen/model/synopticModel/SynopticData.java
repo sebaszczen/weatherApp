@@ -1,9 +1,10 @@
-package sebaszczen.model;
+package sebaszczen.model.synopticModel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.ResourceSupport;
+import sebaszczen.model.cityModel.City;
 
 import javax.persistence.*;
 import java.time.LocalDate;

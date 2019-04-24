@@ -1,6 +1,6 @@
 package sebaszczen.respository;
 
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

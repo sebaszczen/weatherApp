@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import sebaszczen.apiProvider.ApiProvider;
 import sebaszczen.model.airModel.AirData;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.repository.*;
 import sebaszczen.respository.MockAirData;
 import sebaszczen.respository.MockSynopticData;

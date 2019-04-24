@@ -1,6 +1,6 @@
 package sebaszczen.services;
 
-import sebaszczen.model.City;
+import sebaszczen.model.cityModel.City;
 
 import java.util.List;
 

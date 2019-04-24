@@ -1,7 +1,7 @@
 package sebaszczen.tests.unitTests.dto;
 
 import org.junit.Test;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.respository.MockSynopticData;
 
 import static org.junit.Assert.*;

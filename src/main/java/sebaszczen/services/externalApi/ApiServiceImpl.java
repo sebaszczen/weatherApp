@@ -8,15 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.ResourceAccessException;
 import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.model.City;
+import sebaszczen.model.cityModel.City;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirQuality;
-import sebaszczen.model.SynopticData;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.repository.*;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 @Service
 public class ApiServiceImpl implements ApiService {
@@ -56,28 +57,28 @@ public class ApiServiceImpl implements ApiService {
                 try {
                     updateCitySynopticData(cityToSynopticData.get());
 //                    throw new InterruptedException();
-                } catch (InterruptedException | ExecutionException  e) {
+                } catch (InterruptedException | ExecutionException e) {
                     logger.warn("Error occured during stopping thread", e);
                 }
             }
         } catch (ResourceAccessException e) {
-            logger.warn("Error occured during updating synoptic data",e);
+            logger.warn("Error occured during updating synoptic data", e);
         }
         try {
             if (airDataIsNotUpToDate()) {
-                    try {
-                        saveAirQualityData(cityToAirData);
-                    } catch (ExecutionException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        updateCityAirData(cityToAirData.get());
-                    } catch (InterruptedException | ExecutionException  e) {
-                        logger.warn("Error occured during stopping thread", e);
-                    }
+                try {
+                    saveAirQualityData(cityToAirData);
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
                 }
+                try {
+                    updateCityAirData(cityToAirData.get());
+                } catch (InterruptedException | ExecutionException e) {
+                    logger.warn("Error occured during stopping thread", e);
+                }
+            }
         } catch (ResourceAccessException e) {
-            logger.warn("Error occured during updating air data",e);
+            logger.warn("Error occured during updating air data", e);
         }
     }
 
@@ -97,15 +98,16 @@ public class ApiServiceImpl implements ApiService {
     }
 
     private void saveAirQualityData(Future<Map<String, List<AirData>>> cityToAirData) throws ExecutionException, InterruptedException {
-        cityToAirData.get().values().forEach(airDataList1 ->airDataList1.forEach(airData -> {
+        cityToAirData.get().values().forEach(airDataList1 -> airDataList1.forEach(airData -> {
             AirQuality[] airQualities = {airData.getC6H6IndexLevel(), airData.getCoIndexLevel()
                     , airData.getNo2IndexLevel(), airData.getO3IndexLevel(), airData.getPm10IndexLevel()
                     , airData.getPm25IndexLevel(), airData.getSo2IndexLevel(), airData.getStIndexLevel()};
             Arrays.stream(airQualities).filter(airQuality -> airQuality != null && airQuality.getId() != null && !airQuality.isSaved()).
-                    forEach(airQuality->{airQualityRepository.save(airQuality);
+                    forEach(airQuality -> {
+                        airQualityRepository.save(airQuality);
                         airQuality.setSaved(true);
                     });
-        })) ;
+        }));
     }
 
     @Transactional
@@ -140,7 +142,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     private boolean airDataIsNotUpToDate() {
-        int[] stationIndex = {114, 115, 116, 117};
+        List<Integer> stationIndex = apiProvider.getAirData().subList(0,4).parallelStream().map(x -> x.getStationId()).collect(Collectors.toList());
         for (int index : stationIndex) {
             Optional<AirData> airConditionDataByStationIndex = apiProvider.getAirConditionDataByStationIndex(index);
             if (airConditionDataByStationIndex.isPresent()) {

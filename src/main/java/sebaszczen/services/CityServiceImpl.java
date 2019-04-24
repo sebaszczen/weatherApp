@@ -1,32 +1,60 @@
 package sebaszczen.services;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sebaszczen.model.City;
-import sebaszczen.repository.AirMeasurementLocalizationRepository;
+import org.springframework.transaction.annotation.Transactional;
+import sebaszczen.model.InitializeModelService;
+import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.cityModel.City;
+import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.repository.CityRepository;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
 
     private CityRepository cityRepository;
-    private AirMeasurementLocalizationRepository airMeasurementLocalizationRepository;
 
     @Autowired
-    public CityServiceImpl(CityRepository cityRepository, AirMeasurementLocalizationRepository airMeasurementLocalizationRepository) {
+    public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
-        this.airMeasurementLocalizationRepository = airMeasurementLocalizationRepository;
     }
 
     @Override
+    @Transactional
     public List<City> findAll() {
-        airMeasurementLocalizationRepository.findById(1L);
-        List<City> all = cityRepository.findAll();
-        for (City city : all) {
-            System.out.println(city.getAirDataList());
-        }
-        return all;
+//        List<City> all = cityRepository.findAll();
+//        cityRepository.findAll().stream().forEach(y->{
+//            InitializeModelService.initializedCollection(y.getSynopticDataList());
+//                });
+//        return cityRepository.findAll().stream().filter(Objects::nonNull).map(x->{
+//            List<AirData> airDataList = x.getAirDataList();
+//            airDataList.stream().filter(Objects::nonNull).forEach(airData -> {
+//                InitializeModelService.initializedCollection(airData.getAirMeasurementLocalization());
+//                InitializeModelService.initializedCollection(airData.getStIndexLevel());
+//                InitializeModelService.initializedCollection(airData.getSo2IndexLevel());
+//                InitializeModelService.initializedCollection(airData.getPm25IndexLevel());
+//                InitializeModelService.initializedCollection(airData.getPm10IndexLevel());
+//                InitializeModelService.initializedCollection(airData.getO3IndexLevel());
+//                InitializeModelService.initializedCollection(airData.getNo2IndexLevel());
+//                InitializeModelService.initializedCollection(airData.getC6H6IndexLevel());
+//            });
+//            return x;
+//                }).collect(Collectors.toList());
+//        return all;
+        List<City> allWithAirInitialized = cityRepository.findAllWithAirInitialized();
+        List<City> allWithSynopticInitialized = cityRepository.findAllWithSynopticInitialized();
+        allWithAirInitialized.stream().forEach(a->
+                a.addSynopticData(allWithSynopticInitialized.stream().filter(x -> x.getName() == "warszawa").
+                map(c -> c.getSynopticDataList()).flatMap(q->q.stream()).collect(Collectors.toList())));
+
+        return allWithAirInitialized;
     }
 }
