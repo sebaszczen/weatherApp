@@ -8,12 +8,19 @@ import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import sebaszczen.dto.AirDataDto;
 import sebaszczen.dto.CityDto;
+import sebaszczen.services.externalApi.ApiServiceImpl;
 import sebaszczen.servicesFacade.WeatherServiceFacade;
 
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -27,21 +34,19 @@ public class DataController {
     @Autowired
     private WeatherServiceFacade weatherServiceFacade;
 
-//    @CrossOrigin(origins = "http://localhost:4200")
-//    @RequestMapping(value = "/cities", method = GET)
-//    public ResponseEntity<City> getDataForCity(@RequestParam(value = "name")String name, WebRequest webRequest) throws NotFoundException {
-//        City lastDataForCityName = weatherServiceFacade.findLastDataForCityName(name);
-//        return new ResponseEntity<City>(lastDataForCityName, HttpStatus.OK);
-//    }
-
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{name}")
-    public ResponseEntity<CityDto> getDataForCity(@PathVariable String name) {
+    public ResponseEntity<CityDto> getDataForCity(@PathVariable String name, WebRequest webRequest) {
+        if (webRequest.checkNotModified(ApiServiceImpl.localDateTime.toString())) {
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                    .cacheControl(CacheControl.maxAge(0, TimeUnit.SECONDS).cachePrivate().mustRevalidate())
+                    .lastModified(ApiServiceImpl.localDateTime.toEpochSecond(ZoneOffset.UTC))
+                    .build();
+        }
         CityDto lastDataForCityName = weatherServiceFacade.findLastDataForCityName(name);
-        Link selfLink = ControllerLinkBuilder.linkTo(methodOn(DataController.class).getDataForCity(name)).slash(name).withSelfRel();
+        Link selfLink = ControllerLinkBuilder.linkTo(methodOn(DataController.class).getDataForCity(name,null)).slash(name).withSelfRel();
         lastDataForCityName.add(selfLink);
-//        return new ResponseEntity<>(lastDataForCityName, HttpStatus.OK);
-        return ResponseEntity.ok().cacheControl(CacheControl.maxAge(20, TimeUnit.MINUTES).cachePublic()).body(lastDataForCityName);
+        return ResponseEntity.ok().lastModified(ApiServiceImpl.localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()).cacheControl(CacheControl.maxAge(0, TimeUnit.SECONDS).cachePublic()).body(lastDataForCityName);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -57,9 +62,7 @@ public class DataController {
         final Resources<CityDto> resources = new Resources<>(cityDtoList);
         final String uriString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
         resources.add(new Link(uriString, "self"));
-//        return ResponseEntity.ok().
-//                cacheControl(CacheControl.maxAge(22, TimeUnit.MINUTES).cachePublic()).body(resources);
-        return new ResponseEntity<>(resources, HttpStatus.OK);
+        return ResponseEntity.ok().cacheControl(CacheControl.maxAge(22, TimeUnit.MINUTES).cachePublic()).body(resources);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

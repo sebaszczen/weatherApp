@@ -14,6 +14,7 @@ import sebaszczen.model.airModel.AirQuality;
 import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.repository.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -36,6 +37,8 @@ public class ApiServiceImpl implements ApiService {
 
     private final EntitiesMapper entitiesMapper;
 
+    public static LocalDateTime localDateTime=LocalDateTime.now();
+
     @Autowired
     public ApiServiceImpl(SynopticDataRepository synopticDataRepository, ApiProvider apiProvider, AirDataRepository airDataRepository, AirQualityRepository airQualityRepository, CityRepository cityRepository, EntitiesMapper entitiesMapper) {
         this.synopticDataRepository = synopticDataRepository;
@@ -56,6 +59,7 @@ public class ApiServiceImpl implements ApiService {
             if (synopticDataIsNotUpToDate()) {
                 try {
                     updateCitySynopticData(cityToSynopticData.get());
+                    localDateTime = LocalDateTime.now();
 //                    throw new InterruptedException();
                 } catch (InterruptedException | ExecutionException e) {
                     logger.warn("Error occured during stopping thread", e);
@@ -73,6 +77,7 @@ public class ApiServiceImpl implements ApiService {
                 }
                 try {
                     updateCityAirData(cityToAirData.get());
+                    localDateTime = LocalDateTime.now();
                 } catch (InterruptedException | ExecutionException e) {
                     logger.warn("Error occured during stopping thread", e);
                 }

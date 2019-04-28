@@ -15,7 +15,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class CityDto extends ResourceSupport {
 
     private String name;
-    private List<SynopticData.SynoptiDataDto> synoptiDataDtoList = new ArrayList<>();
+    private List<SynopticData.SynoptiDataDto> synopticDataDtoList = new ArrayList<>();
     private List<AirDataDto> airDataDtoList= new ArrayList<>();
 
     public CityDto(City city) {
@@ -27,18 +27,18 @@ public class CityDto extends ResourceSupport {
         city.getSynopticDataList().forEach(synopticData -> {
             SynopticData.SynoptiDataDto synoptiDataDto = new SynopticData.SynoptiDataDto();
             BeanUtils.copyProperties(synopticData,synoptiDataDto);
-            synoptiDataDtoList.add(synoptiDataDto);
+            synopticDataDtoList.add(synoptiDataDto);
         });
         add(linkTo(DataController.class).withRel("cities"));
-        add(linkTo(methodOn(DataController.class).getDataForCity(name)).withSelfRel());
+        add(linkTo(methodOn(DataController.class).getDataForCity(name,null)).withSelfRel());
     }
 
     public String getName() {
         return name;
     }
 
-    public List<SynopticData.SynoptiDataDto> getSynoptiDataDtoList() {
-        return synoptiDataDtoList;
+    public List<SynopticData.SynoptiDataDto> getSynopticDataDtoList() {
+        return synopticDataDtoList;
     }
 
     public List<AirDataDto> getAirDataDtoList() {
