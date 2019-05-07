@@ -20,13 +20,11 @@ public class DataService {
     private Logger logger = LoggerFactory.getLogger(DataService.class);
     private AirDataRepository airDataRepository;
     private SynopticDataRepository synopticDataRepository;
-    private ConvertBetweenEntityAndResource convertBetweenEntityAndResource;
 
     @Autowired
-    public DataService(AirDataRepository airDataRepository, SynopticDataRepository synopticDataRepository, ConvertBetweenEntityAndResource convertBetweenEntityAndResource) {
+    public DataService(AirDataRepository airDataRepository, SynopticDataRepository synopticDataRepository) {
         this.airDataRepository = airDataRepository;
         this.synopticDataRepository = synopticDataRepository;
-        this.convertBetweenEntityAndResource = convertBetweenEntityAndResource;
     }
 
     //    @Cacheable(value = "findLastDataForCityName", key = "#name")

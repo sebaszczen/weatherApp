@@ -29,7 +29,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping(value = "/cities")
-public class DataController {
+public class
+DataController {
 
     @Autowired
     private WeatherServiceFacade weatherServiceFacade;
@@ -44,8 +45,6 @@ public class DataController {
                     .build();
         }
         CityDto lastDataForCityName = weatherServiceFacade.findLastDataForCityName(name);
-        Link selfLink = ControllerLinkBuilder.linkTo(methodOn(DataController.class).getDataForCity(name,null)).slash(name).withSelfRel();
-        lastDataForCityName.add(selfLink);
         return ResponseEntity.ok().lastModified(ApiServiceImpl.localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()).cacheControl(CacheControl.maxAge(0, TimeUnit.SECONDS).cachePublic()).body(lastDataForCityName);
     }
 
