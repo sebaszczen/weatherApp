@@ -35,7 +35,6 @@ DataController {
     @Autowired
     private WeatherServiceFacade weatherServiceFacade;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{name}")
     public ResponseEntity<CityDto> getDataForCity(@PathVariable String name, WebRequest webRequest) {
         if (webRequest.checkNotModified(ApiServiceImpl.localDateTime.toString())) {
@@ -48,7 +47,6 @@ DataController {
         return ResponseEntity.ok().lastModified(ApiServiceImpl.localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()).cacheControl(CacheControl.maxAge(0, TimeUnit.SECONDS).cachePublic()).body(lastDataForCityName);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<Resources<CityDto>> getAllCities() {
         final List<CityDto> cityDtoList = weatherServiceFacade.findAllCities();
@@ -64,7 +62,6 @@ DataController {
         return ResponseEntity.ok().cacheControl(CacheControl.maxAge(22, TimeUnit.MINUTES).cachePublic()).body(resources);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{name}/airData")
     public ResponseEntity<List<AirDataDto>> getAllAirDataForCity(@PathVariable String name) {
         List<AirDataDto> airDataList = weatherServiceFacade.findAllAirDataForCity(name);

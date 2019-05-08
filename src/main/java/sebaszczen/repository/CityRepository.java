@@ -10,7 +10,6 @@ import sebaszczen.model.cityModel.City;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Repository
 public interface CityRepository extends JpaRepository<City,Long> {
 
