@@ -42,7 +42,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+//        auth.authenticationProvider(authenticationProvider());
+        auth.inMemoryAuthentication().withUser("a").password("a").roles("*");
+//                .and().withUser("").password("").roles("");
     }
 
     @Bean
@@ -61,18 +63,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                addFilterBefore(corsFilter(), SessionManagementFilter.class)
+        http.cors().and().
+                csrf().disable()
+//                addFilterBefore(corsFilter(), SessionManagementFilter.class)
                 .authorizeRequests()
-                .antMatchers("/login*").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/users").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("http://localhost:4200/login").and().
+                .and().formLogin().and().httpBasic();
 //                formLogin().
-        csrf().
-                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
-                and().addFilterAfter(
-                new StatelessCSRFFilter(), CsrfFilter.class);
+//        csrf().
+//                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
+//                and().addFilterAfter(
+//                new StatelessCSRFFilter(), CsrfFilter.class);
     }
 
     @Bean
@@ -80,10 +84,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomAuthenticationFailureHandler();
     }
 
+//    @Bean
+//    CORSFilter corsFilter() {
+//        CORSFilter filter = new CORSFilter();
+//        return filter;
+//    }
+
     @Bean
-    CORSFilter corsFilter() {
-        CORSFilter filter = new CORSFilter();
-        return filter;
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("POST","PUT","DELETE","GET","OPTIONS"));
+        configuration.setAllowCredentials(true);
+
+        configuration.setAllowedHeaders(ImmutableList.of("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 //    @Bean
