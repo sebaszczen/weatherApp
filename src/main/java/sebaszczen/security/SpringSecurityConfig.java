@@ -42,8 +42,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(encoder());
 //        auth.authenticationProvider(authenticationProvider());
-        auth.inMemoryAuthentication().withUser("a").password("a").roles("*");
+//        auth.inMemoryAuthentication().withUser("a").password("a").roles("*");
 //                .and().withUser("").password("").roles("");
     }
 
@@ -71,7 +72,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/users").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().and().httpBasic();
+                .and().formLogin().loginPage("http://localhost:4200/login")
+                .and().httpBasic();
 //                formLogin().
 //        csrf().
 //                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
