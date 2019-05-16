@@ -4,6 +4,7 @@ import org.springframework.hateoas.ResourceSupport;
 import sebaszczen.validations.ValidEmail;
 import sebaszczen.validations.ValidPassword;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 

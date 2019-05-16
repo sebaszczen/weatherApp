@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -42,9 +44,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserDetailsService).passwordEncoder(encoder());
+//        auth.userDetailsService(myUserDetailsService).passwordEncoder(encoder());
 //        auth.authenticationProvider(authenticationProvider());
-//        auth.inMemoryAuthentication().withUser("a").password("a").roles("*");
+        String password = passwordEncoder().encode("a");
+        System.out.println(password);
+        auth.inMemoryAuthentication().withUser("a").password(password).roles("*");
 //                .and().withUser("").password("").roles("");
     }
 
@@ -53,13 +57,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider
                 = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(myUserDetailsService);
-        authProvider.setPasswordEncoder(encoder());
+        authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
     @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -68,11 +72,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf().disable()
 //                addFilterBefore(corsFilter(), SessionManagementFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/users").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("http://localhost:4200/login")
+                .and().formLogin().loginPage("http://localhost:4200/login").permitAll()
+                .successHandler(loginSuccessHandler())
+//                failureHandler(authenticationFailureHandler());
                 .and().httpBasic();
 //                formLogin().
 //        csrf().
@@ -81,10 +87,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                new StatelessCSRFFilter(), CsrfFilter.class);
     }
 
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler();
+    private AuthenticationSuccessHandler loginSuccessHandler() {
+        //poniewaz AuthenticationSuccessHandler ma tylko jedna metode mozna uzyc lambda
+        //parametry tej metody to:request,response,authentication
+        System.out.println("asda");
+        return (request, response, authentication) -> response.setStatus(200);
     }
+
+    private AuthenticationFailureHandler authenticationFailureHandler() {
+        return (request, response, authentication) -> {
+            if (authentication.getMessage().equals("User is disabled")) {
+                response.sendRedirect("/login?disabled");
+            } else {
+                response.sendRedirect("/login?error");
+            }
+        };
+//                request.getUserPrincipal().getName();  response.sendRedirect( "/logged");
+    }
+
 
 //    @Bean
 //    CORSFilter corsFilter() {
