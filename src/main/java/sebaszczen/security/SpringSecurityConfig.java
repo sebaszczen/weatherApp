@@ -77,6 +77,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("http://localhost:4200/login").permitAll()
+                .loginProcessingUrl("/login")
                 .successHandler(loginSuccessHandler())
 //                failureHandler(authenticationFailureHandler());
                 .and().httpBasic();
@@ -91,7 +92,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //poniewaz AuthenticationSuccessHandler ma tylko jedna metode mozna uzyc lambda
         //parametry tej metody to:request,response,authentication
         System.out.println("asda");
-        return (request, response, authentication) -> response.setStatus(200);
+        return (request, response, authentication) -> response.setHeader("ads","adf");
     }
 
     private AuthenticationFailureHandler authenticationFailureHandler() {
