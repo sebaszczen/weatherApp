@@ -68,7 +68,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().
+        (http.cors().and().
                 csrf().disable()
 //                addFilterBefore(corsFilter(), SessionManagementFilter.class)
                 .authorizeRequests()
@@ -76,11 +76,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/users").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("http://localhost:4200/login").permitAll()
+                .and().
+                        formLogin().loginPage("http://localhost:4200/login").permitAll()
                 .loginProcessingUrl("/login")
                 .successHandler(loginSuccessHandler())
 //                failureHandler(authenticationFailureHandler());
-                .and().httpBasic();
+                .and()).
+                httpBasic();
+//                and().
+//                rememberMe().key("klucz").tokenValiditySeconds(600);
 //                formLogin().
 //        csrf().
 //                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
