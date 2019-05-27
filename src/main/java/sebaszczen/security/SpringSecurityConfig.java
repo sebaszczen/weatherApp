@@ -82,9 +82,9 @@
 //                .successHandler(loginSuccessHandler())
 ////                failureHandler(authenticationFailureHandler());
 //                .and()).
-//                httpBasic();
+////                httpBasic();
 ////                and().
-////                rememberMe().key("klucz").tokenValiditySeconds(600);
+//                rememberMe().key("klucz").tokenValiditySeconds(600);
 ////                formLogin().
 ////        csrf().
 ////                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
