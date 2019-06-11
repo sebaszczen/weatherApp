@@ -1,14 +1,16 @@
 package sebaszczen.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.hateoas.ResourceSupport;
 import sebaszczen.validations.ValidEmail;
 import sebaszczen.validations.ValidPassword;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @ValidPassword
+@ApiModel(description = "All details about the user")
 public class UserDto extends ResourceSupport {
     @NotNull
     @NotEmpty
@@ -16,6 +18,7 @@ public class UserDto extends ResourceSupport {
 
     @NotNull
     @NotEmpty
+    @ApiModelProperty( notes= "should have at leat 2 characters")
     private String lastName;
 
     @NotNull

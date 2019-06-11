@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import sebaszczen.apiProvider.ApiProvider;
-import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.util.HashMap;
 import java.util.List;

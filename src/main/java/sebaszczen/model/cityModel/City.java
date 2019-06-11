@@ -2,10 +2,9 @@ package sebaszczen.model.cityModel;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.synopticModel.SynopticData;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sebaszczen.dto.CityDto;
+import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.cityModel.City;
 import sebaszczen.model.synopticModel.SynopticData;
-import sebaszczen.model.airModel.AirData;
 import sebaszczen.repository.AirDataRepository;
 import sebaszczen.repository.SynopticDataRepository;
 

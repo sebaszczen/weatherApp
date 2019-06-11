@@ -1,8 +1,8 @@
 package sebaszczen.respository;
 
+import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.cityModel.City;
 import sebaszczen.model.synopticModel.SynopticData;
-import sebaszczen.model.airModel.AirData;
 
 import java.util.ArrayList;
 import java.util.List;

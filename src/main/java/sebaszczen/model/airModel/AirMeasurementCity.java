@@ -3,7 +3,8 @@ package sebaszczen.model.airModel;
 import sebaszczen.dto.AirCityDto;
 import sebaszczen.dto.CommuneDto;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Embeddable
