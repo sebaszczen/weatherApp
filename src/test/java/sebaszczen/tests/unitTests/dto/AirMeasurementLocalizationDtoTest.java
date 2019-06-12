@@ -5,7 +5,7 @@ import sebaszczen.dto.StationLocalizationDto;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.respository.MockStationLocalizationDto;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AirMeasurementLocalizationDtoTest {
 

@@ -4,7 +4,6 @@ import sebaszczen.dto.UserDto;
 import sebaszczen.model.Role;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

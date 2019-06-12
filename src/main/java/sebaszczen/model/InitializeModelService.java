@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sebaszczen.repository.CityRepository;
 
-import java.util.List;
-
 @Service
 public class InitializeModelService {
 

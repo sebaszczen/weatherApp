@@ -32,7 +32,8 @@ public class SynopticData {
     @JsonIgnore
     private City city;
 
-    public LocalDateTime getLocalDateTime() {
+    public LocalDateTime
+    getLocalDateTime() {
         return localDateTime;
     }
 

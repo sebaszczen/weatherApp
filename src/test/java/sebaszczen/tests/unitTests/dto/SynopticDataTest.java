@@ -4,7 +4,7 @@ import org.junit.Test;
 import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.respository.MockSynopticData;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SynopticDataTest {
 

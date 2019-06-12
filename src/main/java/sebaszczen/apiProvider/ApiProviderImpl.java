@@ -8,16 +8,19 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import sebaszczen.dto.AirDataDto;
+import sebaszczen.dto.StationLocalizationDto;
 import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.airModel.AirMeasurementLocalization;
 import sebaszczen.model.synopticModel.SynopticData;
-import sebaszczen.dto.StationLocalizationDto;
 
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component

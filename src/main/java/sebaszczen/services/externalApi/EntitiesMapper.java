@@ -1,7 +1,7 @@
 package sebaszczen.services.externalApi;
 
-import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.model.airModel.AirData;
+import sebaszczen.model.synopticModel.SynopticData;
 
 import java.util.List;
 import java.util.Map;

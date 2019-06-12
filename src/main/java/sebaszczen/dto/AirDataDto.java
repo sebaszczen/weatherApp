@@ -5,17 +5,12 @@ import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.ResourceSupport;
-import org.springframework.transaction.annotation.Transactional;
-import sebaszczen.controller.DataController;
 import sebaszczen.model.airModel.AirData;
-import sebaszczen.model.airModel.AirQuality;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 public class AirDataDto extends ResourceSupport {
     @JsonProperty("id")

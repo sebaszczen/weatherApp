@@ -1,20 +1,12 @@
 package sebaszczen.services;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sebaszczen.model.InitializeModelService;
-import sebaszczen.model.airModel.AirData;
 import sebaszczen.model.cityModel.City;
-import sebaszczen.model.synopticModel.SynopticData;
 import sebaszczen.repository.CityRepository;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
