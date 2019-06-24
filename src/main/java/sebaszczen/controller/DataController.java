@@ -1,5 +1,8 @@
 package sebaszczen.controller;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -8,6 +11,7 @@ import org.springframework.hateoas.Resources;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +41,18 @@ DataController {
 
     @Autowired
     private MessageSource messageSource;
+
+    @GetMapping("dynamicFiltering")
+    public MappingJacksonValue dynamicFiltering() {
+        CityDto warszawa = weatherServiceFacade.findLastDataForCityName("warszawa");
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(warszawa);
+        SimpleBeanPropertyFilter filter= SimpleBeanPropertyFilter.filterOutAllExcept("name");
+        FilterProvider filters= new SimpleFilterProvider().addFilter("mojFilter", filter);
+        mappingJacksonValue.setFilters(filters);
+
+        return mappingJacksonValue;
+    }
 
     @GetMapping("/hello")
     public String hello () {

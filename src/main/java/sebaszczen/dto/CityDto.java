@@ -1,5 +1,6 @@
 package sebaszczen.dto;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.ResourceSupport;
 import sebaszczen.controller.DataController;
@@ -12,6 +13,7 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+@JsonFilter("mojFilter")
 public class CityDto extends ResourceSupport {
 
     private String name;
